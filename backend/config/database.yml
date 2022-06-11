@@ -51,11 +51,12 @@ test:
 #
 production:
   <<: *default
-  database: backend_production
-  username: backend
-  password: <%= ENV['BACKEND_DATABASE_PASSWORD'] %>
-  # database: <%= ENV['MYSQL_DATABASE'] %>
-  # url: <%= ENV['MYSQL_URL'] %>
-  # username: <%= ENV['MYSQL_USERNAME'] %>
-  # password: <%= ENV['MYSQL_PASSWORD'] %>
-  # host: <%= ENV['MYSQL_HOST'] %>
+  # database: backend_production
+  # username: backend
+  # password: <%= ENV['BACKEND_DATABASE_PASSWORD'] %>
+  
+  database: <%= ENV['MYSQL_DATABASE'] %>
+  url: <%= ENV['MYSQL_URL'] %>
+  username: <%= ENV['MYSQL_USERNAME'] %>
+  password: <%= ENV['MYSQL_PASSWORD'] %>
+  host: <%= ENV['MYSQL_HOST'] %>

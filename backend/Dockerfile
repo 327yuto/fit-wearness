@@ -1,6 +1,9 @@
 FROM ruby:2.7.0
 #RUN apt-get update -qq && apt-get install -y nodejs postgresql-client
 
+#本番環境を環境変数で定義する
+ENV RAILS_ENV=production
+
 # yarnパッケージ管理ツールをインストール
 RUN apt-get update && apt-get install -y curl apt-transport-https wget && \
   curl -sS https://dl.yarnpkg.com/debian/pubkey.gpg | apt-key add - && \
@@ -32,4 +35,8 @@ ENTRYPOINT ["entrypoint.sh"]
 EXPOSE 3020
 
 # Start the main process.
-CMD ["rails", "server", "-b", "0.0.0.0"]
+# CMD ["rails", "server", "-b", "0.0.0.0"]
+
+COPY start.sh /start.sh
+RUN chmod 744 /start.sh
+CMD ["sh", "/start.sh"]

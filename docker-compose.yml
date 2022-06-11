@@ -1,0 +1,50 @@
+version: '3'
+services:
+  db:
+    image: mysql:8.0
+    command:
+      [
+        "--character-set-server=utf8mb4",
+        "--collation-server=utf8mb4_unicode_ci",
+        "--default-authentication-plugin=mysql_native_password"
+      ]
+    ports:
+      - "3306:3306"
+    environment:
+      MYSQL_ROOT_PASSWORD: password
+      # MYSQL_DATABASE: backend_development #database.ymlのdevelopmentと同じ名前にする必要があります。
+      #MYSQL_USER: root #mysqlにログインするユーザー。database.ymlのusernameと同じにする必要がある。
+      # MYSQL_PASSWORD: password #mysqlにログインするパスワードです。自身で設定する必要があり、database.ymlのpasswordと同じにする必要がある。
+      MYSQL_ALLOW_EMPTY_PASSWORD: "yes" #これ追加
+    volumes:
+      - mysql_vol:/var/lib/mysql
+  backend:
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
+    command: /bin/sh -c "rm -f tmp/pids/server.pid && bundle exec rails s -p 3020 -b '0.0.0.0'"
+    volumes:
+      - ./backend:/backend
+    ports:
+      - "3020:3020"
+    stdin_open: true
+    tty: true
+    depends_on:
+      - "db"
+    links:
+      - "db"
+  frontend:
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile
+    volumes:
+      - ./frontend:/usr/src/app
+    ports:
+      - "3002:3002"
+    command: sh -c "PORT=3002 yarn start"
+    depends_on:
+      - "db"
+      - "backend"
+    stdin_open: true
+volumes:
+  mysql_vol:

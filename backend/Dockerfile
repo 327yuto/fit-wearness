@@ -1,4 +1,4 @@
-FROM ruby:2.7.0
+FROM ruby:2.7.6
 #RUN apt-get update -qq && apt-get install -y nodejs postgresql-client
 
 #本番環境を環境変数で定義する

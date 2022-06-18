@@ -56,7 +56,8 @@ production:
   # password: <%= ENV['BACKEND_DATABASE_PASSWORD'] %>
   
   database: <%= ENV['MYSQL_DATABASE'] %>
-  url: <%= ENV['MYSQL_URL'] %>
+  # url: <%= ENV['MYSQL_URL'] %>
   username: <%= ENV['MYSQL_USERNAME'] %>
   password: <%= ENV['MYSQL_PASSWORD'] %>
   host: <%= ENV['MYSQL_HOST'] %>
+  # port: <%= ENV['DB_PORT'] %>

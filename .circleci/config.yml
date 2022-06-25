@@ -5,7 +5,7 @@ orbs:
 jobs:
   build:
     docker:
-      - image: cimg/ruby:2.7.6
+      - image: circleci/ruby:2.7.6
     working_directory: ~/fit-wearness/backend
     steps:
       - checkout:
@@ -14,7 +14,7 @@ jobs:
 
   test:
     docker:
-      - image: cimg/ruby:2.7.6
+      - image: circleci/ruby:2.7.6
       - image: circleci/mysql:5.5
         environment:
           MYSQL_ROOT_PASSWORD: password
@@ -38,7 +38,7 @@ jobs:
           command: bundle exec rspec
 workflows:
   version: 2
-  build_test_and_deploy:
+  build_test:
     jobs:
       - build
       - test:

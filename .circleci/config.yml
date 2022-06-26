@@ -41,11 +41,6 @@ jobs:
   deploy:
     docker:
       - image: cimg/ruby:2.7.6
-    working_directory: backend
-         name: cd dir
-         command: |
-           pwd
-           ls
     steps:
       - checkout
       - setup_remote_docker:
@@ -54,6 +49,12 @@ jobs:
       - run:
           name: heroku login
           command: heroku container:login
+      - run:
+          working_directory: backend
+          name: cd dir
+          command: |
+            pwd
+            ls
       - run:
           name: push docker image
           command: heroku container:push web -a $HEROKU_APP_NAME

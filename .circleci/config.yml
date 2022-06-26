@@ -50,11 +50,11 @@ jobs:
           name: heroku login
           command: heroku container:login
       - run:
+          working_directory: backend
           name: cd dir
-          command: cd backend
-      - run:
-          name: ls
-          command: ls
+          command: |
+            pwd
+            ls
       - run:
           name: push docker image
           command: heroku container:push web -a $HEROKU_APP_NAME

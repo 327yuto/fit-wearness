@@ -51,6 +51,9 @@ jobs:
           command: heroku container:login
       - run:
           name: cd dir
+          command: cd backend
+      - run:
+          name: ls
           command: ls
       - run:
           name: push docker image

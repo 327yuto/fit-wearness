@@ -51,14 +51,11 @@ jobs:
           command: heroku container:login
       - run:
           working_directory: backend
-          name: cd dir
+          name: cd dir and push docker image
           command: |
             pwd
             ls
             heroku container:push web -a $HEROKU_APP_NAME
-      - run:
-          name: push docker image
-          command: heroku container:push web -a $HEROKU_APP_NAME
       - run:
           name: release docker image
           command: heroku container:release web -a $HEROKU_APP_NAME

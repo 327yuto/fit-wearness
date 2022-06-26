@@ -40,7 +40,7 @@ jobs:
           command: bundle exec rspec
 deploy:
     docker:
-      - image: cimg/ruby:2.7
+      - image: cimg/ruby:2.7.6
     steps:
       - checkout
       - setup_remote_docker:
@@ -54,7 +54,7 @@ deploy:
           command: git subtree push --prefix backend/ heroku main
       - run:
           name: database setup
-          command: heroku run bundle exec rake db:migrate 
+          command: heroku run bundle exec rake db:migrate\
           RAILS_ENV=production -a $HEROKU_APP_NAME
 
 workflows:

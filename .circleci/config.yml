@@ -50,7 +50,7 @@ jobs:
           name: heroku login
           command: heroku container:login
       - run:
-          working_directory: backend
+          working_directory: ~/fit-wearness/backend
           name: cd dir
           command: |
             pwd

@@ -50,8 +50,14 @@ jobs:
           name: heroku login
           command: heroku container:login
       - run:
+          name: cd dir
+          command: cd backend
+      - run:
           name: push docker image
-          command: git subtree push --prefix backend/ heroku main
+          command: heroku container:push web -a $HEROKU_APP_NAME
+      - run:
+          name: release docker image
+          command: heroku container:release web -a $HEROKU_APP_NAME
       - run:
           name: database setup
           command: >-

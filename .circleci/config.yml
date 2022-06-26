@@ -54,9 +54,9 @@ deploy:
           command: git subtree push --prefix backend/ heroku main
       - run:
           name: database setup
-          command: >
-          heroku run bundle exec rake db:migrate
-          RAILS_ENV=production -a $HEROKU_APP_NAME
+          command: >-
+                heroku run bundle exec rake db:migrate
+                RAILS_ENV=production -a $HEROKU_APP_NAME
 
 workflows:
   version: 2

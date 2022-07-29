@@ -49,3 +49,6 @@ frontend/.env.production.local
 frontend/npm-debug.log*
 frontend/yarn-debug.log*
 frontend/yarn-error.log*
+
+#環境変数管理の為に追加したファイル
+backend/.env

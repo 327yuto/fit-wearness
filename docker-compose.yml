@@ -26,7 +26,7 @@ services:
     volumes:
       - ./backend:/backend
     env_file:
-      - ./backend/.env
+      - .env
     environment:
       TZ: Asia/Tokyo
     ports:

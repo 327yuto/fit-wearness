@@ -36,6 +36,9 @@ jobs:
           name: Database setup
           command: bundle exec rails db:migrate
       - run:
+          name: env
+          command: env > ~/.env
+      - run:
           name: test
           command: bundle exec rspec
   deploy:

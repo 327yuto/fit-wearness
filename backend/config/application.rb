@@ -27,12 +27,23 @@ module Backend
 
     config.generators do |g|
      g.test_framework :rspec,
-     fixtures: false,
+     #  fixtures: false,
      view_specs: false,
      helper_specs: false,
      routing_specs: false
      g.factory_bot false
     end
+
+    config.middleware.use Rack::Cors do
+      allow do
+        origins 'localhost:3002'
+        resource '*',
+                 headers: :any,
+                 expose: %w[access-token expiry token-type uid client],
+                 methods: %i[get post put patch delete options head]
+      end
+    end
+
     # Configuration for the application, engines, and railties goes here.
     #
     # These settings can be overridden in specific environments using the files

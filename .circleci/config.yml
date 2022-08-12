@@ -16,7 +16,6 @@ jobs:
       - run:
           name: Display the value set in context
           command: echo $EMAIL_ADDRESS
-
   test:
     docker:
       - image: cimg/ruby:2.7.6

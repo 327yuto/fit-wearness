@@ -27,8 +27,8 @@ Devise.setup do |config|
   #config.mailer_sender = 'please-change-me-at-config-initializers-devise@example.com'
   
   # メール設定で追加
-    config.mailer_sender = "black.ael88@gmail.com"
-    # config.mailer_sender = ENV['EMAIL_ADDRESS'] # コメントアウトをはずして変更
+    # config.mailer_sender = "black.ael88@gmail.com"
+    config.mailer_sender = ENV['EMAIL_ADDRESS'] # コメントアウトをはずして変更
     config.mailer = 'Devise::Mailer' # コメントアウトを外す
   
 

@@ -6,6 +6,8 @@ RSpec.describe 'api v1 auth registration', type: :request do
    let(:password_confirmation) { 'password' }
    # let(:name) { 'ユーザー' }
    let(:confirm_success_url) { "https://google.com" }
+   let(:category) { 'test category' }
+
 
    let(:user) { FactoryBot.create(:user) }
     let(:auth_params) do
@@ -16,12 +18,13 @@ RSpec.describe 'api v1 auth registration', type: :request do
   describe 'post /api_v1_user_registration_path' do
      context 'normal<正常>' do
        it 'response of singup is 200 & user records increases' do
-         expect { post api_v1_user_registration_path, 
+        expect { post api_v1_user_registration_path, 
           params: {
                   email: email, 
                   password: password,
                   password_confirmation: password, 
-                  confirm_success_url: confirm_success_url
+                  confirm_success_url: confirm_success_url,
+                  category: category
                   } 
                 }.to change(User, :count).by(+1)
          expect(response.status).to eq 200
@@ -33,7 +36,8 @@ RSpec.describe 'api v1 auth registration', type: :request do
                   email: email, 
                   password: password,
                   password_confirmation: password, 
-                  confirm_success_url: confirm_success_url
+                  confirm_success_url: confirm_success_url,
+                  category: category
                   })
          expect(JSON.parse(response.body)['data']['uid']).to eq email
        end
@@ -46,7 +50,8 @@ RSpec.describe 'api v1 auth registration', type: :request do
                   email: 'email', 
                   password: password,
                   password_confirmation: password, 
-                  confirm_success_url: confirm_success_url
+                  confirm_success_url: confirm_success_url,
+                  category: category
                   })
                 }.to change(User, :count).by 0
           expect(response.status).to eq 422
@@ -58,7 +63,8 @@ RSpec.describe 'api v1 auth registration', type: :request do
                   email: email, 
                   password: 'passw',
                   password_confirmation: 'passw', 
-                  confirm_success_url: confirm_success_url
+                  confirm_success_url: confirm_success_url,
+                  category: category
                   })
                 }.to change(User, :count).by 0
         expect(response.status).to eq 422

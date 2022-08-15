@@ -10,6 +10,7 @@ export const SignUp = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [comfirmPassword, setComfirmPassword] = useState("");
+  const [category, setCategory] = useState("");
   const confirmSuccessUrl = "http://localhost:3002";
 
   const generateParams = () => {
@@ -18,6 +19,7 @@ export const SignUp = () => {
       password: password,
       comfirmPassword: comfirmPassword,
       confirmSuccessUrl: confirmSuccessUrl,
+      category: category,
     };
     return signUpParams;
   };
@@ -66,6 +68,16 @@ export const SignUp = () => {
             name="comfirm_password"
             value={comfirmPassword}
             onChange={(e) => setComfirmPassword(e.target.value)}
+          />
+        </div>
+        <div>
+          <label htmlFor="category">Fitnessカテゴリー</label>
+          <input
+            type="category"
+            id="category"
+            name="category"
+            value={category}
+            onChange={(e) => setCategory(e.target.value)}
           />
         </div>
         <div>

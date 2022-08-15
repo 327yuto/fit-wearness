@@ -1,8 +1,8 @@
 import Cookies from "js-cookie";
 import { useContext, useState } from "react";
 import { Link } from "react-router-dom";
-import { signUp } from "../api/auth";
-import { AuthContext } from "../App";
+import { signUp } from "../../api/auth";
+import { AuthContext } from "../../App";
 
 export const SignUp = () => {
   const { setIsSignedIn, setCurrentUser } = useContext(AuthContext);

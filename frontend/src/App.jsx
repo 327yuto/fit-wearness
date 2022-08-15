@@ -1,9 +1,9 @@
 import { createContext, useEffect, useState } from "react";
 import { BrowserRouter, Switch, Route, Redirect } from "react-router-dom";
 import { getCurrentUser } from "./api/auth";
-import { Home } from "./components/Home";
-import { SignIn } from "./components/SignIn";
-import { SignUp } from "./components/SignUp";
+import { Home } from "./components/pages/Home";
+import { SignIn } from "./components/pages/SignIn";
+import { SignUp } from "./components/pages/SignUp";
 
 export const AuthContext = createContext();
 

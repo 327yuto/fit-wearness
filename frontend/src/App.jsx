@@ -4,6 +4,13 @@ import { getCurrentUser } from "./api/auth";
 import { Home } from "./components/pages/Home";
 import { SignIn } from "./components/pages/SignIn";
 import { SignUp } from "./components/pages/SignUp";
+import MainContainer from './components/layouts/MainContainer'; //export defaultしている
+import Header from './components/commons/Header';
+
+// style
+import { CssBaseline } from '@material-ui/core'; //ブラウザの個体差を調整してくれるリセットCSS
+import { StylesProvider, ThemeProvider } from '@material-ui/styles';
+import { theme } from './styles/theme';
 
 export const AuthContext = createContext();
 
@@ -46,32 +53,43 @@ function App() {
     }
   };
   return (
-    <AuthContext.Provider
-      value={{
-        loading,
-        setLoading,
-        isSignedIn,
-        setIsSignedIn,
-        currentUser,
-        setCurrentUser,
-      }}
-    >
-      <BrowserRouter>
-        <Switch>
-          <Route exact path="/signup">
-            <SignUp />
-          </Route>
-          <Route exact path="/signin">
-            <SignIn />
-          </Route>
-          <Private>
-            <Route exact path="/">
-              <Home />
-            </Route>
-          </Private>
-        </Switch>
-      </BrowserRouter>
-    </AuthContext.Provider>
+    <>
+      <StylesProvider injectFirst>
+        <ThemeProvider theme={theme}>
+          <AuthContext.Provider
+            value={{
+              loading,
+              setLoading,
+              isSignedIn,
+              setIsSignedIn,
+              currentUser,
+              setCurrentUser,
+            }}
+          >
+            <CssBaseline />
+
+            <BrowserRouter>
+              <Header />
+              <MainContainer>
+                <Switch>
+                  <Route exact path="/signup">
+                    <SignUp />
+                  </Route>
+                  <Route exact path="/signin">
+                    <SignIn />
+                  </Route>
+                  <Private>
+                    <Route exact path="/">
+                      <Home />
+                    </Route>
+                  </Private>
+                </Switch>
+              </MainContainer>
+            </BrowserRouter>
+          </AuthContext.Provider>
+        </ThemeProvider>
+      </StylesProvider>
+    </>
   );
 }
 

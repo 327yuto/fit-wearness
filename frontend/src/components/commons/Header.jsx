@@ -36,7 +36,7 @@ const useStyles = makeStyles((theme) =>
 );
 
 const drawerItem = [
-  { label: '一覧へ戻る', path: '/' },
+  { label: 'HOME', path: '/' },
   { label: '新規作成', path: '/new' },
   { label: '自分の投稿', path: '#' },
 ];
@@ -74,7 +74,7 @@ const Header = () => {
           <>
             <Button
               component={Link}
-              to='/'
+              to={`/users/${currentUser.id}`}
               color='inherit'
               className={classes.linkBtn}
             >

@@ -2,6 +2,8 @@ import { createContext, useEffect, useState } from "react";
 import { BrowserRouter, Switch, Route, Redirect } from "react-router-dom";
 import { getCurrentUser } from "./api/auth";
 import { Home } from "./components/pages/Home";
+import { Account } from "./components/pages/Account";
+import { AccountList } from "./components/pages/AccountList";
 import { SignIn } from "./components/pages/SignIn";
 import { SignUp } from "./components/pages/SignUp";
 import MainContainer from './components/layouts/MainContainer'; //export defaultしている
@@ -12,6 +14,7 @@ import { CssBaseline } from '@material-ui/core'; //ブラウザの個体差を�
 import { StylesProvider, ThemeProvider } from '@material-ui/styles';
 import { theme } from './styles/theme';
 
+// Contextの作成
 export const AuthContext = createContext();
 
 function App() {
@@ -27,7 +30,7 @@ function App() {
         setIsSignedIn(true);
         setCurrentUser(res?.data.data);
         console.log(res?.data.data);
-        console.log("sign in user")
+        console.log("sign in user");
       } else {
         console.log("no current user");
       }
@@ -46,7 +49,7 @@ function App() {
       if (isSignedIn) {
         return children;
       } else {
-        return <Redirect to="signin" />;
+        return <Redirect to="/signin" />;
       }
     } else {
       return <></>;
@@ -81,6 +84,13 @@ function App() {
                   <Private>
                     <Route exact path="/">
                       <Home />
+                    </Route>
+                    <Route exact path="/users/:id">
+                      {/*このpathが呼ばれた時、下のpageを呼ぶ*/}
+                      <Account />
+                    </Route>
+                    <Route exact path="/users">
+                      <AccountList />
                     </Route>
                   </Private>
                 </Switch>

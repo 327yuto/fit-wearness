@@ -20,4 +20,12 @@ FactoryBot.define do
     confirmed_at { '' } 
     category { 'test category' }
   end
+
+  trait :user_2 do
+    email { "user_2@mail.com" }
+    password { 'password' }
+    password_confirmation { 'password' }
+    confirmed_at { Date.today } 
+    category { 'test category' }
+  end
 end

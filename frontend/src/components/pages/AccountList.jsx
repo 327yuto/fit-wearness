@@ -85,6 +85,9 @@ export const AccountList = withRouter(() => {
                 Category
               </TableCell>
               <TableCell align='center' className={classes.fontWeight}>
+                Detail
+              </TableCell>
+              <TableCell align='center' className={classes.fontWeight}>
                 Delete
               </TableCell>
               <TableCell align='center'></TableCell>
@@ -110,7 +113,12 @@ export const AccountList = withRouter(() => {
                   <Link to={`/edit/${item.id}`}>更新</Link>
                 </TableCell> */}
                 <TableCell align='center'>
-                  <Link to={`/users/${item.id}`}>詳細へ</Link>
+                  <Button
+                    variant='contained'
+                    color='inherit'
+                  >
+                    <Link to={`/users/${item.id}`}>詳細ページ</Link>
+                  </Button>
                 </TableCell>
                 <TableCell align='center'>
                   <Button

@@ -4,6 +4,7 @@ import { getCurrentUser } from "./api/auth";
 import { Home } from "./components/pages/Home";
 import { Account } from "./components/pages/Account";
 import { AccountList } from "./components/pages/AccountList";
+import { AccountEdit } from "./components/pages/AccountEdit";
 import { SignIn } from "./components/pages/SignIn";
 import { SignUp } from "./components/pages/SignUp";
 import MainContainer from './components/layouts/MainContainer'; //export defaultしている
@@ -91,6 +92,9 @@ function App() {
                     </Route>
                     <Route exact path="/users">
                       <AccountList />
+                    </Route>
+                    <Route exact path="/edit/:id">
+                      <AccountEdit />
                     </Route>
                   </Private>
                 </Switch>

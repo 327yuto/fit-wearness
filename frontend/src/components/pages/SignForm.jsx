@@ -138,7 +138,6 @@ const SignForm = (props) => {
                 </Typography>
               </Box>
             )}
-
           </CardContent>
         </Card>
       </form>

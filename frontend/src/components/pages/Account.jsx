@@ -19,7 +19,7 @@ import {
   Typography, TextField, Card, CardContent,
   CardHeader, Button, Box,
 } from '@material-ui/core';
-import UpdateIcon from "@material-ui/icons/Update"
+import EditIcon from "@material-ui/icons/Edit"
 
 
 const useStyles = makeStyles((theme) => ({
@@ -127,41 +127,27 @@ export const Account = withRouter(() => {
               </Typography>
 
               <Typography variant='body1'>
-                {/* <tbody>
-                  {accountId.map(user => (
-                    <tr key={user.id}>
-                      <td>
-                        <Link to={{ // ★１解説します
-                          pathname: "/users" + user.id,
-                          state: { id: user.id },
-                        }}>{user.email}</Link>
-                      </td>
-                    </tr>
-                  ))}
-                </tbody> */}
-              </Typography>
-
-              <Typography variant='body1'>
                 カテゴリー：{userProfile?.category}&nbsp;
               </Typography>
 
               <Typography variant='body2'>
                 <Link to={`/users/${accountId}`} className={classes.link}>
-                  アクセス users/:id " {accountId} "
+                  アクセス users/:id " {query.id} "
                 </Link>
               </Typography>
 
-              <Button
-                variant='outlined'
-                color='primary'
-                fullWidth
-                startIcon={<UpdateIcon />}
-                style={{ marginTop: "1rem" }}
-                onClick={() => history.push('/')}
-              >
-                更新
-              </Button>
-
+              {currentUser.id == query.id && (
+                <Button
+                  variant='outlined'
+                  color='primary'
+                  fullWidth
+                  startIcon={<EditIcon />}
+                  style={{ marginTop: "1rem" }}
+                  onClick={() => history.push(`/edit/${accountId}`)}
+                >
+                  編集
+                </Button>
+              )}
 
             </Box>
 

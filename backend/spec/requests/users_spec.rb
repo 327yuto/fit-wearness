@@ -35,4 +35,23 @@ RSpec.describe ' Users ', type: :request do
       end
     end
   end
+
+  describe 'PATCH /users/:id' do
+    context 'normal(正常)' do
+    
+      
+
+      it 'update category' do
+      
+        @params = {category: "Update"}
+
+        patch api_v1_user_path(user.id), headers: auth_params,
+         params: @params
+         user.reload
+         
+        expect(response.status).to eq 200
+        expect(user.category).to eq "Update"
+      end
+    end
+  end
 end

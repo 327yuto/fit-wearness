@@ -17,7 +17,7 @@ import { AuthContext } from '../../App';
 import { makeStyles } from '@material-ui/core/styles';
 import {
   Typography, TextField, Card, CardContent,
-  CardHeader, Button, Box,
+  CardHeader, Button, Box, Input,
 } from '@material-ui/core';
 import EditIcon from "@material-ui/icons/Edit"
 
@@ -127,6 +127,10 @@ export const Account = withRouter(() => {
               </Typography>
 
               <Typography variant='body1'>
+                ユーザーネーム：{userProfile?.name}&nbsp;
+              </Typography>
+
+              <Typography variant='body1'>
                 カテゴリー：{userProfile?.category}&nbsp;
               </Typography>
 
@@ -135,6 +139,30 @@ export const Account = withRouter(() => {
                   アクセス users/:id " {query.id} "
                 </Link>
               </Typography>
+
+              <TextField
+                variant='standard'
+                fullWidth
+                id='category'
+                label='Category'
+                name='category'
+                type='text'
+                margin='dense'
+                // value={userProfile?.category}
+                value={`${userProfile?.category}`}
+              />
+              <TextField
+                variant='standard'
+                fullWidth
+                multiline
+                maxRows={4}
+                id='metadata'
+                label='Info'
+                name='metadata'
+                type='text'
+                margin='dense'
+                value={`${userProfile?.metadata}`}
+              />
 
               {currentUser.id == query.id && (
                 <Button

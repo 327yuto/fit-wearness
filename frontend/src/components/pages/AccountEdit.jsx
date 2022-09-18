@@ -42,6 +42,7 @@ export const AccountEdit = withRouter(() => {
   const [value, setValue] = useState({
     email: '',
     category: '',
+    metadata: '',
   })
 
   //react hocksのルールで追加
@@ -67,6 +68,7 @@ export const AccountEdit = withRouter(() => {
       setValue({
         email: res.data.email,
         category: res.data.category,
+        metadata: res.data.metadata,
       })
       console.log(value)
     } catch (e) {
@@ -135,6 +137,19 @@ export const AccountEdit = withRouter(() => {
               margin='dense'
               onChange={(e) => handleChange(e)}
               value={value.category}
+            />
+            <TextField
+              variant='outlined'
+              fullWidth
+              multiline
+              maxRows={4}
+              id='metadata'
+              label='Info'
+              name='metadata'
+              type='text'
+              margin='dense'
+              onChange={(e) => handleChange(e)}
+              value={value.metadata}
             />
           </Box>
           <input type="submit" value={buttonType} onClick={(e) => handleSubmit(e)} />

@@ -39,18 +39,31 @@ RSpec.describe ' Users ', type: :request do
   describe 'PATCH /users/:id' do
     context 'normal(正常)' do
     
-      
-
       it 'update category' do
-      
         @params = {category: "Update"}
 
-        patch api_v1_user_path(user.id), headers: auth_params,
+        patch api_v1_user_path(user.id), 
+         headers: auth_params,
          params: @params
+        
          user.reload
-         
         expect(response.status).to eq 200
         expect(user.category).to eq "Update"
+      end
+    end
+
+    context 'abnomal(異常)' do
+    
+      it 'response is bad_request'do 
+        @params = {category: "Update"}
+
+        patch api_v1_user_path(user_2.id), 
+         headers: auth_params,
+         params: @params
+      
+       user.reload
+      expect(response.status).to eq 400
+      expect(user.category).not_to eq "Update"
       end
     end
   end

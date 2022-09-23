@@ -5,6 +5,8 @@ User.create!(
    email: 'user_seed@test.com',
    password: 'password',
    password_confirmation: 'password',
+   name: 'one man',
+   metadata: 'Iam oneman. follow me!',
    category: 'test category',
    confirmed_at: Date.today
    },
@@ -14,6 +16,8 @@ User.create!(
    email: 'user_2@test.com',
    password: 'password',
    password_confirmation: 'password',
+   name: 'two man',
+   metadata: 'Iam twoman. yeah!',
    category: 'test category2',
    confirmed_at: Date.today
    }

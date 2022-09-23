@@ -17,9 +17,11 @@ import { AuthContext } from '../../App';
 import { makeStyles } from '@material-ui/core/styles';
 import {
   Typography, TextField, Card, CardContent,
-  CardHeader, Button, Box,
+  CardHeader, Button, Box, Input, Avatar,
 } from '@material-ui/core';
-import UpdateIcon from "@material-ui/icons/Update"
+import EditIcon from "@material-ui/icons/Edit"
+
+import IconImage from '../../man-839604_1280.jpg'
 
 
 const useStyles = makeStyles((theme) => ({
@@ -122,50 +124,66 @@ export const Account = withRouter(() => {
           <CardContent>
 
             <Box textAlign='center' className={classes.box}>
-              <Typography variant='body1'>
-                メールアドレス：{userProfile?.email} &nbsp;
-              </Typography>
-
-              <Typography variant='body1'>
-                {/* <tbody>
-                  {accountId.map(user => (
-                    <tr key={user.id}>
-                      <td>
-                        <Link to={{ // ★１解説します
-                          pathname: "/users" + user.id,
-                          state: { id: user.id },
-                        }}>{user.email}</Link>
-                      </td>
-                    </tr>
-                  ))}
-                </tbody> */}
-              </Typography>
-
-              <Typography variant='body1'>
-                カテゴリー：{userProfile?.category}&nbsp;
-              </Typography>
-
               <Typography variant='body2'>
                 <Link to={`/users/${accountId}`} className={classes.link}>
-                  アクセス users/:id " {accountId} "
+                  USER ID[ {query.id} ]
                 </Link>
               </Typography>
 
-              <Button
-                variant='outlined'
-                color='primary'
-                fullWidth
-                startIcon={<UpdateIcon />}
-                style={{ marginTop: "1rem" }}
-                onClick={() => history.push('/')}
-              >
-                更新
-              </Button>
+              <Avatar
+                // sx={{ width: 56, height: 56 }}
+                // src={"https://joeschmoe.io/api/v1/random"}
+                src={IconImage}
 
+              />
+
+              <TextField
+                variant='standard'
+                fullWidth
+                id='name'
+                label='Name'
+                name='name'
+                type='text'
+                margin='dense'
+                value={`${userProfile?.name}`}
+              />
+              <TextField
+                variant='standard'
+                fullWidth
+                id='category'
+                label='Category'
+                name='category'
+                type='text'
+                margin='dense'
+                value={`${userProfile?.category}`}
+              />
+              <TextField
+                variant='standard'
+                fullWidth
+                multiline
+                maxRows={4}
+                id='metadata'
+                label='Info'
+                name='metadata'
+                type='text'
+                margin='dense'
+                value={`${userProfile?.metadata}`}
+              />
+
+              {currentUser.id == query.id && (
+                <Button
+                  variant='outlined'
+                  color='primary'
+                  fullWidth
+                  startIcon={<EditIcon />}
+                  style={{ marginTop: "1rem" }}
+                  onClick={() => history.push(`/edit/${accountId}`)}
+                >
+                  編集
+                </Button>
+              )}
 
             </Box>
-
-
           </CardContent>
         </Card>
       </form>

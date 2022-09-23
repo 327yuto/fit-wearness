@@ -8,9 +8,11 @@ import { getId, updateUserInfo } from '../../api/users';
 import { makeStyles } from '@material-ui/core/styles';
 import {
   Typography, TextField, Card, CardContent,
-  CardHeader, Button, Box,
+  CardHeader, Button, Box, Avatar,
 } from '@material-ui/core';
 import UpdateIcon from "@material-ui/icons/Update"
+
+import IconImage from '../../man-839604_1280.jpg'
 
 const useStyles = makeStyles((theme) => ({
   container: {
@@ -34,6 +36,25 @@ const useStyles = makeStyles((theme) => ({
   link: {
     textDecoration: 'none',
   },
+
+  uploadLabel: {
+    display: 'inline-block',
+    cursor: 'pointer', /* カーソルを指に */
+    margin: '1em 0', /* まわりの余白 */
+    padding: '.7em 1em', /* 文字まわりの余白 */
+    lineHeight: '1.4', /* 行間 */
+    background: '#3e8bff', /* 背景色 */
+    color: '#FFF', /* 文字色 */
+    fontSize: '0.95em', /* フォントサイズ */
+    borderRadius: '2.5em', /* 角の丸み */
+    transition: '0.2s', /* ホバーをなめらかに */
+
+  },
+  input: {
+    display: 'none',
+  },
+
+
 }));
 
 
@@ -41,6 +62,7 @@ export const AccountEdit = withRouter(() => {
   // apiで取得したデータを管理する為のstate
   const [value, setValue] = useState({
     email: '',
+    name: '',
     category: '',
     metadata: '',
   })
@@ -63,10 +85,11 @@ export const AccountEdit = withRouter(() => {
   const handleGetData = async (query) => {
     try {
       const res = await getId(query.id)
-      console.log(res.data.email)
+      console.log(res.data.name)
       // 使う値のみstateにセットする
       setValue({
         email: res.data.email,
+        name: res.data.name,
         category: res.data.category,
         metadata: res.data.metadata,
       })
@@ -113,7 +136,16 @@ export const AccountEdit = withRouter(() => {
         <Card className={classes.card}>
           <CardHeader className={classes.header} title="Edit" />
 
-          <Box textAlign='center' className={classes.box}>
+          <Avatar
+            src={IconImage}
+          />
+
+          <label className={classes.uploadLabel}>
+            プロフィール画像を変更
+            <input type="file" className={classes.input} />
+          </label>
+
+          <Box className={classes.box}>
             <TextField
               variant='outlined'
               required
@@ -125,6 +157,17 @@ export const AccountEdit = withRouter(() => {
               margin='dense'
               onChange={(e) => handleChange(e)}
               value={value.email}
+            />
+            <TextField
+              variant='outlined'
+              fullWidth
+              id='name'
+              label='Name'
+              name='name'
+              type='text'
+              margin='dense'
+              onChange={(e) => handleChange(e)}
+              value={value.name}
             />
             <TextField
               variant='outlined'
@@ -152,7 +195,17 @@ export const AccountEdit = withRouter(() => {
               value={value.metadata}
             />
           </Box>
-          <input type="submit" value={buttonType} onClick={(e) => handleSubmit(e)} />
+          {/* <input type="submit" value={buttonType} onClick={(e) => handleSubmit(e)} /> */}
+          <Button
+            variant='outlined'
+            color='primary'
+            fullWidth
+            startIcon={<UpdateIcon />}
+            style={{ marginTop: "2rem" }}
+            onClick={(e) => handleSubmit(e)}
+          >
+            更新
+          </Button>
         </Card>
       </form>
     </>

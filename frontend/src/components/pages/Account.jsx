@@ -17,9 +17,11 @@ import { AuthContext } from '../../App';
 import { makeStyles } from '@material-ui/core/styles';
 import {
   Typography, TextField, Card, CardContent,
-  CardHeader, Button, Box, Input,
+  CardHeader, Button, Box, Input, Avatar,
 } from '@material-ui/core';
 import EditIcon from "@material-ui/icons/Edit"
+
+import IconImage from '../../man-839604_1280.jpg'
 
 
 const useStyles = makeStyles((theme) => ({
@@ -122,24 +124,29 @@ export const Account = withRouter(() => {
           <CardContent>
 
             <Box textAlign='center' className={classes.box}>
-              <Typography variant='body1'>
-                メールアドレス：{userProfile?.email} &nbsp;
-              </Typography>
-
-              <Typography variant='body1'>
-                ユーザーネーム：{userProfile?.name}&nbsp;
-              </Typography>
-
-              <Typography variant='body1'>
-                カテゴリー：{userProfile?.category}&nbsp;
-              </Typography>
-
               <Typography variant='body2'>
                 <Link to={`/users/${accountId}`} className={classes.link}>
-                  アクセス users/:id " {query.id} "
+                  USER ID[ {query.id} ]
                 </Link>
               </Typography>
 
+              <Avatar
+                // sx={{ width: 56, height: 56 }}
+                // src={"https://joeschmoe.io/api/v1/random"}
+                src={IconImage}
+
+              />
+
+              <TextField
+                variant='standard'
+                fullWidth
+                id='name'
+                label='Name'
+                name='name'
+                type='text'
+                margin='dense'
+                value={`${userProfile?.name}`}
+              />
               <TextField
                 variant='standard'
                 fullWidth
@@ -148,7 +155,6 @@ export const Account = withRouter(() => {
                 name='category'
                 type='text'
                 margin='dense'
-                // value={userProfile?.category}
                 value={`${userProfile?.category}`}
               />
               <TextField
@@ -178,8 +184,6 @@ export const Account = withRouter(() => {
               )}
 
             </Box>
-
-
           </CardContent>
         </Card>
       </form>

@@ -1,6 +1,7 @@
 {
   "name": "frontend",
   "version": "0.1.0",
+  "main": "index.jsx",
   "private": true,
   "dependencies": {
     "@material-ui/core": "^4.12.4",

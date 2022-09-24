@@ -4,9 +4,9 @@ WORKDIR /usr/src/app
 COPY ["package.json","package-lock.json", "./"]
 
 
-RUN npm install -g npm@8.10.0
+RUN npm install -g npm@8.19.2
 RUN npm install -g react-scripts
 
-COPY . .
+COPY . ./
 
 # RUN yarn run build

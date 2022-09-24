@@ -4,4 +4,5 @@ build:
     config:
         NODE_ENV: production
 run:
-    web: sh -c "PORT=3002 yarn start"
+    # web: sh -c "yarn start"
+    web: yarn run start

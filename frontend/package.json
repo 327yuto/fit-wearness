@@ -1,7 +1,6 @@
 {
   "name": "frontend",
   "version": "0.1.0",
-  "main": "index.jsx",
   "private": true,
   "dependencies": {
     "@material-ui/core": "^4.12.4",
@@ -22,7 +21,7 @@
   },
   "license": "UNLICENSED",
   "scripts": {
-    "start": "PORT=3002 react-scripts start",
+    "start": "PORT=3002 yarn start",
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject"

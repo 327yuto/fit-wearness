@@ -8,3 +8,5 @@ RUN npm install -g npm@8.10.0
 RUN npm install -g react-scripts
 
 COPY . .
+
+RUN yarn run build

@@ -4,5 +4,5 @@ build:
     config:
         NODE_ENV: production
 run:
-    # web: sh -c "yarn start"
-    web: npm start
+    web: sh -c "yarn start"
+    # web: npm start

@@ -42,7 +42,7 @@ services:
       context: ./frontend
       dockerfile: Dockerfile
     volumes:
-      - ./frontend:/usr/src/app
+      - ./frontend:/client
     ports:
       - "3002:3002"
     command: sh -c "PORT=3002 yarn start"

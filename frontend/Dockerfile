@@ -9,4 +9,5 @@ RUN npm install -g react-scripts
 
 COPY . ./
 
-# RUN yarn build
+# RUN yarn run build
+RUN heroku-postbuild

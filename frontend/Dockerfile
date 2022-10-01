@@ -9,4 +9,4 @@ RUN npm install -g react-scripts
 
 COPY . ./
 
-RUN yarn build
+# RUN yarn build

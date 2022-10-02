@@ -34,15 +34,15 @@ module Backend
      g.factory_bot false
     end
 
-    config.middleware.use Rack::Cors do
-      allow do
-        origins 'localhost:3002' || "https://fit-wearness-front.herokuapp.com/"
-        resource '*',
-                 headers: :any,
-                 expose: %w[access-token expiry token-type uid client],
-                 methods: %i[get post put patch delete options head]
-      end
-    end
+    # config.middleware.use Rack::Cors do
+    #   allow do
+    #     origins 'localhost:3002' || "https://fit-wearness-front.herokuapp.com"
+    #     resource '*',
+    #              headers: :any,
+    #              expose: %w[access-token expiry token-type uid client],
+    #              methods: %i[get post put patch delete options head]
+    #   end
+    # end
 
     # Configuration for the application, engines, and railties goes here.
     #

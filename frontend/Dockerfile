@@ -5,7 +5,7 @@ WORKDIR /client
 # COPY ["package.json","package-lock.json", "./"]
 COPY package*.json ./
 
-RUN yarn install
+RUN npm install
 # RUN npm install -g npm@8.19.2
 # RUN npm install -g react-scripts
 

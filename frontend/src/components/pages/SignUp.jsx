@@ -15,7 +15,8 @@ export const SignUp = () => {
   const [password, setPassword] = useState("");
   const [passwordConfirmation, setPasswordConfirmation] = useState("");
   const [category, setCategory] = useState("");
-  const confirmSuccessUrl = "http://localhost:3002";
+  // const confirmSuccessUrl = "http://localhost:3002";
+  const confirmSuccessUrl = "https://fit-wearness-front.herokuapp.com/"
 
   // const generateParams = () => {
   //   const signUpParams = {

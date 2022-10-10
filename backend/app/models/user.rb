@@ -5,7 +5,7 @@ class User < ActiveRecord::Base
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable, :confirmable # ←メール認証で追加
   
- # 下記全て、session_specにて追加(8/10)
+# 下記全て、session_specにて追加(8/10)
 #  after_create :skip_confirmation_email_for_some_user
 
 #  protected

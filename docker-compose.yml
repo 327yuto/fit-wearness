@@ -45,6 +45,7 @@ services:
       - ./frontend:/client
     ports:
       - "3002:3002"
+    environment: WDS_SOCKET_PORT=0
     command: sh -c "PORT=3002 yarn start"
     depends_on:
       - "db"

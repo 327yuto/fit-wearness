@@ -46,7 +46,7 @@ services:
     ports:
       - "3002:3002"
     env_file:
-      - .env
+      - ./.env
     command: sh -c "PORT=3002 yarn start"
     depends_on:
       - "db"

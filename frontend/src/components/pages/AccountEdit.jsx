@@ -51,7 +51,7 @@ const useStyles = makeStyles((theme) => ({
 
   },
   input: {
-    display: 'none',
+    // display: 'none',
   },
 
 
@@ -65,7 +65,13 @@ export const AccountEdit = withRouter(() => {
     name: '',
     category: '',
     metadata: '',
+    image: '',
   })
+
+  const [image, setImage] = useState({
+    data: '',
+    name: '',
+  });
 
   //react hocksのルールで追加
   const classes = useStyles();
@@ -85,15 +91,18 @@ export const AccountEdit = withRouter(() => {
   const handleGetData = async (query) => {
     try {
       const res = await getId(query.id)
-      console.log(res.data.name)
+      console.log(res.data.image)
       // 使う値のみstateにセットする
       setValue({
         email: res.data.email,
         name: res.data.name,
         category: res.data.category,
         metadata: res.data.metadata,
+        image: res.data.image,
       })
+
       console.log(value)
+
     } catch (e) {
       console.log(e)
     }
@@ -110,6 +119,10 @@ export const AccountEdit = withRouter(() => {
     e.preventDefault()
     try {
       console.log(query.id)
+      console.log(image.data)
+
+      // setValue({ image: image.data })
+
       const res = await updateUserInfo(query.id, value)
       console.log(res)
       // リクエストが成功したら'/'にリダイレクトさせる
@@ -118,6 +131,29 @@ export const AccountEdit = withRouter(() => {
       console.log(e)
     }
   }
+
+  const handleImageSelect = (e) => {
+    const reader = new FileReader();
+    // 画像をbase64にエンコード
+    const { files } = e.target;
+    if (files) {
+      reader.onload = () => {
+        setImage({
+          data: reader.result,
+          name: files[0] ? files[0].name : 'unknownfile',
+        });
+      };
+      reader.readAsDataURL(files[0]);
+    }
+
+    // setValue({
+    // image: image.data,
+    // email: res.data.email,
+    // name: res.data.name,
+    // category: res.data.category,
+    // metadata: res.data.metadata,
+    // });
+  };
 
   const Form = (props) => {
     const { handleChange, handleSubmit, value, buttonType } = props
@@ -137,12 +173,19 @@ export const AccountEdit = withRouter(() => {
           <CardHeader className={classes.header} title="Edit" />
 
           <Avatar
-            src={IconImage}
+            src={image.data}
           />
 
           <label className={classes.uploadLabel}>
             プロフィール画像を変更
-            <input type="file" className={classes.input} />
+            <input
+              type="file"
+              id='image'
+              name="image"
+              accept="image/png,image/jpeg"
+              onChange={handleImageSelect}
+              className={classes.input} />
+
           </label>
 
           <Box className={classes.box}>

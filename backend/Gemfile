@@ -46,3 +46,7 @@ gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
 # Devise for token authentification
 gem 'devise'
 gem 'devise_token_auth'
+
+# Uploader 
+gem 'carrierwave'
+gem 'fog-aws'

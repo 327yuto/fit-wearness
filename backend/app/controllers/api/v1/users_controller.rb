@@ -42,7 +42,7 @@ class Api::V1::UsersController < ApplicationController
   private
 
     def user_params
-      params.permit(:email, :category, :metadata, :image, :name)
+      params.permit(:email, :category, :metadata, :name, :image)
     end
 end
 

@@ -22,6 +22,7 @@ import {
 import EditIcon from "@material-ui/icons/Edit"
 
 import IconImage from '../../man-839604_1280.jpg'
+import axios from 'axios';
 
 
 const useStyles = makeStyles((theme) => ({
@@ -55,6 +56,7 @@ export const Account = withRouter(() => {
   const { loading, isSignedIn, currentUser } = useContext(AuthContext);
   const [userProfile, setUserProfile] = useState({});
   const [accountId, setAccountId] = useState([]);
+  const [imageUrl, setImageUrl] = useState()
 
   const history = useHistory();
 
@@ -67,6 +69,13 @@ export const Account = withRouter(() => {
   // データを取得
   useEffect(() => {
     handleGetUserProfile(query);
+
+    // axios.get(userProfile.image)
+    //   .then(res => {
+    //     setImageUrl(res.data.image.url)
+    // console.log(userProfile.image)
+    // })
+
   }, [query])
 
 
@@ -86,37 +95,11 @@ export const Account = withRouter(() => {
     }
   };
 
-  // const handleDelete = async (item) => {
-  //   console.log('click', item.id);
-  //   try {
-  //     const res = await deletePost(item.id);
-  //     console.log(res.data);
-  //     handleGetUserPosts();
-  //   } catch (e) {
-  //     console.log(e);
-  //   }
-  // };
-  // const UserTable = () => {
-  //   if (userPosts.length >= 1) {
-  //     return (
-  //       <ListTable
-  //         dataList={userPosts}
-  //         handleDelete={handleDelete}
-  //         currentUser={currentUser}
-  //       />
-  //     );
-  //   } else {
-  //     return <h2>投稿はありません。</h2>;
-  //   }
-  // };
-
 
 
 
   return (
     <>
-      {/* <h1>{currentUser.name}投稿一覧</h1> */}
-      {/* <h1>My page</h1> */}
 
       <form noValidate autoComplete='off'>
         <Card className={classes.card}>
@@ -131,12 +114,11 @@ export const Account = withRouter(() => {
               </Typography>
 
               <Avatar
-                // sx={{ width: 56, height: 56 }}
-                // src={"https://joeschmoe.io/api/v1/random"}
-                src={IconImage}
-
+              // sx={{ width: 56, height: 56 }}
+              // src={"https://joeschmoe.io/api/v1/random"}
+              // src={userProfile ? URL.createObjectURL(userProfile) : ""} alt=""
+              // src={imageUrl}
               />
-
               <TextField
                 variant='standard'
                 fullWidth

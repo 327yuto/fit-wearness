@@ -47,6 +47,9 @@ gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
 gem 'devise'
 gem 'devise_token_auth'
 
-# Uploader 
+# Uploader (active_storage使用する為、不使用)
 gem 'carrierwave'
 gem 'fog-aws'
+
+# active_storage使用で追加
+gem "aws-sdk-s3", "~> 1.116"

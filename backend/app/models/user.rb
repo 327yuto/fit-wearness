@@ -20,5 +20,7 @@ class User < ActiveRecord::Base
 #   end
   include DeviseTokenAuth::Concerns::User
 
+  # has_one_attached :image
+  # has_many_attached :image
   mount_uploader :image, ImageUploader
 end

@@ -48,4 +48,24 @@ export const updateUserInfo = (id, params) => {
   });
 };
 
+export const updateUserImage = (id, params) => {
+  return client.patch(`/users/${id}`, params, {
+    headers: {
+      'content-type': 'multipart/form-data',
+    },
+  });
+};
+
+
+
+// export const updateUserImage = (params) => {
+//   return client.post(`/users/post_file`, params, {
+//     headers: {
+//       'access-token': Cookies.get('_access_token'),
+//       client: Cookies.get('_client'),
+//       uid: Cookies.get('_uid'),
+//       'content-type': 'multipart/form-data',
+//     },
+//   });
+// };
 

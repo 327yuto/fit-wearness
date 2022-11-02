@@ -1,9 +1,11 @@
 import React, { useContext, useState, useEffect } from 'react';
 import { Redirect, useHistory, Link, withRouter, useParams } from 'react-router-dom';
-import client from "../../api/client";
+
 
 // api
 import { getId } from '../../api/users';
+import client from "../../api/client";
+import axios from 'axios';
 // import { deletePost } from '../../lib/api/post';
 
 // context
@@ -21,8 +23,7 @@ import {
 } from '@material-ui/core';
 import EditIcon from "@material-ui/icons/Edit"
 
-import IconImage from '../../man-839604_1280.jpg'
-import axios from 'axios';
+
 
 
 const useStyles = makeStyles((theme) => ({
@@ -47,37 +48,40 @@ const useStyles = makeStyles((theme) => ({
   link: {
     textDecoration: 'none',
   },
+
+  avatarSize: {
+    width: 64,
+    height: 64,
+  },
+
 }));
+
+// const SizedAvatar = styled(Avatar)`
+//   ${({ size, theme }) => `
+//     width: ${theme.spacing(size)}px; 
+//     height: ${theme.spacing(size)}px; 
+//   `};
+// `;
 
 
 export const Account = withRouter(() => {
 
   const classes = useStyles(); //react hocksのルールで追加
   const { loading, isSignedIn, currentUser } = useContext(AuthContext);
+
+  // useState
   const [userProfile, setUserProfile] = useState({});
   const [accountId, setAccountId] = useState([]);
   const [imageUrl, setImageUrl] = useState()
 
   const history = useHistory();
-
-
-
   const query = useParams();
-  // console.log(query.id);
 
 
   // データを取得
   useEffect(() => {
     handleGetUserProfile(query);
-
-    // axios.get(userProfile.image)
-    //   .then(res => {
-    //     setImageUrl(res.data.image.url)
-    // console.log(userProfile.image)
-    // })
-
   }, [query])
-
 
   const handleGetUserProfile = async (query) => {
     if (!loading) {
@@ -85,9 +89,8 @@ export const Account = withRouter(() => {
         const res = await getId(query.id);
         console.log(res.data);
         setUserProfile(res.data);
-
-        console.log(res.data.id);
         setAccountId(res.data.id);
+        setImageUrl(res.data.image.url);
       } else {
         console.log("else");
         <Redirect to='/signin' />;
@@ -113,12 +116,11 @@ export const Account = withRouter(() => {
                 </Link>
               </Typography>
 
-              <Avatar
-              // sx={{ width: 56, height: 56 }}
+              <Avatar className={classes.avatarSize}
+                src={`${imageUrl}`}
               // src={"https://joeschmoe.io/api/v1/random"}
-              // src={userProfile ? URL.createObjectURL(userProfile) : ""} alt=""
-              // src={imageUrl}
               />
+
               <TextField
                 variant='standard'
                 fullWidth
@@ -182,5 +184,6 @@ export const Account = withRouter(() => {
     </>
   );
 });
+
 // };
 export default Account;

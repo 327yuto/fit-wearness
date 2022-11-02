@@ -14,6 +14,7 @@ import {
   TableRow,
   TableHead,
   Paper,
+  Avatar,
 } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
 
@@ -98,6 +99,8 @@ export const AccountList = withRouter(() => {
 
           <TableBody>
             {dataList.map((item, index) => (
+
+
               <TableRow key={index}>
                 <TableCell align='center'>{subString(item.email, 15)}</TableCell>
                 <TableCell align='center'>
@@ -106,6 +109,8 @@ export const AccountList = withRouter(() => {
                 <TableCell align='center'>
                   {subString(item.category, 15)}
                 </TableCell>
+
+
                 {/* <TableCell align='center'>
                   {subString(item.detailInfo.favoriteToy, 10)}
                 </TableCell>

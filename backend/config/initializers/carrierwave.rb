@@ -16,7 +16,7 @@ CarrierWave.configure do |config|
     #   path_style: true
     # }
   else
-    config.asset_host = 'http://localhost:3020/api/v1'
+    config.asset_host = 'http://localhost:3020'
     config.storage = :file
     config.cache_storage = :file
   end

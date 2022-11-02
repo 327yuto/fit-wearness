@@ -63,6 +63,10 @@ const useStyles = makeStyles((theme) => ({
     display: 'none',
   },
 
+  avatarSize: {
+    width: 64,
+    height: 64,
+  },
 
 }));
 
@@ -77,6 +81,12 @@ export const AccountEdit = withRouter(() => {
     metadata: '',
     image: '',
   })
+  // apiから取得したimageカラムのデータを管理
+  const [imageUrl, setImageUrl] = useState()
+
+  // 更新したい画像を管理・プレビューするstate
+  const [image, setImage] = useState(null);
+
 
   //react hocksのルールで追加
   const classes = useStyles();
@@ -108,10 +118,9 @@ export const AccountEdit = withRouter(() => {
         name: res.data.name,
         category: res.data.category,
         metadata: res.data.metadata,
-        image: res.data.image,
-      })
+      });
 
-      // console.log(value)
+      setImageUrl(res.data.image.url)
 
     } catch (e) {
       console.log(e)
@@ -128,10 +137,8 @@ export const AccountEdit = withRouter(() => {
   const handleSubmit = async (e) => {
     e.preventDefault()
     try {
-      console.log(query.id)
-
       const res = await updateUserInfo(query.id, (value))
-      console.log(res)
+
       // リクエストが成功したら'/'にリダイレクトさせる
       history.push(`/users/${query.id}`)
     } catch (e) {
@@ -139,31 +146,26 @@ export const AccountEdit = withRouter(() => {
     }
   }
 
-  // 画像
-  // const [imagePreview, setImagePreview] = useState({});
-  const [image, setImage] = useState();
-
 
   const handleFileSend = async (e) => {
+    if (image != null && query.id == currentUser.id) {
 
-    const file = new FormData()
-    file.append("image", image);
-    console.log(file)
+      const file = new FormData()
+      file.append("image", image);
 
-    //  axios
-    const res = await updateUserImage(query.id, (file))
-      .then(response => {
-        console.log(response);
-      })
+      const res = await updateUserImage(query.id, (file))
+
+        .then(response => {
+          console.log(response);
+        })
+    }
   }
+
 
 
   const Form = (props) => {
     const { handleChange, handleSubmit, value, buttonType } = props
   }
-
-  // const buttonType = '更新'
-
 
   return (
     <>
@@ -173,8 +175,8 @@ export const AccountEdit = withRouter(() => {
 
 
           <label className={classes.uploadLabel}>
-            <Avatar
-              src={image ? URL.createObjectURL(image) : ""} alt=""
+            <Avatar className={classes.avatarSize}
+              src={image ? URL.createObjectURL(image) : imageUrl} alt=""
             />
             <input
               type="file"

@@ -1,9 +1,11 @@
 import React, { useContext, useState, useEffect } from 'react';
 import { Redirect, useHistory, Link, withRouter, useParams } from 'react-router-dom';
-import client from "../../api/client";
+
 
 // api
 import { getId } from '../../api/users';
+import client from "../../api/client";
+import axios from 'axios';
 // import { deletePost } from '../../lib/api/post';
 
 // context
@@ -21,7 +23,7 @@ import {
 } from '@material-ui/core';
 import EditIcon from "@material-ui/icons/Edit"
 
-import IconImage from '../../man-839604_1280.jpg'
+
 
 
 const useStyles = makeStyles((theme) => ({
@@ -46,22 +48,34 @@ const useStyles = makeStyles((theme) => ({
   link: {
     textDecoration: 'none',
   },
+
+  avatarSize: {
+    width: 64,
+    height: 64,
+  },
+
 }));
+
+// const SizedAvatar = styled(Avatar)`
+//   ${({ size, theme }) => `
+//     width: ${theme.spacing(size)}px; 
+//     height: ${theme.spacing(size)}px; 
+//   `};
+// `;
 
 
 export const Account = withRouter(() => {
 
   const classes = useStyles(); //react hocksのルールで追加
   const { loading, isSignedIn, currentUser } = useContext(AuthContext);
+
+  // useState
   const [userProfile, setUserProfile] = useState({});
   const [accountId, setAccountId] = useState([]);
+  const [imageUrl, setImageUrl] = useState()
 
   const history = useHistory();
-
-
-
   const query = useParams();
-  // console.log(query.id);
 
 
   // データを取得
@@ -69,16 +83,14 @@ export const Account = withRouter(() => {
     handleGetUserProfile(query);
   }, [query])
 
-
   const handleGetUserProfile = async (query) => {
     if (!loading) {
       if (isSignedIn) {
         const res = await getId(query.id);
         console.log(res.data);
         setUserProfile(res.data);
-
-        console.log(res.data.id);
         setAccountId(res.data.id);
+        setImageUrl(res.data.image.url);
       } else {
         console.log("else");
         <Redirect to='/signin' />;
@@ -86,37 +98,11 @@ export const Account = withRouter(() => {
     }
   };
 
-  // const handleDelete = async (item) => {
-  //   console.log('click', item.id);
-  //   try {
-  //     const res = await deletePost(item.id);
-  //     console.log(res.data);
-  //     handleGetUserPosts();
-  //   } catch (e) {
-  //     console.log(e);
-  //   }
-  // };
-  // const UserTable = () => {
-  //   if (userPosts.length >= 1) {
-  //     return (
-  //       <ListTable
-  //         dataList={userPosts}
-  //         handleDelete={handleDelete}
-  //         currentUser={currentUser}
-  //       />
-  //     );
-  //   } else {
-  //     return <h2>投稿はありません。</h2>;
-  //   }
-  // };
-
 
 
 
   return (
     <>
-      {/* <h1>{currentUser.name}投稿一覧</h1> */}
-      {/* <h1>My page</h1> */}
 
       <form noValidate autoComplete='off'>
         <Card className={classes.card}>
@@ -130,11 +116,9 @@ export const Account = withRouter(() => {
                 </Link>
               </Typography>
 
-              <Avatar
-                // sx={{ width: 56, height: 56 }}
-                // src={"https://joeschmoe.io/api/v1/random"}
-                src={IconImage}
-
+              <Avatar className={classes.avatarSize}
+                src={`${imageUrl}`}
+              // src={"https://joeschmoe.io/api/v1/random"}
               />
 
               <TextField
@@ -200,5 +184,6 @@ export const Account = withRouter(() => {
     </>
   );
 });
+
 // };
 export default Account;

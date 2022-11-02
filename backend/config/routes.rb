@@ -4,6 +4,7 @@ Rails.application.routes.draw do
     namespace :v1 do
       resources :test, only: %i[index]
       resources :users, only: %i[update index show]   
+      # patch 'post_file' => 'users#post_file'
       # get '/users/:id', to: 'users#show', as: :user_info #個人ページのみ
 
 

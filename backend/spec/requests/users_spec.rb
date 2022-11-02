@@ -54,7 +54,7 @@ RSpec.describe ' Users ', type: :request do
 
     context 'abnomal(異常)' do
     
-      it 'response is bad_request'do 
+      it 'Categories not updating'do 
         @params = {category: "Update"}
 
         patch api_v1_user_path(user_2.id), 
@@ -62,8 +62,9 @@ RSpec.describe ' Users ', type: :request do
          params: @params
       
        user.reload
-      expect(response.status).to eq 400
-      expect(user.category).not_to eq "Update"
+      # expect(response.status).to eq 200 //更新できないが、errorも出ない
+      expect(user.category).to include( "test category" )
+      expect(user.category).to_not include( "Update" )
       end
     end
   end

@@ -184,7 +184,6 @@ export const AccountEdit = withRouter(() => {
               name="image"
               accept="image/png,image/jpeg"
               onChange={e => setImage(e.target.files[0])}
-              // onChange={handleImageSelect}
               className={classes.input} />
           </label>
 

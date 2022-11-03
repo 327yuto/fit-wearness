@@ -1,5 +1,5 @@
 import Cookies from "js-cookie";
-import { useContext, useState } from "react";
+import { useContext, useState, useEffect } from "react";
 import { Link, useHistory } from "react-router-dom";
 import { signIn } from "../../api/auth";
 import { AuthContext } from "../../App";
@@ -14,13 +14,7 @@ export const SignIn = () => {
 
   const history = useHistory();
 
-  // const generateParams = () => {
-  //   const signInParams = {
-  //     email: email,
-  //     password: password,
-  //   };
-  //   return signInParams;
-  // };
+
 
   const signInHandleSubmit = async (e) => {
     e.preventDefault();
@@ -42,6 +36,7 @@ export const SignIn = () => {
       }
     } catch (e) {
       console.log(e);
+      console.log("catch");
     }
   };
 
@@ -52,6 +47,7 @@ export const SignIn = () => {
     };
     return signInParams;
   };
+
 
   return (
     <SignForm

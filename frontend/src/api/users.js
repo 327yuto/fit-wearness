@@ -52,6 +52,9 @@ export const updateUserImage = (id, params) => {
   return client.patch(`/users/${id}`, params, {
     headers: {
       'content-type': 'multipart/form-data',
+      'access-token': Cookies.get('_access_token'),
+      client: Cookies.get('_client'),
+      uid: Cookies.get('_uid'),
     },
   });
 };

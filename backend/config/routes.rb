@@ -4,8 +4,7 @@ Rails.application.routes.draw do
     namespace :v1 do
       resources :test, only: %i[index]
       resources :users, only: %i[update index show]   
-      # patch 'post_file' => 'users#post_file'
-      # get '/users/:id', to: 'users#show', as: :user_info #個人ページのみ
+      resources :posts, only: %i[index show create destroy]
 
 
       mount_devise_token_auth_for 'User', at: 'auth', controllers: {
@@ -15,6 +14,7 @@ Rails.application.routes.draw do
       namespace :auth do
         resources :sessions, only: %i[index]
       end
+      
     end
   end
 end

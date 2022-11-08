@@ -22,5 +22,7 @@ class User < ActiveRecord::Base
 
   # has_one_attached :image
   # has_many_attached :image
+  
   mount_uploader :image, ImageUploader
+  has_many :posts, dependent: :destroy
 end

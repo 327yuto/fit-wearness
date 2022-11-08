@@ -13,15 +13,15 @@ class Api::V1::UsersController < ApplicationController
 
   def update
     @user = User.find_by(id: params[:id])
-    # if @user.id == current_api_v1_user.id
+    if @user.id == current_api_v1_user.id
       if @user.update(user_params)
         render json: @user, status: :ok
       else
         render json: @user.errors, status: :bad_request
       end
-    # else
-    #   render json: {}, status: :bad_request
-    # end
+    else
+      render json: {}, status: :bad_request
+    end
   end
 
 

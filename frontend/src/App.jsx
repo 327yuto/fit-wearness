@@ -5,6 +5,7 @@ import { Home } from "./components/pages/Home";
 import { Account } from "./components/pages/Account";
 import { AccountList } from "./components/pages/AccountList";
 import { AccountEdit } from "./components/pages/AccountEdit";
+import { PostList } from "./components/pages/PostList";
 import { SignIn } from "./components/pages/SignIn";
 import { SignUp } from "./components/pages/SignUp";
 import MainContainer from './components/layouts/MainContainer'; //export defaultしている
@@ -43,7 +44,7 @@ function App() {
 
   useEffect(() => {
     handleGetCurrentUser();
-  }, []);
+  }, [setCurrentUser]);
 
   const Private = ({ children }) => {
     if (!loading) {
@@ -95,6 +96,9 @@ function App() {
                     </Route>
                     <Route exact path="/edit/:id">
                       <AccountEdit />
+                    </Route>
+                    <Route exact path="/posts">
+                      <PostList />
                     </Route>
                   </Private>
                 </Switch>

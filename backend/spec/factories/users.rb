@@ -5,7 +5,7 @@ FactoryBot.define do
     end
     password { 'password' }
     password_confirmation { 'password' }
-    confirmed_at { Date.today } 
+    confirmed_at { DateTime.now } 
     category { 'test category' }
     
     # confirm_success_url { "https://google.com" } #使用できない
@@ -25,7 +25,7 @@ FactoryBot.define do
     email { "user_2@mail.com" }
     password { 'password' }
     password_confirmation { 'password' }
-    confirmed_at { Date.today } 
+    confirmed_at { DateTime.now  } 
     category { 'test category' }
   end
 end

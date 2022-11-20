@@ -86,6 +86,15 @@ export const Header = withRouter(() => {
       if (isSignedIn) {
         return (
           <>
+
+
+            <Button
+              color='inherit'
+              className={classes.linkBtn}
+              onClick={() => history.push('/posts')}
+            >
+              Posts List
+            </Button>
             <Button
               color='inherit'
               className={classes.linkBtn}

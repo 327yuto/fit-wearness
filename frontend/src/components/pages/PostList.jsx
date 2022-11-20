@@ -3,12 +3,13 @@ import React, { useEffect, useState } from 'react';
 import { getList, getId } from '../../api/users';
 import { useHistory, withRouter, Link } from 'react-router-dom';
 import SpaceRow from '../commons/SpaceRow';
-import defaultPicture from '../../man-839604_1280.jpg';
 
-import { getpostsList } from '../../api/posts';
+import { getPostsList } from '../../api/posts';
 
 // commons
 import BodyCard from '../commons/BodyCard';
+// import Paginate from '../commons/Paginate';
+// import Pagination from '@material-ui/lab/Pagination';
 
 // style
 import { makeStyles } from '@material-ui/core/styles';
@@ -55,66 +56,49 @@ const useStyles = makeStyles((theme) => ({
     margin: 1,
   },
 
-
-
 }));
 
 export const PostList = withRouter(() => {
 
   const classes = useStyles(); //react hocksのルールで追加
 
-  const urls = [defaultPicture, defaultPicture, defaultPicture];
-  // console.log(urls);
-
-
+  // State 
   const [posts, setPosts] = useState([]);
-  const [pictureUrl, setPictureUrl] = useState([]);
+  // const [pictureUrl, setPictureUrl] = useState([]);
 
-  // apiで取得したデータを管理する為のstate
-  // const [value, setValue] = useState({
-  //   pictureUrl: '',
-  // })
 
   const handleGetData = async () => {
     try {
-      const res = await getpostsList();
-      // const urls = res.data
-      // console.log(urls.map((url) => setPictureUrl(url)));
+      const res = await getPostsList();
 
-      setPosts(res.data);
-      console.log(res.data);
-      // const image = (res.data).map((u) => console.log(u.picture.url));
-      // console.log(image)
-
-      // setValue({
-      //   pictureUrl: urls[0].picture.url,
-      // });
-      // console.log(value)
-
-      // urls.map((url) => console.log(url.picture.url));
-      // console.log(urls.map((url) => setPictureUrl(url.picture.url)));
-      // console.log(pictureUrl)
-
+      // スプレッドで配列をばらした後もう一度まとめる。
+      setPosts([...res.data].reverse());
+      console.log(res.data.reverse());
 
     } catch (e) {
       console.log(e)
     }
   };
 
+  // posts.reverse();
+
 
   // データを取得
   useEffect(() => {
+
     handleGetData();
+
   }, [])
 
 
   const getCardContent = getObj => {
 
     return (
-      <Grid item xs={12} sm={3} key={getObj.id}>
+      <Grid item xs={12} sm={3} key={getObj.id} >
         {/* <BodyCard {...getObj} */}
         <BodyCard
           pictureUrl={getObj.picture.url}
+          postId={getObj.id}
         />
       </Grid>
     );

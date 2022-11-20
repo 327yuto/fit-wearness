@@ -25,6 +25,10 @@ module Backend
     config.load_defaults 6.1
 
 
+    # 日本時間に設定
+    config.time_zone = 'Tokyo'
+
+
     config.generators do |g|
      g.test_framework :rspec,
      #  fixtures: false,

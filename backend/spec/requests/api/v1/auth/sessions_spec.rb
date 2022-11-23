@@ -26,7 +26,7 @@ RSpec.describe 'api v1 auth session', type: :request do
 
       it 'there is confirmed_at ' do
         login(user)
-          expect(user.confirmed_at).to eq Date.today
+          expect(user.confirmed_at).to be_a(Time)
       end
     end
 

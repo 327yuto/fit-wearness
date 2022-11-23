@@ -1,5 +1,5 @@
-import React, { useContext, useState } from 'react';
-import { useHistory, Link } from 'react-router-dom';
+import React, { useContext, useState, useEffect } from 'react';
+import { useHistory, Link, withRouter } from 'react-router-dom';
 import Cookies from 'js-cookie';
 // style
 import { createStyles, makeStyles } from '@material-ui/core/styles';
@@ -11,10 +11,13 @@ import {
   IconButton,
 } from '@material-ui/core';
 import MenuIcon from '@material-ui/icons/Menu';
+
 // api
 import { signOut } from '../../api/auth';
+
 // context
 import { AuthContext } from '../../App';
+
 // component
 import HeaderDrawer from './HeaderDrawer';
 
@@ -35,17 +38,28 @@ const useStyles = makeStyles((theme) =>
   })
 );
 
-const drawerItem = [
-  { label: 'HOME', path: '/' },
-  // { label: '新規作成', path: '/new' },
-  { label: '自分の投稿', path: '#' },
-];
+export const Header = withRouter(() => {
 
-const Header = () => {
+  const drawerItem = [
+    { label: 'HOME', path: '/' },
+    // { label: '新規作成', path: '/new' },
+    { label: '自分の投稿', path: '#' },
+  ];
+
+
+  // const Header = () => {
   const { loading, isSignedIn, setIsSignedIn, currentUser } =
     useContext(AuthContext);
   const classes = useStyles();
   const history = useHistory();
+
+  useEffect(() => {
+    // handleGetCurrentUser();
+    // console.log(currentUser)
+  }, [])
+
+
+
 
   const handleSignOut = async (e) => {
     try {
@@ -72,11 +86,19 @@ const Header = () => {
       if (isSignedIn) {
         return (
           <>
+
+
             <Button
-              component={Link}
-              to={`/users/${currentUser.id}`}
               color='inherit'
               className={classes.linkBtn}
+              onClick={() => history.push('/posts')}
+            >
+              Posts List
+            </Button>
+            <Button
+              color='inherit'
+              className={classes.linkBtn}
+              onClick={() => history.push(`/users/${currentUser.id}`)}
             >
               Account
             </Button>
@@ -152,5 +174,5 @@ const Header = () => {
       />
     </>
   );
-};
+});
 export default Header;

@@ -2,6 +2,8 @@ FROM node:14.15.0-alpine3.10
 RUN mkdir /client
 WORKDIR /client
 
+# ENV NODE_ENV production
+
 # COPY ["package.json","package-lock.json", "./"]
 COPY package*.json ./
 

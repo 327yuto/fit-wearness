@@ -53,3 +53,6 @@ frontend/yarn-error.log*
 #環境変数管理の為に追加したファイル
 backend/.env
 .env
+
+# uploaderのローカル保存先を追加
+backend/public/uploads

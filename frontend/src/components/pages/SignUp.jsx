@@ -18,16 +18,6 @@ export const SignUp = () => {
   // const confirmSuccessUrl = "http://localhost:3002";
   const confirmSuccessUrl = "https://fit-wearness-front.herokuapp.com"
 
-  // const generateParams = () => {
-  //   const signUpParams = {
-  //     email: email,
-  //     password: password,
-  //     passwordConfirmation: passwordConfirmation,
-  //     category: category,
-  //     confirmSuccessUrl: confirmSuccessUrl,
-  //   };
-  //   return signUpParams;
-  // };
 
   const signUpHandleSubmit = async (e) => {
     e.preventDefault();

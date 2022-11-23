@@ -62,7 +62,7 @@ RSpec.describe ' Users ', type: :request do
          params: @params
       
        user.reload
-      # expect(response.status).to eq 200 //更新できないが、errorも出ない
+      expect(response.status).to eq 400
       expect(user.category).to include( "test category" )
       expect(user.category).to_not include( "Update" )
       end

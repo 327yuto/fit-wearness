@@ -4,7 +4,9 @@ Rails.application.routes.draw do
     namespace :v1 do
       resources :test, only: %i[index]
       resources :users, only: %i[update index show]   
-      resources :posts, only: %i[index show create destroy]
+      resources :posts, only: %i[index show create destroy] do
+        resource :likes, only: %i[create destroy]
+      end
 
 
       mount_devise_token_auth_for 'User', at: 'auth', controllers: {

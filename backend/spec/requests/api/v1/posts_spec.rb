@@ -19,7 +19,7 @@ RSpec.describe " Posts ", type: :request do
               category: "ワークアウト",
               content: "今日のコーディネート",
               picture: Rack::Test::UploadedFile.new(File.join(Rails.root,
-              "/spec/fixtures/attachment.jpg")),
+              "/spec/fixtures/images/attachment.jpg")),
               user_id: user.id 
             },
             headers: auth_params
@@ -38,13 +38,29 @@ RSpec.describe " Posts ", type: :request do
               category: "ワークアウト",
               content: "今日のコーディネート",
               picture: Rack::Test::UploadedFile.new(File.join(Rails.root,
-              "/spec/fixtures/attachment.jpg")),
-              user_id: 1000000000
+              "/spec/fixtures/images/attachment.jpg")),
+              user_id: user.id + 1
             },
             headers: auth_params
           )
         }.to change(Post, :count).by 0
+        expect(response.status).to eq 422
+      end
 
+      it 'Not created when content is over 140 characters<コンテンツが140文字以上の時、作成されない>' do
+
+        expect {
+          post(api_v1_posts_path, 
+            params:{
+              category: "ワークアウト",
+              content: "A"*141,
+              picture: Rack::Test::UploadedFile.new(File.join(Rails.root,
+              "/spec/fixtures/images/attachment.jpg")),
+              user_id: user.id
+            },
+            headers: auth_params
+          )
+        }.to change(Post, :count).by 0
         expect(response.status).to eq 422
       end
     end

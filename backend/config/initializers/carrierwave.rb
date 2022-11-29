@@ -4,7 +4,7 @@ require 'carrierwave/storage/fog'
 
 CarrierWave.configure do |config|
 
-  if Rails.env.production?
+  # if Rails.env.production?
     config.storage :fog
     config.fog_provider = 'fog/aws'
     config.fog_directory  = 'fit-wearness-app' # 作成したバケット名を記述
@@ -20,9 +20,9 @@ CarrierWave.configure do |config|
       region: 'ap-northeast-1',    # アジアパシフィック(東京)を選択した場合
       path_style: true
     }
-  else
-    config.asset_host = 'http://localhost:3020'
-    config.storage = :file
-    config.cache_storage = :file
-  end
+  # else
+  #   config.asset_host = 'http://localhost:3020'
+  #   config.storage = :file
+  #   config.cache_storage = :file
+  # end
 end 

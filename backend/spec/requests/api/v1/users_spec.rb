@@ -3,7 +3,7 @@ require 'rails_helper'
 RSpec.describe ' Users ', type: :request do
 
   let(:user) { FactoryBot.create(:user) }
-  let(:user_2) { FactoryBot.create(:user, :user_2) }
+  let(:user_2) { FactoryBot.create(:user) }
   let(:auth_params) do
     login(user)
    get_auth_params_from_login_response_headers(response)

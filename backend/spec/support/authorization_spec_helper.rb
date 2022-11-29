@@ -6,25 +6,13 @@ module AuthorizationSpecHelper
   end
 
   def get_auth_params_from_login_response_headers(response)
-    # token = response.headers['access-token']
-    # client = response.headers['client']
-    # uid = response.headers['uid']
-    # expiry = response.headers['expiry']
-    # token_type = response.headers['token-type']
 
-    # {
-    #   'access-token' => token,
-    #   'client' => client,
-    #   'uid' => uid,
-    #   'expiry' => expiry,
-    #   'token-type' => token_type
-    # }
     # 下記で作成したメソッドは同等のコード (対象のkeyのみを入手している)
     response.headers.slice('access-token', 'client', 'uid', 'expiry', 'token-type')
   end
 
   def get_auth_params_and_create_posts(response)
-   token = response.headers['access-token']
+    token = response.headers['access-token']
     client = response.headers['client']
     uid = response.headers['uid']
     expiry = response.headers['expiry']

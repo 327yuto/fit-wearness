@@ -105,7 +105,7 @@ export const AccountEdit = withRouter(() => {
   useEffect(() => {
     handleGetData(query)
     console.log(currentUser)
-  }, [query])
+  }, [currentUser])
 
   // idをapiクライアントに渡し、/api/v1/users/:idのエンドポイントからデータ取得
   const handleGetData = async (query) => {

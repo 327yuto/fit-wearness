@@ -10,7 +10,7 @@ RSpec.describe Post, type: :model do
       login(user)
       get_auth_params_and_create_posts(response)
     end
-    let(:post) { ceate(:post, user_id: user.id) }
+    let(:post) { create(:post, user_id: user.id) }
     
 
     context "正常<nomal>" do 

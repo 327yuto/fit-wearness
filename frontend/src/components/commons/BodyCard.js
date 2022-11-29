@@ -23,10 +23,16 @@ const useStyles = makeStyles({
   },
 
   media: {
-    height: 250,
-    width: 300,
+    height: 350,
+    width: 280,
     // paddingTop: '82.25%',
   },
+
+  mediaArea: {
+    // margin: '0 auto',
+    width: '80%',
+  },
+
 });
 
 
@@ -49,7 +55,7 @@ function BodyCard(props) {
       // title={title}
       // subheader={subheader}
       /> */}
-      <CardActionArea>
+      <CardActionArea className={classes.mediaArea}>
         <CardMedia className={classes.media}
           // style={{ height: "250px", width: "250px" }} 
           image={pictureUrl}

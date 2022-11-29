@@ -3,6 +3,9 @@ import { makeStyles } from '@material-ui/core/styles';
 import { useHistory, withRouter, useParams } from 'react-router-dom';
 import { getPostsList, getPostShow, postDelete } from '../../api/posts';
 import { getId } from '../../api/users';
+import LikeButton from '../../components/commons/LikeButton';
+import { likedCheck } from '../../api/likes';
+
 
 import {
   CardMedia, Avatar, IconButton, CardHeader, Typography,
@@ -30,13 +33,13 @@ const useStyles = makeStyles((theme) => ({
   },
 
   media: {
-    height: 0,
-    paddingTop: '82.25%',
+    // height: 0,
+    // paddingTop: '82.25%',
   },
 
   card: {
     padding: theme.spacing(3),
-    height: 700,
+    height: 800,
     maxWidth: 400,
     backgroundColor: '#f0f8ff',
   },
@@ -56,7 +59,8 @@ const useStyles = makeStyles((theme) => ({
 
   codeInfo: {
     background: '#ffffff',
-    margin: 20,
+    marginTop: 15,
+    margin: 10,
     // width: 350,
     // minRows: 4,
     // rows: 10,
@@ -68,9 +72,17 @@ const useStyles = makeStyles((theme) => ({
     fontSize: '15px',
   },
 
-  bodyTextSize: {
+  bodyText: {
     fontSize: '13px',
+    wordBreak: 'break-word',
   },
+
+  deleteButton: {
+    marginTop: 10,
+  },
+
+
+
 
 }));
 
@@ -99,6 +111,8 @@ export const PostShow = withRouter(() => {
     userId: '',
   })
 
+  const [likeCount, setLikeCount] = useState(0);
+
 
   const handleGetData = async (query) => {
 
@@ -106,7 +120,7 @@ export const PostShow = withRouter(() => {
 
     // setPost(res.data);
     // setPictureUrl(res.data.picture.url)
-    console.log(res.data);
+    // console.log(res.data);
 
     // 使う値のみstateにセットする
     setValue({
@@ -119,7 +133,13 @@ export const PostShow = withRouter(() => {
     });
   };
 
-  console.log(value)
+  const handleGetLike = async () => {
+
+    const res = await likedCheck(query.id);
+    console.log(res)
+    setLikeCount(res.data.likeCount);
+
+  }
 
   const handleDelete = async (post) => {
     console.log('click', post.id);
@@ -137,7 +157,8 @@ export const PostShow = withRouter(() => {
   // データを取得
   useEffect(() => {
     handleGetData(query);
-    console.log(currentUser);
+    handleGetLike();
+    // console.log(currentUser);
     // console.log()
   }, [query])
 
@@ -166,11 +187,9 @@ export const PostShow = withRouter(() => {
           />
 
 
-
-
           {value.picture ? (
             <CardMedia className={classes.media}
-              style={{ height: "350px", width: "350px" }}
+              style={{ height: "400px", width: "350px" }}
               image={value.picture}
             // onClick={() => history.push(`/posts/${postId}`)}
             />
@@ -187,7 +206,7 @@ export const PostShow = withRouter(() => {
 
             <Box display="flex" className={classes.box} >
               {/* <Box borderRadius="borderRadius" className={classes.box} /> */}
-              <Typography variant="body1" component="p" className={classes.bodyTextSize}>
+              <Typography variant="body1" component="p" className={classes.bodyText}>
                 {value.content}
               </Typography>
             </Box>
@@ -200,16 +219,14 @@ export const PostShow = withRouter(() => {
             </Box>
           </CardContent>
 
-          {value.userId == currentUser.id && (
-            <Button
-              variant='contained'
-              color='secondary'
-              fullWidth
-              onClick={() => handleDelete(query)}
-            >
-              削除
-            </Button>
-          )}
+
+          <LikeButton
+            postId={query.id}
+            currentUser={currentUser}
+            initialLikeCount={likeCount}
+          />
+
+
 
 
           {/* </CardContent> */}
@@ -217,6 +234,19 @@ export const PostShow = withRouter(() => {
           <Button size="small">詳細をみる</Button>
           </CardActions> */}
         </Card>
+
+        {value.userId == currentUser.id && (
+          <Button
+            className={classes.deleteButton}
+            variant='contained'
+            color='secondary'
+            fullWidth
+            onClick={() => handleDelete(query)}
+          >
+            削除
+          </Button>
+        )}
+
       </form>
     </>
   )

@@ -3,10 +3,14 @@ FactoryBot.define do
     sequence :email do |n|
       "confirm_testmail#{n}@mail.com"
     end
+    sequence :id do |id|
+      id
+    end
     password { 'password' }
     password_confirmation { 'password' }
     confirmed_at { DateTime.now } 
     category { 'test category' }
+  
     
     # confirm_success_url { "https://google.com" } #使用できない
     # uid { email }

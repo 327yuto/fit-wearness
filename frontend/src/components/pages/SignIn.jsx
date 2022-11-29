@@ -1,7 +1,7 @@
 import Cookies from "js-cookie";
 import { useContext, useState, useEffect } from "react";
 import { Link, useHistory } from "react-router-dom";
-import { signIn } from "../../api/auth";
+import { getCurrentUser, signIn } from "../../api/auth";
 import { AuthContext } from "../../App";
 
 import SignForm from './SignForm';
@@ -31,6 +31,10 @@ export const SignIn = () => {
 
         setIsSignedIn(true);
         setCurrentUser(res.data.data);
+
+        // jsonを飛ばす用
+        const sessions = await getCurrentUser();
+
 
         history.push("/");
       }

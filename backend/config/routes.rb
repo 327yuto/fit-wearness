@@ -5,7 +5,7 @@ Rails.application.routes.draw do
       resources :test, only: %i[index]
       resources :users, only: %i[update index show]   
       resources :posts, only: %i[index show create destroy] do
-        resource :likes, only: %i[create destroy]
+        resource :likes, only: %i[show create destroy]
       end
 
 

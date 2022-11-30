@@ -12,7 +12,7 @@ CarrierWave.configure do |config|
     config.fog_credentials = {
       provider: 'AWS',
       
-      # aws_access_key_id: ENV['AWS_ACCESS_KEY_ID'],   # 環境変数
+      # aws_access_key_id: ENV['AWS_ACCESS_KEY_ID'],  # 環境変数
       aws_access_key_id: 'AKIA2F7A5FFQ2AL6FFSL',
       
       # aws_secret_access_key: ENV['AWS_SECRET_ACCESS_KEY'],   # 環境変数

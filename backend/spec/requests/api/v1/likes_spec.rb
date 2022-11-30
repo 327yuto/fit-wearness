@@ -26,6 +26,10 @@ RSpec.describe ' Api::V1::Likes ', type: :request do
           post api_v1_post_likes_path(new_post.id), params: post_params, headers: auth_params
         }.to change(Like.where(user_id: user.id, post_id: new_post.id), :count).by(1)
         expect(response.status).to eq 200
+        expect{
+        delete api_v1_post_likes_path(new_post.id), params: {user_id: user.id}, headers: auth_params
+        }.to change(Like.where(user_id: user.id, post_id: new_post.id), :count).by(-1)
+
       end
     end
 

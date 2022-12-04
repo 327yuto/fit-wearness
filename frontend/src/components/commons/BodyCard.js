@@ -23,14 +23,15 @@ const useStyles = makeStyles({
   },
 
   media: {
+    width: 300,
     height: 350,
-    width: 280,
+
     // paddingTop: '82.25%',
   },
 
   mediaArea: {
     // margin: '0 auto',
-    width: '80%',
+    // width: '80%',
   },
 
 });

@@ -65,4 +65,12 @@ RSpec.configure do |config|
   config.include FactoryBot::Syntax::Methods
   config.include AuthorizationSpecHelper, type: :request
 
+  
+  # テスト終了後にファイルを削除する
+  config.after(:all) do
+    if Rails.env.test?
+      FileUtils.rm_rf(Dir["#{Rails.root}/public/uploads_#{Rails.env}/"])
+    end
+  end
+
 end

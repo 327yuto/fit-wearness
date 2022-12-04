@@ -21,7 +21,7 @@ RSpec.describe ' Api::V1::Likes ', type: :request do
     context "正常<nomal>" do 
   
       it "returns 200 and successfully creation
-          <200を返し、作成に成功>" do
+          <200を返し、作成・削除が成功>" do
         expect{
           post api_v1_post_likes_path(new_post.id), params: post_params, headers: auth_params
         }.to change(Like.where(user_id: user.id, post_id: new_post.id), :count).by(1)

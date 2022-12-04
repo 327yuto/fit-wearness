@@ -34,7 +34,7 @@ const useStyles = makeStyles((theme) => ({
     textAlign: 'center',
   },
   card: {
-    padding: theme.spacing(2),
+    padding: theme.spacing(4),
     height: 750,
     maxWidth: 400,
     backgroundColor: '#f0f8ff',
@@ -64,9 +64,9 @@ const useStyles = makeStyles((theme) => ({
   },
 
   picture: {
-    width: 340,
-    height: 340,
-    background: '#3e8bff', /* 背景色 */
+    width: 300,
+    height: 350,
+    // background: '#3e8bff', /* 背景色 */
   },
 
   content: {
@@ -112,34 +112,6 @@ export const CreatPost = withRouter(() => {
 
   const reader = new FileReader();
 
-
-  useEffect(() => {
-    // handleGetData(query)
-    console.log(currentUser.id)
-    setValue({ user_id: currentUser.id })
-  }, [currentUser])
-
-
-  // idをapiクライアントに渡し、/api/v1/posts/:idのエンドポイントからデータ取得
-  // const handleGetData = async (query) => {
-  //   try {
-  //     const res = await getId(query.id)
-
-  //     // 使う値のみstateにセットする
-  //     setValue({
-  //       email: res.data.email,
-  //       name: res.data.name,
-  //       category: res.data.category,
-  //       metadata: res.data.metadata,
-  //     });
-
-  //     console.log(query)
-  //     setImageUrl(res.data.image.url)
-
-  //   } catch (e) {
-  //     console.log(e)
-  //   }
-  // }
 
   // テキストフィールドの変更を検知し値を書き換えstateで管理
   const handleChange = (e) => {
@@ -187,11 +159,15 @@ export const CreatPost = withRouter(() => {
     }
   }
 
+  useEffect(() => {
+    // handleGetData(query)
+    console.log(currentUser.id)
+    setValue({ user_id: currentUser.id })
+  }, [currentUser])
 
-
-  const Form = (props) => {
-    const { handleChange, handleSubmit, value, buttonType } = props
-  }
+  // const Form = (props) => {
+  //   const { handleChange, handleSubmit, value, buttonType } = props
+  // }
 
   return (
     <>
@@ -213,53 +189,7 @@ export const CreatPost = withRouter(() => {
               className={classes.input} />
           </label>
 
-          {/* <Button
-            variant='outlined'
-            color='primary'
-            style={{ marginTop: "2rem" }}
-            onClick={(e) => handleFileSend(e)}
-          >
-            アイコンの更新
-          </Button> */}
-
-
           <Box className={classes.box}>
-            {/* <TextField
-              variant='outlined'
-              required
-              fullWidth
-              id='email'
-              label='Email'
-              name='email'
-              type='text'
-              margin='dense'
-              onChange={(e) => handleChange(e)}
-              value={value.email}
-            /> */}
-            {/* <TextField
-              variant='outlined'
-              fullWidth
-              id='name'
-              label='Name'
-              name='name'
-              type='text'
-              margin='dense'
-              onChange={(e) => handleChange(e)}
-              value={value.name}
-            /> */}
-            {/* <TextField
-              variant='outlined'
-              required
-              fullWidth
-              id='category'
-              label='Category'
-              name='ca
-              tegory'
-              type='text'
-              margin='dense'
-              onChange={(e) => handleChange(e)}
-              value={value.category}
-            /> */}
 
             <TextField className={classes.category}
               id="category"
@@ -288,21 +218,7 @@ export const CreatPost = withRouter(() => {
               onChange={(e) => handleChange(e)}
             />
 
-            {/* <TextField
-              variant='outlined'
-              fullWidth
-              multiline
-              maxRows={4}
-              id='metadata'
-              label='Info'
-              name='metadata'
-              type='text'
-              margin='dense'
-              onChange={(e) => handleChange(e)}
-              value={value.metadata} */}
-            {/* /> */}
           </Box>
-
 
           {/* <input type="submit" value={buttonType} onClick={(e) => handleSubmit(e)} /> */}
           <Button

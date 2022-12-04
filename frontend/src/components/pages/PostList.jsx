@@ -109,7 +109,7 @@ export const PostList = withRouter(() => {
     <>
       <form noValidate autoComplete='off'>
 
-        <Grid container spacing={2}>
+        <Grid container spacing={3}>
           {posts.map(contentObj => getCardContent(contentObj))}
         </Grid>
       </form>

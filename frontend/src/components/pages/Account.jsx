@@ -177,7 +177,7 @@ export const Account = withRouter(() => {
         color='primary'
         onClick={() => history.push('/')}
       >
-        戻る
+        HOME
       </Button>
       {/* <SpaceRow height={20} />
       <UserTable /> */}

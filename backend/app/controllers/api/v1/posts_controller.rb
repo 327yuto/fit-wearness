@@ -4,6 +4,13 @@ class Api::V1::PostsController < ApplicationController
     render json: Post.all
   end
 
+  def my_liked_posts
+    @my_liked_posts = Like.where(user_id: current_api_v1_user.id)
+    @my_liked_posts = @my_liked_posts.map{ | p | Post.find_by(id: p.post_id) }
+    render json: @my_liked_posts
+  end
+
+
   def show
     render json: Post.find(params[:id])
   end

@@ -11,6 +11,10 @@ import {
   IconButton,
 } from '@material-ui/core';
 import MenuIcon from '@material-ui/icons/Menu';
+import AccountCircleIcon from '@material-ui/icons/AccountCircle';
+import ExitToAppIcon from '@material-ui/icons/ExitToApp';
+import PublicIcon from '@material-ui/icons/Public';
+import AddBoxIcon from '@material-ui/icons/AddBox';
 
 // api
 import { signOut } from '../../api/auth';
@@ -91,9 +95,19 @@ export const Header = withRouter(() => {
             <Button
               color='inherit'
               className={classes.linkBtn}
+              onClick={() => history.push('/create/post')}
+            >
+              Post
+              <AddBoxIcon />
+            </Button>
+
+            <Button
+              color='inherit'
+              className={classes.linkBtn}
               onClick={() => history.push('/posts')}
             >
               Posts List
+              <PublicIcon />
             </Button>
             <Button
               color='inherit'
@@ -101,6 +115,7 @@ export const Header = withRouter(() => {
               onClick={() => history.push(`/users/${currentUser.id}`)}
             >
               Account
+              <AccountCircleIcon />
             </Button>
             <Button
               color='inherit'
@@ -108,6 +123,7 @@ export const Header = withRouter(() => {
               onClick={handleSignOut}
             >
               Sign out
+              <ExitToAppIcon />
             </Button>
           </>
         );

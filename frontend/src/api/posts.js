@@ -7,6 +7,18 @@ export const getPostsList = () => {
   return client.get('/posts')
 };
 
+export const getMyLikedPosts = () => {
+  return client.get('/my_liked_posts', {
+
+    headers: {
+      'access-token': Cookies.get('_access_token'),
+      client: Cookies.get('_client'),
+      uid: Cookies.get('_uid'),
+    },
+  },
+  );
+};
+
 // Postデータの詳細を取得 投稿詳細ページ
 export const getPostShow = (id) => {
   return client.get(`/posts/${id}`)

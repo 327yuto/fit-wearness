@@ -24,8 +24,7 @@ User.create!(
   ]
 )
 
-user1 = User.find(1)
-Post.create!(picture: 'user1の投稿', category: 'ワークアウト', user: user1)
-
-user2 = User.find(2)
-Post.create!(picture: 'user2の投稿', category: 'ランニング', user: user2)
+# Post.create!(
+#   picture:File.open('./man-839604_1280.jpg'), 
+#   category: 'ワークアウト', 
+#   user_id: 1)

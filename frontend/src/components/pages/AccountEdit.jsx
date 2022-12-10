@@ -19,6 +19,7 @@ import {
 } from '@material-ui/core';
 import UpdateIcon from "@material-ui/icons/Update"
 import IconImage from '../../man-839604_1280.jpg'
+import CancelPresentationIcon from '@material-ui/icons/CancelPresentation';
 
 
 
@@ -261,6 +262,14 @@ export const AccountEdit = withRouter(() => {
           </Button>
         </Card>
       </form>
+      <Button
+        variant='contained'
+        color='primary'
+        // onClick={() => history.push('/')}
+        onClick={() => history.push(`/users/${currentUser.id}`)}
+      >
+        <CancelPresentationIcon />
+      </Button>
     </>
   )
 });

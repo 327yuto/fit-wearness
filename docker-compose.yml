@@ -47,6 +47,8 @@ services:
       - "3002:3002"
     env_file:
       - ./.env
+    environment:
+      - NODE_OPTIONS=--max_old_space_size=8192
     command: sh -c "PORT=3002 yarn start"
     depends_on:
       - "db"

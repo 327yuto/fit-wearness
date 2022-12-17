@@ -23,7 +23,7 @@ const useStyles = makeStyles({
   },
 
   media: {
-    width: 300,
+    width: 280,
     // width: '0 auto',
     height: 350,
 

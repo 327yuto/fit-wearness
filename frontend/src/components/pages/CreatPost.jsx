@@ -35,7 +35,7 @@ const useStyles = makeStyles((theme) => ({
   },
   card: {
     padding: theme.spacing(4),
-    height: 750,
+    maxheight: 800,
     maxWidth: 400,
     backgroundColor: '#f0f8ff',
   },
@@ -64,8 +64,9 @@ const useStyles = makeStyles((theme) => ({
   },
 
   picture: {
-    width: 300,
-    height: 350,
+    width: 310,
+    height: 'auto',
+    // maxheight: 'auto',
     // background: '#3e8bff', /* 背景色 */
   },
 

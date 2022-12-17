@@ -18,6 +18,8 @@ import {
   CardHeader, Button, Box, Input, Avatar, Grid,
 } from '@material-ui/core';
 import Skeleton from '@material-ui/lab/Skeleton';
+import { useDisclosure, Wrap, WrapItem, Spinner, Center, Heading } from '@chakra-ui/react';
+
 
 // functions
 import { subString } from '../../styles/functions';
@@ -94,13 +96,15 @@ export const PostList = withRouter(() => {
   const getCardContent = getObj => {
 
     return (
-      <Grid item xs={12} sm={3} key={getObj.id} >
+      <WrapItem key={getObj.id} mx="auto" overflow="hidden" textAlign="center">
+
         {/* <BodyCard {...getObj} */}
         <BodyCard
           pictureUrl={getObj.picture.url}
           postId={getObj.id}
         />
-      </Grid>
+
+      </WrapItem>
     );
   };
 
@@ -109,9 +113,16 @@ export const PostList = withRouter(() => {
     <>
       <form noValidate autoComplete='off'>
 
-        <Grid container spacing={3}>
+        <Heading as="h1" size="lg" textAlign="center">
+          お気に入りのコーディネートをみつけよう
+        </Heading>
+
+        <Wrap p={{ base: 3, md: 10 }}>
+
           {posts.map(contentObj => getCardContent(contentObj))}
-        </Grid>
+
+        </Wrap>
+
       </form>
     </>
   );

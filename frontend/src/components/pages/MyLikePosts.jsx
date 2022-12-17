@@ -20,6 +20,8 @@ import {
   CardHeader, Button, Box, Input, Avatar, Grid,
 } from '@material-ui/core';
 import Skeleton from '@material-ui/lab/Skeleton';
+import { useDisclosure, Wrap, WrapItem, Spinner, Center, Heading } from '@chakra-ui/react';
+
 
 // functions
 import { subString } from '../../styles/functions';
@@ -101,27 +103,14 @@ export const MyLikePosts = withRouter(() => {
 
     return (
 
+      <WrapItem key={getObj.id} mx="auto" overflow="hidden" textAlign="center">
 
-      <Grid item xs={12} sm={3} key={getObj.id} className={classes.grid}>
-        {/* <BodyCard {...getObj} */}
-        <Box
-          sx={{
-            width: {
-              xs: "300px",
-              sm: "400px",
-              md: "500px",
-              lg: "600px",
-              xl: "650px",
-            },
-            // p: 1,
-          }}
-        >
-          <BodyCard
-            pictureUrl={getObj.picture.url}
-            postId={getObj.id}
-          />
-        </Box>
-      </Grid>
+        <BodyCard
+          pictureUrl={getObj.picture.url}
+          postId={getObj.id}
+        />
+
+      </WrapItem>
     );
   };
 
@@ -130,9 +119,15 @@ export const MyLikePosts = withRouter(() => {
     <>
       <form noValidate autoComplete='off'>
 
-        <Grid container spacing={3} >
+        <Heading as="h1" size="lg" textAlign="center">
+          あなたが着てみたいコーデ
+        </Heading>
+
+        <Wrap p={{ base: 3, md: 10 }}>
+
           {posts.map(contentObj => getCardContent(contentObj))}
-        </Grid>
+
+        </Wrap>
 
       </form>
     </>

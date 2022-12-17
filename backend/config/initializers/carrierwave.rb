@@ -10,7 +10,8 @@ CarrierWave.configure do |config|
 
   # if Rails.env.production?
   
-    config.asset_host = 'https://s3.amazonaws.com/fit-wearness-app'
+    config.asset_host = 'https://s3-ap-northeast-1.amazonaws.com/fit-wearness-app' 
+
     config.storage :fog
     config.fog_provider = 'fog/aws'
     config.fog_directory  = 'fit-wearness-app'               # 作成したバケット名

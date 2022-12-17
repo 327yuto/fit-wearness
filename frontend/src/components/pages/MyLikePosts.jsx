@@ -1,10 +1,12 @@
 // List.jsx
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useContext } from 'react';
 import { getList, getId } from '../../api/users';
-import { useHistory, withRouter, Link } from 'react-router-dom';
+import { useHistory, withRouter, Link, } from 'react-router-dom';
 import SpaceRow from '../commons/SpaceRow';
+import { getMyLikedPosts } from '../../api/posts';
 
-import { getPostsList } from '../../api/posts';
+// context
+import { AuthContext } from '../../App';
 
 // commons
 import BodyCard from '../commons/BodyCard';
@@ -24,6 +26,7 @@ import { useDisclosure, Wrap, WrapItem, Spinner, Center, Heading } from '@chakra
 // functions
 import { subString } from '../../styles/functions';
 import { common } from '@material-ui/core/colors';
+import { getCurrentUser } from '../../api/auth';
 
 const useStyles = makeStyles((theme) => ({
   container: {
@@ -58,32 +61,35 @@ const useStyles = makeStyles((theme) => ({
     margin: 1,
   },
 
+  grid: {
+    margin: 'auto',
+  },
+
 }));
 
-export const PostList = withRouter(() => {
+export const MyLikePosts = withRouter(() => {
 
   const classes = useStyles(); //react hocksのルールで追加
 
   // State 
   const [posts, setPosts] = useState([]);
-  // const [pictureUrl, setPictureUrl] = useState([]);
+
+  const { loading, isSignedIn, currentUser } = useContext(AuthContext);
 
 
   const handleGetData = async () => {
     try {
-      const res = await getPostsList();
+      const res = await getMyLikedPosts();
 
       // スプレッドで配列をばらした後もう一度まとめる。
       setPosts([...res.data].reverse());
       console.log(res.data.reverse());
 
+
     } catch (e) {
       console.log(e)
     }
   };
-
-  // posts.reverse();
-
 
   // データを取得
   useEffect(() => {
@@ -96,9 +102,9 @@ export const PostList = withRouter(() => {
   const getCardContent = getObj => {
 
     return (
+
       <WrapItem key={getObj.id} mx="auto" overflow="hidden" textAlign="center">
 
-        {/* <BodyCard {...getObj} */}
         <BodyCard
           pictureUrl={getObj.picture.url}
           postId={getObj.id}
@@ -114,7 +120,7 @@ export const PostList = withRouter(() => {
       <form noValidate autoComplete='off'>
 
         <Heading as="h1" size="lg" textAlign="center">
-          お気に入りのコーディネートをみつけよう
+          あなたが着てみたいコーデ
         </Heading>
 
         <Wrap p={{ base: 3, md: 10 }}>

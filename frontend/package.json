@@ -3,6 +3,9 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "@chakra-ui/react": "^1.8.9",
+    "@emotion/react": "^11.10.5",
+    "@emotion/styled": "^11.10.5",
     "@material-ui/core": "^4.12.4",
     "@material-ui/icons": "^4.11.3",
     "@material-ui/lab": "^4.0.0-alpha.61",
@@ -11,6 +14,7 @@
     "@testing-library/user-event": "^13.5.0",
     "axios": "^0.27.2",
     "axios-case-converter": "^0.9.0",
+    "framer-motion": "^4.1.17",
     "js-cookie": "^3.0.1",
     "moment": "^2.29.4",
     "moment-timezone": "^0.5.38",

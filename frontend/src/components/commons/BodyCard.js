@@ -5,7 +5,7 @@ import { useHistory } from 'react-router-dom';
 
 import {
   CardMedia, Avatar, IconButton, CardHeader, Typography,
-  Button, CardContent, CardActions, Card, CardActionArea,
+  Button, CardContent, CardActions, Card, CardActionArea, Box,
 } from '@material-ui/core';
 // import StarBorderOutlinedIcon from '@material-ui/icons/StarBorderOutlined';
 
@@ -23,8 +23,10 @@ const useStyles = makeStyles({
   },
 
   media: {
-    width: 300,
+    width: 280,
+    // width: '0 auto',
     height: 350,
+
 
     // paddingTop: '82.25%',
   },
@@ -45,6 +47,9 @@ function BodyCard(props) {
   const bull = <span className={classes.bullet}>•</span>;
 
   return (
+
+
+
     <Card variant="outlined">
       {/* <CardHeader
         // avatar={<Avatar src={avatarUrl} />}

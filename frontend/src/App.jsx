@@ -6,6 +6,7 @@ import { Account } from "./components/pages/Account";
 import { AccountList } from "./components/pages/AccountList";
 import { AccountEdit } from "./components/pages/AccountEdit";
 import { PostList } from "./components/pages/PostList";
+import { MyLikePosts } from "./components/pages/MyLikePosts";
 import { PostShow } from "./components/pages/PostShow";
 import { CreatPost } from "./components/pages/CreatPost";
 import { SignIn } from "./components/pages/SignIn";
@@ -17,6 +18,7 @@ import Header from './components/commons/Header';
 import { CssBaseline } from '@material-ui/core'; //ブラウザの個体差を調整してくれるリセットCSS
 import { StylesProvider, ThemeProvider } from '@material-ui/styles';
 import { theme } from './styles/theme';
+import { ChakraProvider } from '@chakra-ui/react';
 
 // Contextの作成
 export const AuthContext = createContext();
@@ -61,58 +63,64 @@ function App() {
   };
   return (
     <>
+
       <StylesProvider injectFirst>
         <ThemeProvider theme={theme}>
-          <AuthContext.Provider
-            value={{
-              loading,
-              setLoading,
-              isSignedIn,
-              setIsSignedIn,
-              currentUser,
-              setCurrentUser,
-            }}
-          >
-            <CssBaseline />
+          <ChakraProvider>
+            <AuthContext.Provider
+              value={{
+                loading,
+                setLoading,
+                isSignedIn,
+                setIsSignedIn,
+                currentUser,
+                setCurrentUser,
+              }}
+            >
+              <CssBaseline />
 
-            <BrowserRouter>
-              <Header />
-              <MainContainer>
-                <Switch>
-                  <Route exact path="/signup">
-                    <SignUp />
-                  </Route>
-                  <Route exact path="/signin">
-                    <SignIn />
-                  </Route>
-                  <Private>
-                    <Route exact path="/">
-                      <Home />
+              <BrowserRouter>
+                <Header />
+                <MainContainer>
+                  <Switch>
+                    <Route exact path="/signup">
+                      <SignUp />
                     </Route>
-                    <Route exact path="/users/:id">
-                      {/*このpathが呼ばれた時、下のpageを呼ぶ*/}
-                      <Account />
+                    <Route exact path="/signin">
+                      <SignIn />
                     </Route>
-                    <Route exact path="/users">
-                      <AccountList />
-                    </Route>
-                    <Route exact path="/edit/:id">
-                      <AccountEdit />
-                    </Route>
-                    <Route exact path="/posts">
-                      <PostList />
-                    </Route>
-                    <Route exact path="/posts/:id">
-                      <PostShow />
-                    </Route>
-                    <Route exact path="/create/post">
-                      <CreatPost />
-                    </Route>
-                  </Private>
-                </Switch>
-              </MainContainer>
-            </BrowserRouter>
-          </AuthContext.Provider>
+                    <Private>
+                      <Route exact path="/">
+                        <Home />
+                      </Route>
+                      <Route exact path="/users/:id">
+                        {/*このpathが呼ばれた時、下のpageを呼ぶ*/}
+                        <Account />
+                      </Route>
+                      <Route exact path="/users">
+                        <AccountList />
+                      </Route>
+                      <Route exact path="/edit/:id">
+                        <AccountEdit />
+                      </Route>
+                      <Route exact path="/posts">
+                        <PostList />
+                      </Route>
+                      <Route exact path="/mylikeposts">
+                        <MyLikePosts />
+                      </Route>
+                      <Route exact path="/posts/:id">
+                        <PostShow />
+                      </Route>
+                      <Route exact path="/create/post">
+                        <CreatPost />
+                      </Route>
+                    </Private>
+                  </Switch>
+                </MainContainer>
+              </BrowserRouter>
+            </AuthContext.Provider>
+          </ChakraProvider>
         </ThemeProvider>
       </StylesProvider>
     </>

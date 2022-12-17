@@ -110,11 +110,11 @@ export const Account = withRouter(() => {
           <CardContent>
 
             <Box textAlign='center' className={classes.box}>
-              <Typography variant='body2'>
+              {/* <Typography variant='body2'>
                 <Link to={`/users/${accountId}`} className={classes.link}>
                   USER ID[ {query.id} ]
                 </Link>
-              </Typography>
+              </Typography> */}
 
               <Avatar className={classes.avatarSize}
                 src={`${imageUrl}`}
@@ -177,7 +177,7 @@ export const Account = withRouter(() => {
         color='primary'
         onClick={() => history.push('/')}
       >
-        戻る
+        HOME
       </Button>
       {/* <SpaceRow height={20} />
       <UserTable /> */}

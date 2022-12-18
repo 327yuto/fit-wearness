@@ -31,11 +31,27 @@ const useStyles = makeStyles((theme) =>
       ...theme.mixins.toolbar,
       justifyContent: 'flex-end',
     },
+    drawerItem: {
+      '&:hover': {
+        cursor: 'pointer',
+        transform: 'scale(1.1, 1.1)',
+        backgroundColor: '#E6A1C0',
+      },
+    },
+
   })
 );
 
+
+const closeWithClickOutSideMethod = (e, setter) => {
+
+  setter(false);
+
+};
+
+
 const HeaderDrawer = (props) => {
-  const { open, handleDrawerToggle, drawerItem } = props;
+  const { open, setOpen, handleDrawerToggle, drawerItem } = props;
   const classes = useStyles();
   const theme = useTheme();
 
@@ -46,6 +62,9 @@ const HeaderDrawer = (props) => {
       anchor='left'
       open={open}
       classes={{ paper: classes.drawerPaper }}
+      onClick={(e) => {
+        closeWithClickOutSideMethod(e, setOpen);
+      }}
     >
       <div className={classes.drawerHeader}>
         <IconButton onClick={handleDrawerToggle}>
@@ -64,6 +83,7 @@ const HeaderDrawer = (props) => {
             to={item.path}
             key={index}
             onClick={handleDrawerToggle}
+            className={classes.drawerItem}
           >
             <ListItemText primary={item.label} />
           </ListItem>

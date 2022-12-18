@@ -45,9 +45,9 @@ const useStyles = makeStyles((theme) =>
 export const Header = withRouter(() => {
 
   const drawerItem = [
-    { label: 'HOME', path: '/' },
+    { label: 'みんなのコーデ', path: '/posts' },
     // { label: '新規作成', path: '/new' },
-    { label: '自分の投稿', path: '#' },
+    { label: '着てみたいコーデ', path: '/mylikeposts' },
   ];
 
 
@@ -184,7 +184,9 @@ export const Header = withRouter(() => {
         </AppBar>
       </div>
       <HeaderDrawer
+        className={classes.drawerItem}
         open={open}
+        setOpen={setOpen}
         handleDrawerToggle={handleDrawerToggle}
         drawerItem={drawerItem}
       />

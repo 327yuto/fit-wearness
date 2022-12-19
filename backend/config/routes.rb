@@ -11,6 +11,7 @@ Rails.application.routes.draw do
       end
 
       get '/my_liked_posts', to: 'posts#my_liked_posts', as: :my_liked_posts
+      get '/my_posts', to: 'posts#my_posts', as: :my_posts
 
       mount_devise_token_auth_for 'User', at: 'auth', controllers: {
         registrations: 'api/v1/auth/registrations'

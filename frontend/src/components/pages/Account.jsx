@@ -37,6 +37,11 @@ const useStyles = makeStyles((theme) => ({
   },
   header: {
     textAlign: 'center',
+    // backgroundColor: '#115293',
+    // backgroundColor: '#1976d2',
+    backgroundColor: '#192e43',
+
+    color: 'white',
   },
   card: {
     padding: theme.spacing(2),
@@ -56,12 +61,6 @@ const useStyles = makeStyles((theme) => ({
 
 }));
 
-// const SizedAvatar = styled(Avatar)`
-//   ${({ size, theme }) => `
-//     width: ${theme.spacing(size)}px; 
-//     height: ${theme.spacing(size)}px; 
-//   `};
-// `;
 
 
 export const Account = withRouter(() => {
@@ -106,7 +105,9 @@ export const Account = withRouter(() => {
 
       <form noValidate autoComplete='off'>
         <Card className={classes.card}>
-          <CardHeader className={classes.header} title="Profile" />
+          <CardHeader
+            className={classes.header}
+            title={`${userProfile?.name}`} />
           <CardContent>
 
             <Box textAlign='center' className={classes.box}>

@@ -39,7 +39,7 @@ const useStyles = makeStyles((theme) => ({
 
   card: {
     padding: theme.spacing(3),
-    height: 800,
+    maxHeight: 800,
     maxWidth: 400,
     backgroundColor: '#f0f8ff',
   },
@@ -79,6 +79,7 @@ const useStyles = makeStyles((theme) => ({
 
   deleteButton: {
     marginTop: 10,
+    marginBottom: 30,
   },
 
 

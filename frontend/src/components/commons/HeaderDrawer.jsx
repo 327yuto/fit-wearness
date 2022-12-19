@@ -36,6 +36,7 @@ const useStyles = makeStyles((theme) =>
         cursor: 'pointer',
         transform: 'scale(1.1, 1.1)',
         backgroundColor: '#E6A1C0',
+        backgroundColor: '#e08e00',
       },
     },
 

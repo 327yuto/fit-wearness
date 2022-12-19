@@ -6,6 +6,7 @@ import { Account } from "./components/pages/Account";
 import { AccountList } from "./components/pages/AccountList";
 import { AccountEdit } from "./components/pages/AccountEdit";
 import { PostList } from "./components/pages/PostList";
+import { MyPosts } from "./components/pages/MyPosts";
 import { MyLikePosts } from "./components/pages/MyLikePosts";
 import { PostShow } from "./components/pages/PostShow";
 import { CreatPost } from "./components/pages/CreatPost";
@@ -114,6 +115,9 @@ function App() {
                       </Route>
                       <Route exact path="/create/post">
                         <CreatPost />
+                      </Route>
+                      <Route exact path="/myposts">
+                        <MyPosts />
                       </Route>
                     </Private>
                   </Switch>

@@ -7,8 +7,22 @@ export const getPostsList = () => {
   return client.get('/posts')
 };
 
+// 自分がライクした投稿を全て取得
 export const getMyLikedPosts = () => {
   return client.get('/my_liked_posts', {
+
+    headers: {
+      'access-token': Cookies.get('_access_token'),
+      client: Cookies.get('_client'),
+      uid: Cookies.get('_uid'),
+    },
+  },
+  );
+};
+
+//自分の投稿を全て取得 
+export const getMyPosts = () => {
+  return client.get('/my_posts', {
 
     headers: {
       'access-token': Cookies.get('_access_token'),

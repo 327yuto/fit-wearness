@@ -9,6 +9,7 @@ import {
   Typography,
   Button,
   IconButton,
+  Box,
 } from '@material-ui/core';
 import MenuIcon from '@material-ui/icons/Menu';
 import AccountCircleIcon from '@material-ui/icons/AccountCircle';
@@ -25,6 +26,8 @@ import { AuthContext } from '../../App';
 // component
 import HeaderDrawer from './HeaderDrawer';
 
+import TitleLogo from '../../images/logo-fit-wearness-5.jpg';
+
 const useStyles = makeStyles((theme) =>
   createStyles({
     root: {
@@ -33,20 +36,28 @@ const useStyles = makeStyles((theme) =>
     menuButton: {
       marginRight: theme.spacing(2),
     },
-    title: {
+    titleArea: {
       flexGrow: 1,
     },
     linkBtn: {
       textTransform: 'none',
     },
+
+    logoSize: {
+      width: 100,
+      height: 60,
+      // flexGrow: 1,
+    },
+
   })
 );
 
 export const Header = withRouter(() => {
 
   const drawerItem = [
+    { label: 'TOP', path: '/' },
     { label: 'みんなのコーデ', path: '/posts' },
-    // { label: '新規作成', path: '/new' },
+    { label: 'あなたの投稿', path: '/myposts' },
     { label: '着てみたいコーデ', path: '/mylikeposts' },
   ];
 
@@ -97,24 +108,24 @@ export const Header = withRouter(() => {
               className={classes.linkBtn}
               onClick={() => history.push('/create/post')}
             >
-              Post
+              投稿
               <AddBoxIcon />
             </Button>
 
-            <Button
+            {/* <Button
               color='inherit'
               className={classes.linkBtn}
               onClick={() => history.push('/posts')}
             >
               Posts List
               <PublicIcon />
-            </Button>
+            </Button> */}
             <Button
               color='inherit'
               className={classes.linkBtn}
               onClick={() => history.push(`/users/${currentUser.id}`)}
             >
-              Account
+              アカウント
               <AccountCircleIcon />
             </Button>
             <Button
@@ -122,7 +133,7 @@ export const Header = withRouter(() => {
               className={classes.linkBtn}
               onClick={handleSignOut}
             >
-              Sign out
+              サインアウト
               <ExitToAppIcon />
             </Button>
           </>
@@ -136,7 +147,7 @@ export const Header = withRouter(() => {
               color='inherit'
               className={classes.linkBtn}
             >
-              Sign in
+              サインイン
             </Button>
             <Button
               component={Link}
@@ -144,7 +155,7 @@ export const Header = withRouter(() => {
               color='inherit'
               className={classes.linkBtn}
             >
-              Sign Up
+              サインアップ
             </Button>
           </>
         );
@@ -176,9 +187,16 @@ export const Header = withRouter(() => {
                 <MenuIcon />
               </IconButton>
             )}
-            <Typography variant='h6' className={classes.title}>
-              Fit-wearness
+            <Box>
+              <img className={classes.logoSize}
+                src={TitleLogo}
+              />
+            </Box>
+
+            <Typography className={classes.titleArea}>
             </Typography>
+
+
             <AuthButtons />
           </Toolbar>
         </AppBar>

@@ -197,20 +197,8 @@ export const AccountEdit = withRouter(() => {
             アイコンの更新
           </Button>
 
-
           <Box className={classes.box}>
-            <TextField
-              variant='outlined'
-              required
-              fullWidth
-              id='email'
-              label='Email'
-              name='email'
-              type='text'
-              margin='dense'
-              onChange={(e) => handleChange(e)}
-              value={value.email}
-            />
+
             <TextField
               variant='outlined'
               fullWidth

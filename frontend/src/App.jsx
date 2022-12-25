@@ -9,7 +9,7 @@ import { PostList } from "./components/pages/PostList";
 import { MyPosts } from "./components/pages/MyPosts";
 import { MyLikePosts } from "./components/pages/MyLikePosts";
 import { PostShow } from "./components/pages/PostShow";
-import { CreatPost } from "./components/pages/CreatPost";
+import { CreatePost } from "./components/pages/CreatePost";
 import { SignIn } from "./components/pages/SignIn";
 import { SignUp } from "./components/pages/SignUp";
 import MainContainer from './components/layouts/MainContainer'; //export defaultしている
@@ -49,14 +49,14 @@ function App() {
 
   useEffect(() => {
     handleGetCurrentUser();
-  }, []);
+  }, [setCurrentUser]);
 
   const Private = ({ children }) => {
     if (!loading) {
       if (isSignedIn) {
         return children;
       } else {
-        return <Redirect to="/signin" />;
+        return <Redirect to="/" />;
       }
     } else {
       return <></>;
@@ -84,6 +84,9 @@ function App() {
                 <Header />
                 <MainContainer>
                   <Switch>
+                    <Route exact path="/">
+                      <Home />
+                    </Route>
                     <Route exact path="/signup">
                       <SignUp />
                     </Route>
@@ -91,9 +94,6 @@ function App() {
                       <SignIn />
                     </Route>
                     <Private>
-                      <Route exact path="/">
-                        <Home />
-                      </Route>
                       <Route exact path="/users/:id">
                         {/*このpathが呼ばれた時、下のpageを呼ぶ*/}
                         <Account />
@@ -114,7 +114,7 @@ function App() {
                         <PostShow />
                       </Route>
                       <Route exact path="/create/post">
-                        <CreatPost />
+                        <CreatePost />
                       </Route>
                       <Route exact path="/myposts">
                         <MyPosts />

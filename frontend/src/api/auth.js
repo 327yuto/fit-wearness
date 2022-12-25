@@ -39,3 +39,23 @@ export const getCurrentUser = () => {
     },
   });
 };
+
+// ゲストログイン
+export const getGuestUserSignIn = () => {
+  // if (
+  //   !Cookies.get("_access_token") ||
+  //   !Cookies.get("_client") ||
+  //   !Cookies.get("_uid")
+  // )
+  //   return;
+
+  return client.post("/auth/guest_sign_in", {
+    headers: {
+      "access-token": Cookies.get("_access_token"),
+      client: Cookies.get("_client"),
+      uid: Cookies.get("_uid"),
+    },
+  });
+};
+
+

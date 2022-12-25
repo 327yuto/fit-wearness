@@ -10,6 +10,8 @@ import axios from 'axios';
 
 // context
 import { AuthContext } from '../../App';
+import CanNotUserEditToastButton from '../commons/CanNotUserEditToastButton';
+
 
 // component
 // import SpaceRow from '../commons/SpaceRow';
@@ -70,7 +72,7 @@ export const Account = withRouter(() => {
 
   // useState
   const [userProfile, setUserProfile] = useState({});
-  const [accountId, setAccountId] = useState([]);
+  const [accountId, setAccountId] = useState();
   const [imageUrl, setImageUrl] = useState()
 
   const history = useHistory();
@@ -86,13 +88,13 @@ export const Account = withRouter(() => {
     if (!loading) {
       if (isSignedIn) {
         const res = await getId(query.id);
-        console.log(res.data);
+        // console.log(res.data);
         setUserProfile(res.data);
         setAccountId(res.data.id);
         setImageUrl(res.data.image.url);
       } else {
         console.log("else");
-        <Redirect to='/signin' />;
+        // <Redirect to='/signin' />;
       }
     }
   };
@@ -118,8 +120,7 @@ export const Account = withRouter(() => {
               </Typography> */}
 
               <Avatar className={classes.avatarSize}
-                src={`${imageUrl}`}
-              // src={"https://joeschmoe.io/api/v1/random"}
+                src={imageUrl ? imageUrl : ""} alt=""
               />
 
               <TextField
@@ -155,7 +156,7 @@ export const Account = withRouter(() => {
                 value={`${userProfile?.metadata}`}
               />
 
-              {currentUser.id == query.id && (
+              {currentUser.id == query.id && currentUser.email != "guest@example.com" && (
                 <Button
                   variant='outlined'
                   color='primary'
@@ -168,6 +169,11 @@ export const Account = withRouter(() => {
                 </Button>
               )}
 
+              {currentUser.email == "guest@example.com" && (
+                <CanNotUserEditToastButton />
+              )}
+
+
             </Box>
           </CardContent>
         </Card>
@@ -176,12 +182,11 @@ export const Account = withRouter(() => {
       <Button
         variant='contained'
         color='primary'
-        onClick={() => history.push('/')}
+        onClick={() => history.push('/posts')}
       >
-        HOME
+        ＜＜  みんなのコーデページ
       </Button>
-      {/* <SpaceRow height={20} />
-      <UserTable /> */}
+
     </>
   );
 });

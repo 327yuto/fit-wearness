@@ -35,8 +35,9 @@ const useStyles = makeStyles((theme) =>
       '&:hover': {
         cursor: 'pointer',
         transform: 'scale(1.1, 1.1)',
-        backgroundColor: '#E6A1C0',
-        backgroundColor: '#e08e00',
+        // backgroundColor: '#E6A1C0',
+        backgroundColor: '#2F4F4F',
+        color: '#FFFFFF',
       },
     },
 

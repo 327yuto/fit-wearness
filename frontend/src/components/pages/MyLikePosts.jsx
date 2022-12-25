@@ -20,7 +20,7 @@ import {
   CardHeader, Button, Box, Input, Avatar, Grid,
 } from '@material-ui/core';
 import Skeleton from '@material-ui/lab/Skeleton';
-import { useDisclosure, Wrap, WrapItem, Spinner, Center, Heading } from '@chakra-ui/react';
+import { useDisclosure, Wrap, WrapItem, Spinner, Center, Heading, Flex } from '@chakra-ui/react';
 
 
 // functions
@@ -128,6 +128,16 @@ export const MyLikePosts = withRouter(() => {
           {posts.map(contentObj => getCardContent(contentObj))}
 
         </Wrap>
+
+        {posts.length == 0 && (
+          <Flex justify='center' align='center' >
+            <Typography
+            // className={classes.bodyComment}
+            >
+              投稿がありません
+            </Typography>
+          </Flex>
+        )}
 
       </form>
     </>

@@ -1,9 +1,15 @@
 import React, { useEffect, useState, useCallback, useContext } from 'react';
+import { Link, useHistory } from "react-router-dom";
+import Cookies from "js-cookie";
+
+import { AuthContext } from "../../App";
+import { getCurrentUser, signIn, getGuestUserSignIn } from "../../api/auth";
+
 import { makeStyles } from '@material-ui/core/styles';
 
 import {
   useDisclosure, Wrap, WrapItem,
-  Spinner, Center, Heading, Image, Box
+  Spinner, Center, Heading, Image, Box, Flex
 } from '@chakra-ui/react';
 
 import {
@@ -32,6 +38,25 @@ const useStyles = makeStyles((theme) => ({
     h: 'auto',
   },
 
+  guestBtn: {
+
+    marginTop: theme.spacing(7),
+    color: '#FFFFFF',
+    backgroundColor: '#2F4F4F',
+  },
+
+  bodyComment: {
+    marginTop: theme.spacing(2),
+  },
+
+  postsBtn: {
+    marginTop: theme.spacing(7),
+    color: '#FFFFFF',
+    backgroundColor: '#2F4F4F',
+    width: 250,
+    height: 50,
+  },
+
 }));
 
 
@@ -42,11 +67,50 @@ export const Home = () => {
   //react hocksのルールで追加
   const classes = useStyles();
 
+  const { isSignedIn, setIsSignedIn, setCurrentUser } = useContext(AuthContext);
+
+  const history = useHistory();
+
+
+  const handleGuestSignIn = async (e) => {
+
+    try {
+      const res = await getGuestUserSignIn();
+      console.log(res)
+
+      if (res.status === 200) {
+        Cookies.set("_access_token", res.headers["access-token"]);
+        Cookies.set("_client", res.headers["client"]);
+        Cookies.set("_uid", res.headers["uid"]);
+
+        setIsSignedIn(true);
+        setCurrentUser(res.data.data);
+
+        // jsonを飛ばす用
+        const sessions = await getCurrentUser();
+
+
+        history.push("/posts");
+      }
+    } catch (e) {
+      console.log(e);
+      console.log("catch");
+    }
+  };
+
+
+  // データを取得
+  useEffect(() => {
+
+    // handleGetData();
+
+  }, []);
+
+
   return (
     <>
 
       <Box>
-
         <Image
           src={TopImage}
           alt='top-page-image'
@@ -57,6 +121,51 @@ export const Home = () => {
         as="h2" size="2xl" textAlign="center">
         Fitness × Fashion を楽しむあなたへ
       </Heading>
+
+      {!isSignedIn && (
+        <Flex justify='center' align='center' >
+          <Button
+            className={classes.guestBtn}
+            // color='primary'
+            variant='contained'
+            onClick={handleGuestSignIn}
+          >
+            ゲストログイン
+          </Button>
+        </Flex>
+      )}
+      {!isSignedIn && (
+        <Flex justify='center' align='center' >
+          <Typography
+            className={classes.bodyComment}
+          >
+            新しい世界を体験してみる
+          </Typography>
+        </Flex>
+      )}
+
+      {isSignedIn && (
+        <Flex justify='center' align='center' >
+          <Button
+            className={classes.postsBtn}
+            // color='primary'
+            variant='contained'
+            onClick={() => history.push('/posts')}
+          >
+            みんなのコーデを見る
+          </Button>
+        </Flex>
+      )}
+      {isSignedIn && (
+        <Flex justify='center' align='center' >
+          <Typography
+            className={classes.bodyComment}
+          >
+            真似してみたいと思ったコーデにライクしよう👍
+          </Typography>
+        </Flex>
+      )}
+
 
       <Wrap p={{ base: 3, md: 10 }} justify='center'>
 
@@ -101,14 +210,7 @@ export const Home = () => {
             </Card>
           </Center>
         </WrapItem>
-
-
-
-
-
       </Wrap>
-
-
 
     </>
   )

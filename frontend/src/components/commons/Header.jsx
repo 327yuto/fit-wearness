@@ -187,11 +187,16 @@ export const Header = withRouter(() => {
                 <MenuIcon />
               </IconButton>
             )}
-            <Box>
-              <img className={classes.logoSize}
+            <Button
+              component={Link}
+              to='/'
+              color='inherit'
+            >
+              <img
+                className={classes.logoSize}
                 src={TitleLogo}
               />
-            </Box>
+            </Button>
 
             <Typography className={classes.titleArea}>
             </Typography>

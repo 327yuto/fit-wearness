@@ -39,9 +39,10 @@ const useStyles = makeStyles((theme) => ({
 
   card: {
     padding: theme.spacing(3),
-    maxHeight: 800,
+    maxHeight: 850,
     maxWidth: 400,
     backgroundColor: '#f0f8ff',
+    marginBottom: 40,
   },
 
   box: {
@@ -78,7 +79,7 @@ const useStyles = makeStyles((theme) => ({
   },
 
   deleteButton: {
-    marginTop: 10,
+    marginTop: 2,
     marginBottom: 30,
   },
 
@@ -190,7 +191,7 @@ export const PostShow = withRouter(() => {
 
           {value.picture ? (
             <CardMedia className={classes.media}
-              style={{ height: "400px", width: "350px" }}
+              style={{ height: "450px", width: "350px" }}
               image={value.picture}
             // onClick={() => history.push(`/posts/${postId}`)}
             />
@@ -226,14 +227,6 @@ export const PostShow = withRouter(() => {
             currentUser={currentUser}
             initialLikeCount={likeCount}
           />
-
-
-
-
-          {/* </CardContent> */}
-          {/* <CardActions>
-          <Button size="small">詳細をみる</Button>
-          </CardActions> */}
         </Card>
 
         {value.userId == currentUser.id && (

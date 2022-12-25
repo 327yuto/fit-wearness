@@ -13,13 +13,19 @@ Rails.application.routes.draw do
       get '/my_liked_posts', to: 'posts#my_liked_posts', as: :my_liked_posts
       get '/my_posts', to: 'posts#my_posts', as: :my_posts
 
+      
       mount_devise_token_auth_for 'User', at: 'auth', controllers: {
         registrations: 'api/v1/auth/registrations'
       }
 
-      namespace :auth do
-        resources :sessions, only: %i[index]
+      devise_scope :api_v1_user do
+        post 'auth/guest_sign_in', to: 'auth/sessions#guest_sign_in'
+        get 'auth/sessions', to: 'auth/sessions#index'
       end
+
+      # namespace :auth do
+      #   resources :sessions, only: %i[index]
+      # end
       
       match '*path' => 'options_request#response_preflight_request', via: :options
 

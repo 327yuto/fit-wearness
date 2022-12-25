@@ -8,6 +8,7 @@ import { getCurrentUser } from '../../api/auth';
 
 // context
 import { AuthContext } from '../../App';
+import CanNotPostToastButton from '../commons/CanNotPostToastButton';
 
 // style
 import { makeStyles } from '@material-ui/core/styles';
@@ -17,7 +18,8 @@ import {
 } from '@material-ui/core';
 import UpdateIcon from "@material-ui/icons/Update"
 
-import IconImage from '../../man-839604_1280.jpg'
+import IconImage from '../../man-839604_1280.jpg';
+import addPicIcon from '../../images/add-picture-icon.jpeg';
 
 
 
@@ -35,9 +37,11 @@ const useStyles = makeStyles((theme) => ({
   },
   card: {
     padding: theme.spacing(4),
+    marginBottom: theme.spacing(4),
     maxheight: 800,
     maxWidth: 400,
     backgroundColor: '#f0f8ff',
+
   },
   box: {
     marginTop: '0.5rem',
@@ -79,10 +83,11 @@ const useStyles = makeStyles((theme) => ({
     margin: '1em 0',
   },
 
+
 }));
 
 
-export const CreatPost = withRouter(() => {
+export const CreatePost = withRouter(() => {
 
   // apiで取得したデータを管理する為のstate
   const [value, setValue] = useState({
@@ -103,6 +108,7 @@ export const CreatPost = withRouter(() => {
   //react hocksのルールで追加
   const classes = useStyles();
   const { loading, isSignedIn, currentUser } = useContext(AuthContext);
+  // const guestToast = GuestToast();
 
 
   // 一覧からreact-router-domを使ってidを取得
@@ -125,20 +131,21 @@ export const CreatPost = withRouter(() => {
 
 
   // 更新ボタン押下後、idとparameterをapiクライアントに渡しリクエストを投げる
-  const handleSubmit = async (e) => {
-    e.preventDefault()
-    try {
-      const res = await updateUserInfo(query.id, (value))
+  // const handleSubmit = async (e) => {
+  //   e.preventDefault()
+  //   try {
+  //     const res = await updateUserInfo(query.id, (value))
 
-      // リクエストが成功したら'/'にリダイレクトさせる
-      history.push(`/users/${query.id}`)
-    } catch (e) {
-      console.log(e)
-    }
-  }
+  //     // リクエストが成功したら'/'にリダイレクトさせる
+  //     history.push(`/users/${query.id}`)
+  //   } catch (e) {
+  //     console.log(e)
+  //   }
+  // }
 
 
   const handleFileSend = async (e) => {
+
     if (image != null && value.category != undefined) {
 
       const file = new FormData()
@@ -156,13 +163,12 @@ export const CreatPost = withRouter(() => {
           console.log(response);
         })
       history.push('/posts');
-
     }
   }
 
   useEffect(() => {
     // handleGetData(query)
-    console.log(currentUser.id)
+    // console.log(currentUser.id)
     setValue({ user_id: currentUser.id })
   }, [currentUser])
 
@@ -179,7 +185,7 @@ export const CreatPost = withRouter(() => {
 
           <label className={classes.uploadLabel}>
             <img className={classes.picture}
-              src={image ? URL.createObjectURL(image) : IconImage} alt=""
+              src={image ? URL.createObjectURL(image) : addPicIcon} alt=""
             />
             <input
               type="file"
@@ -218,24 +224,28 @@ export const CreatPost = withRouter(() => {
               variant="outlined"
               onChange={(e) => handleChange(e)}
             />
-
           </Box>
 
-          {/* <input type="submit" value={buttonType} onClick={(e) => handleSubmit(e)} /> */}
-          <Button
-            variant='outlined'
-            color='primary'
-            fullWidth
-            // startIcon={<UpdateIcon />}
-            style={{ marginTop: "1rem" }}
-            onClick={(e) => handleFileSend(e)}
-          >
-            投稿
-          </Button>
+          {currentUser.email != "guest@example.com" && (
+            <Button
+              variant='outlined'
+              color='primary'
+              fullWidth
+              style={{ marginTop: "1rem" }}
+              onClick={(e) => handleFileSend(e)}
+            >
+              投稿
+            </Button>
+          )}
+
+          {currentUser.email == "guest@example.com" && (
+            <CanNotPostToastButton />
+          )}
+
         </Card>
       </form>
     </>
   )
 });
 
-export default CreatPost;
+export default CreatePost;

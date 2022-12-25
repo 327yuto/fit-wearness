@@ -66,16 +66,36 @@ RSpec.describe 'api v1 auth session', type: :request do
       end
     end
 
-    context 'abnormal' do
+    context 'abnormal(異常)' do
       it '3token does not match' do
         login(user)
-        #  headers = response.header.slice('access-token', 'client', 'uid')
-        #  delete(destroy_api_v1_user_session_path, params: { 'access-token' => 'no data', 'client' => headers['client'], 'uid' => headers['uid'] })
-         delete(destroy_api_v1_user_session_path, 
-         params: { 'access-token' => 'no data', 'client' => auth_params['client'], 'uid' => auth_params['uid'] })
-         expect(response.status).to eq 404
+          #  headers = response.header.slice('access-token', 'client', 'uid')
+          #  delete(destroy_api_v1_user_session_path,
+          #  params: { 'access-token' => 'no data', 'client' => headers['client'], 'uid' => headers['uid'] })
+         
+        delete(destroy_api_v1_user_session_path, 
+          params: { 'access-token' => 'no data', 'client' => auth_params['client'], 'uid' => auth_params['uid'] })
+        expect(response.status).to eq 404
       end 
     end   
+  end
+
+   # ゲストログイン
+   describe "POST api/v1//auth/guest_sign_in" do
+    context "nomal(正常)" do
+      subject(:request) { post(api_v1_auth_guest_sign_in_path) }
+
+      it "リクエストが送信された時、ゲストログインできる" do
+        request
+        expect(response).to have_http_status(:ok)
+        header = response.header
+        expect(header["access-token"]).to be_present
+        expect(header["client"]).to be_present
+        expect(header["expiry"]).to be_present
+        expect(header["uid"]).to be_present
+        expect(header["token-type"]).to be_present
+      end
+    end
   end
   
 

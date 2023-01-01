@@ -23,13 +23,12 @@ Rails.application.routes.draw do
         get 'auth/sessions', to: 'auth/sessions#index'
       end
 
-      # namespace :auth do
-      #   resources :sessions, only: %i[index]
-      # end
       
       match '*path' => 'options_request#response_preflight_request', via: :options
 
-
     end
   end
+
+  resource :health_checks, only: %i[ show ]
+
 end

@@ -16,6 +16,10 @@ services:
       # MYSQL_USER: root #mysqlにログインするユーザー。database.ymlのusernameと同じにする必要がある。
       # MYSQL_PASSWORD: password #mysqlにログインするパスワードです。自身で設定する必要があり、database.ymlのpasswordと同じにする必要がある。
       # MYSQL_ALLOW_EMPTY_PASSWORD: "yes" #これ追加
+      DB_USERNAME: ${DB_USERNAME}
+      DB_PASSWORD: ${DB_PASSWORD}
+      DB_HOST: ${DB_HOST}
+
     volumes:
       - mysql_vol:/var/lib/mysql
   backend:

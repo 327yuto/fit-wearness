@@ -49,16 +49,30 @@ test:
 #
 # Read https://guides.rubyonrails.org/configuring.html#configuring-a-database
 # for a full overview on how database connection configuration can be specified.
-#
+
+# heroku版
+# production:
+#   <<: *default
+#   # database: backend_production
+#   # username: backend
+#   # password: <%= ENV['BACKEND_DATABASE_PASSWORD'] %>
+  
+#   database: <%= ENV['MYSQL_DATABASE'] %>
+#   # url: <%= ENV['MYSQL_URL'] %>
+#   username: <%= ENV['MYSQL_USERNAME'] %>
+#   password: <%= ENV['MYSQL_PASSWORD'] %>
+#   host: <%= ENV['MYSQL_HOST'] %>
+#   # port: <%= ENV['DB_PORT'] %>
+
+
 production:
   <<: *default
   # database: backend_production
   # username: backend
-  # password: <%= ENV['BACKEND_DATABASE_PASSWORD'] %>
-  
-  database: <%= ENV['MYSQL_DATABASE'] %>
-  # url: <%= ENV['MYSQL_URL'] %>
-  username: <%= ENV['MYSQL_USERNAME'] %>
-  password: <%= ENV['MYSQL_PASSWORD'] %>
-  host: <%= ENV['MYSQL_HOST'] %>
-  # port: <%= ENV['DB_PORT'] %>
+  # password: <%= ENV['BACKEND_DATABASE_PASSWORD'] %>  
+  # database: <%= ENV['MYSQL_DATABASE'] %>
+
+  username: <%= ENV['DB_USERNAME'] %>
+  password: <%= ENV['DB_PASSWORD'] %>
+  host: <%= ENV['DB_HOST'] %>
+

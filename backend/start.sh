@@ -3,6 +3,9 @@
 if [ "${RAILS_ENV}" = "production" ]
 then
    bundle exec rails assets:precompile
+   bundle exec rails db:create && bundle exec rails db:migrate && bundle exec unicorn -p 3000 -c /backend/config/unicorn.rb -E production
+else
+bundle exec rails s -p ${PORT:-3020} -b 0.0.0.0
 fi
 
-bundle exec rails s -p ${PORT:-3020} -b 0.0.0.0
+

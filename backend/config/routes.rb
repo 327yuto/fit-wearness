@@ -29,6 +29,6 @@ Rails.application.routes.draw do
     end
   end
 
-  resource :health_checks, only: %i[ show ]
+  get '/health_check', to: 'health_checks#index'
 
 end

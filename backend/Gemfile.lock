@@ -141,6 +141,7 @@ GEM
       mini_magick (>= 4.9.5, < 5)
       ruby-vips (>= 2.0.17, < 3)
     jmespath (1.6.1)
+    kgio (2.11.4)
     listen (3.7.1)
       rb-fsevent (~> 0.10, >= 0.10.3)
       rb-inotify (~> 0.9, >= 0.9.10)
@@ -211,6 +212,7 @@ GEM
       method_source
       rake (>= 12.2)
       thor (~> 1.0)
+    raindrops (0.20.0)
     rake (13.0.6)
     rb-fsevent (0.11.1)
     rb-inotify (0.10.1)
@@ -249,6 +251,9 @@ GEM
     thor (1.2.1)
     tzinfo (2.0.4)
       concurrent-ruby (~> 1.0)
+    unicorn (6.1.0)
+      kgio (~> 2.6)
+      raindrops (~> 0.7)
     warden (1.2.9)
       rack (>= 2.0.9)
     websocket-driver (0.7.5)
@@ -280,9 +285,10 @@ DEPENDENCIES
   rspec-rails
   spring
   tzinfo-data
+  unicorn
 
 RUBY VERSION
    ruby 2.7.6p219
 
 BUNDLED WITH
-   2.3.23
+   2.4.1

@@ -49,16 +49,29 @@ test:
 #
 # Read https://guides.rubyonrails.org/configuring.html#configuring-a-database
 # for a full overview on how database connection configuration can be specified.
-#
-production:
-  <<: *default
-  # database: backend_production
-  # username: backend
-  # password: <%= ENV['BACKEND_DATABASE_PASSWORD'] %>
+
+# heroku版
+# production:
+#   <<: *default
+#   # database: backend_production
+#   # username: backend
+#   # password: <%= ENV['BACKEND_DATABASE_PASSWORD'] %>
   
-  database: <%= ENV['MYSQL_DATABASE'] %>
-  # url: <%= ENV['MYSQL_URL'] %>
-  username: <%= ENV['MYSQL_USERNAME'] %>
-  password: <%= ENV['MYSQL_PASSWORD'] %>
-  host: <%= ENV['MYSQL_HOST'] %>
-  # port: <%= ENV['DB_PORT'] %>
+#   database: <%= ENV['MYSQL_DATABASE'] %>
+#   # url: <%= ENV['MYSQL_URL'] %>
+#   username: <%= ENV['MYSQL_USERNAME'] %>
+#   password: <%= ENV['MYSQL_PASSWORD'] %>
+#   host: <%= ENV['MYSQL_HOST'] %>
+#   # port: <%= ENV['DB_PORT'] %>
+
+
+production:
+  adapter: mysql2
+  encoding: utf8mb4
+  pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
+  host: <%= ENV['DB_HOST'] %>
+  socket: /var/lib/mysql/mysql.sock
+  database: blog_api_production
+  username: <%= ENV['DB_USERNAME'] %>
+  password: <%= ENV['DB_PASSWORD'] %>
+

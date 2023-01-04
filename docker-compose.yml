@@ -12,11 +12,12 @@ services:
       - "3306:3306"
     environment:
       MYSQL_ROOT_PASSWORD: password
-      MYSQL_DATABASE: backend_development #database.ymlのdevelopmentと同じ名前にする必要があります。
+      # MYSQL_DATABASE: backend_development #database.ymlのdevelopmentと同じ名前にする必要があります。
       # MYSQL_DATABASE: ${DB_NAME_MYSQL_DATABASE}
       # MYSQL_USER: root #mysqlにログインするユーザー。database.ymlのusernameと同じにする必要がある。
       # MYSQL_PASSWORD: password #mysqlにログインするパスワードです。自身で設定する必要があり、database.ymlのpasswordと同じにする必要がある。
       # MYSQL_ALLOW_EMPTY_PASSWORD: "yes" #これ追加
+      MYSQL_DATABASE: backend_production
       DB_USERNAME: ${DB_USERNAME}
       DB_PASSWORD: ${DB_PASSWORD}
       DB_HOST: ${DB_HOST}

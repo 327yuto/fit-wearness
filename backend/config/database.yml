@@ -64,6 +64,8 @@ test:
 #   host: <%= ENV['MYSQL_HOST'] %>
 #   # port: <%= ENV['DB_PORT'] %>
 # MYSQL_DATABASE: ${DB_NAME_MYSQL_DATABASE}
+# collation: utf8mb4_general_ci
+
 
 production:
   adapter: mysql2
@@ -71,7 +73,7 @@ production:
   pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
   host: <%= ENV['DB_HOST'] %>
   socket: /var/lib/mysql/mysql.sock
-  database: backend_development
+  database: backend_production
   username: <%= ENV['DB_USERNAME'] %>
   password: <%= ENV['DB_PASSWORD'] %>
 

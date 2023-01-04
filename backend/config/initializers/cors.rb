@@ -7,8 +7,8 @@
 
 Rails.application.config.middleware.insert_before 0, Rack::Cors do
   allow do
-    origins "localhost:3002", "https://fit-wearness-front.herokuapp.com", "https://fit-wearness.com"
-    # ReactのポートとHEROKUのURL
+    origins  "https://web.fit-wearness.com" , "localhost:3002", "https://fit-wearness-front.herokuapp.com"
+    # Reactのポート/ HEROKUのURL / web.取得したドメイン名(形式でフロントエンドのサブドメインを設定)
 
     resource '*',
       headers: :any,

@@ -6,12 +6,14 @@ set -e
 rm -f /backend/tmp/pids/server.pid
 
 
-# 最初のみ実行
+# デプロイ初回のみ実行
 # bundle exec rails db:create
+# bundle exec rails db:reset DISABLE_DATABASE_ENVIRONMENT_CHECK=1 
 
-bundle exec rails db:reset DISABLE_DATABASE_ENVIRONMENT_CHECK=1 
 bundle exec rails db:migrate
-bundle exec rails db:seed RAILS_ENV=production
+
+# デプロイ初回のみ実行
+# bundle exec rails db:seed RAILS_ENV=production
 
 
 exec "$@"

@@ -11,8 +11,9 @@ const options = {
 }
 
 const client = applyCaseMiddleware(axios.create({
-  baseURL: "http://localhost:3000/api/v1" || "https://fit-wearness.herokuapp.com/api/v1",
+  baseURL: "https://api.fit-wearness.com/api/v1" || "https://fit-wearness.herokuapp.com/api/v1" || "http://localhost:3000/api/v1",
   // RailsのURL ＆ herokuのURL
 }), options)
 
 export default client
+

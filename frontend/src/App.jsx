@@ -14,6 +14,7 @@ import { SignIn } from "./components/pages/SignIn";
 import { SignUp } from "./components/pages/SignUp";
 import MainContainer from './components/layouts/MainContainer'; //export defaultしている
 import Header from './components/commons/Header';
+import Page404 from './components/pages/NotFound404';
 
 // style
 import { CssBaseline } from '@material-ui/core'; //ブラウザの個体差を調整してくれるリセットCSS
@@ -23,6 +24,7 @@ import { ChakraProvider } from '@chakra-ui/react';
 
 // Contextの作成
 export const AuthContext = createContext();
+
 
 function App() {
   const [loading, setLoading] = useState(true);
@@ -47,10 +49,6 @@ function App() {
     setLoading(false);
   };
 
-  useEffect(() => {
-    handleGetCurrentUser();
-  }, [setCurrentUser]);
-
   const Private = ({ children }) => {
     if (!loading) {
       if (isSignedIn) {
@@ -62,6 +60,12 @@ function App() {
       return <></>;
     }
   };
+
+  useEffect(() => {
+    handleGetCurrentUser();
+  }, [setCurrentUser]);
+
+
   return (
     <>
 
@@ -95,7 +99,6 @@ function App() {
                     </Route>
                     <Private>
                       <Route exact path="/users/:id">
-                        {/*このpathが呼ばれた時、下のpageを呼ぶ*/}
                         <Account />
                       </Route>
                       <Route exact path="/users">
@@ -118,6 +121,9 @@ function App() {
                       </Route>
                       <Route exact path="/myposts">
                         <MyPosts />
+                      </Route>
+                      <Route path="*">
+                        <Page404 />
                       </Route>
                     </Private>
                   </Switch>

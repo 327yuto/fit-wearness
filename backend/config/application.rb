@@ -40,7 +40,7 @@ module Backend
 
     config.middleware.use Rack::Cors do
       allow do
-        origins 'localhost:3002', "https://fit-wearness-front.herokuapp.com"
+        origins  "https://web.fit-wearness.com" , 'localhost:3002', "https://fit-wearness-front.herokuapp.com"
         resource '*',
                  headers: :any,
                  expose: %w[access-token expiry token-type uid client],

@@ -1,18 +1,14 @@
 import applyCaseMiddleware from "axios-case-converter"
 import axios from "axios"
 
-// applyCaseMiddleware:
-// axiosで受け取ったレスポンスの値をスネークケース→キャメルケースに変換
-// または送信するリクエストの値をキャメルケース→スネークケースに変換してくれるライブラリ
 
-// ヘッダーに関してはケバブケースのままで良いので適用を無視するオプションを追加
 const options = {
   ignoreHeaders: true
 }
 
 const client = applyCaseMiddleware(axios.create({
-  baseURL: "https://api.fit-wearness.com/api/v1" || "https://fit-wearness.herokuapp.com/api/v1" || "http://localhost:3000/api/v1",
-  // RailsのURL ＆ herokuのURL
+  // baseURL: "https://api.fit-wearness.com/api/v1" || "http://localhost:3000/api/v1",
+  baseURL: `${process.env.REACT_APP_BACKEND_URL}`,
 }), options)
 
 export default client

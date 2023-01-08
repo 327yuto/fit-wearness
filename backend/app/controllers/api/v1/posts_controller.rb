@@ -22,7 +22,7 @@ class Api::V1::PostsController < ApplicationController
   end
 
   def create
-    if current_api_v1_user
+    if current_api_v1_user.email != "guest@example.com"
         post = Post.new(post_params)
       if post.save
         render json: post

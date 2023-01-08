@@ -12,13 +12,7 @@ services:
       - "3306:3306"
     environment:
       MYSQL_ROOT_PASSWORD: password
-      # MYSQL_DATABASE: backend_development #database.ymlのdevelopmentと同じ名前にする必要があります。
-      # MYSQL_USER: root #mysqlにログインするユーザー。database.ymlのusernameと同じにする必要がある。
-      # MYSQL_PASSWORD: password #mysqlにログインするパスワードです。自身で設定する必要があり、database.ymlのpasswordと同じにする必要がある。
-      # MYSQL_ALLOW_EMPTY_PASSWORD: "yes" #これ追加
-
-      MYSQL_DATABASE: ${DB_NAME_MYSQL_DATABASE}
-      # 開発：backend_development / 本番：backend_production 
+      MYSQL_DATABASE: ${DB_NAME_MYSQL_DATABASE} # backend_production 
       DB_USERNAME: ${DB_USERNAME}
       DB_PASSWORD: ${DB_PASSWORD}
       DB_HOST: ${DB_HOST}
@@ -55,7 +49,7 @@ services:
     env_file:
       - ./.env
     environment:
-      REACT_APP_BACKEND_URL: "http://localhost:3000/api/v1"
+      REACT_APP_BACKEND_URL: "https://api.fit-wearness.com/api/v1"
     command: sh -c "PORT=3002 yarn start"
     depends_on:
       - "db"

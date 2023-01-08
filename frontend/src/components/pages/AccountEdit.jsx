@@ -106,22 +106,28 @@ export const AccountEdit = withRouter(() => {
   useEffect(() => {
     handleGetData(query)
     console.log(currentUser)
-  }, [currentUser])
+  }, [])
 
   // idをapiクライアントに渡し、/api/v1/users/:idのエンドポイントからデータ取得
   const handleGetData = async (query) => {
     try {
       const res = await getId(query.id)
 
-      // 使う値のみstateにセットする
-      setValue({
-        email: res.data.email,
-        name: res.data.name,
-        category: res.data.category,
-        metadata: res.data.metadata,
-      });
+      if (query.id == currentUser.id) {
 
-      setImageUrl(res.data.image.url)
+
+        // 使う値のみstateにセットする
+        setValue({
+          email: res.data.email,
+          name: res.data.name,
+          category: res.data.category,
+          metadata: res.data.metadata,
+        });
+
+        setImageUrl(res.data.image.url)
+      } else {
+        history.push('/')
+      }
 
     } catch (e) {
       console.log(e)

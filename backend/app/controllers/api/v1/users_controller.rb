@@ -13,7 +13,7 @@ class Api::V1::UsersController < ApplicationController
 
   def update
     @user = User.find_by(id: params[:id])
-    if @user.id == current_api_v1_user.id
+    if @user.id == current_api_v1_user.id && @user.email != "guest@example.com"
       if @user.update(user_params)
         render json: @user, status: :ok
       else

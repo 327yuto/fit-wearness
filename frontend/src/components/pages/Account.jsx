@@ -12,6 +12,7 @@ import axios from 'axios';
 import { AuthContext } from '../../App';
 import CanNotUserEditToastButton from '../commons/CanNotUserEditToastButton';
 
+import Page404 from '../pages/NotFound404';
 
 // component
 // import SpaceRow from '../commons/SpaceRow';
@@ -85,22 +86,26 @@ export const Account = withRouter(() => {
   }, [query])
 
   const handleGetUserProfile = async (query) => {
-    if (!loading) {
-      if (isSignedIn) {
-        const res = await getId(query.id);
-        // console.log(res.data);
-        setUserProfile(res.data);
-        setAccountId(res.data.id);
-        setImageUrl(res.data.image.url);
-      } else {
-        console.log("else");
-        // <Redirect to='/signin' />;
+    try {
+      if (!loading) {
+        if (isSignedIn) {
+
+          const res = await getId(query.id);
+          setUserProfile(res.data);
+          setAccountId(res.data.id);
+          setImageUrl(res.data.image.url);
+
+        } else {
+          console.log("error");
+          <Redirect to='/signin' />;
+        }
       }
+    } catch (e) {
+      console.log("error");
+      history.push('/notfound404')
     }
+
   };
-
-
-
 
   return (
     <>

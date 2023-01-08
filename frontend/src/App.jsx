@@ -98,33 +98,38 @@ function App() {
                       <SignIn />
                     </Route>
                     <Private>
-                      <Route exact path="/users/:id">
-                        <Account />
-                      </Route>
-                      <Route exact path="/users">
-                        <AccountList />
-                      </Route>
-                      <Route exact path="/edit/:id">
-                        <AccountEdit />
-                      </Route>
-                      <Route exact path="/posts">
-                        <PostList />
-                      </Route>
-                      <Route exact path="/mylikeposts">
-                        <MyLikePosts />
-                      </Route>
-                      <Route exact path="/posts/:id">
-                        <PostShow />
-                      </Route>
-                      <Route exact path="/create/post">
-                        <CreatePost />
-                      </Route>
-                      <Route exact path="/myposts">
-                        <MyPosts />
-                      </Route>
-                      <Route path="*">
-                        <Page404 />
-                      </Route>
+                      <Switch>
+                        <Route exact path="/users/:id">
+                          <Account />
+                        </Route>
+                        <Route exact path="/users">
+                          <AccountList />
+                        </Route>
+                        <Route exact path="/edit/:id">
+                          <AccountEdit />
+                        </Route>
+                        <Route exact path="/posts">
+                          <PostList />
+                        </Route>
+                        <Route exact path="/mylikeposts">
+                          <MyLikePosts />
+                        </Route>
+                        <Route exact path="/posts/:id">
+                          <PostShow />
+                        </Route>
+                        <Route exact path="/create/post">
+                          <CreatePost />
+                        </Route>
+                        <Route exact path="/myposts">
+                          <MyPosts />
+                        </Route>
+                        <Route>
+                          <Page404 />
+                        </Route>
+                        <Route exact path="/notfound404">
+                          <Page404 />
+                        </Route>
+                      </Switch>
                     </Private>
                   </Switch>
                 </MainContainer>

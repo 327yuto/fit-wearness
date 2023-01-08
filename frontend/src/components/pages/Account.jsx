@@ -1,22 +1,12 @@
 import React, { useContext, useState, useEffect } from 'react';
 import { Redirect, useHistory, Link, withRouter, useParams } from 'react-router-dom';
 
-
 // api
 import { getId } from '../../api/users';
-import client from "../../api/client";
-import axios from 'axios';
-// import { deletePost } from '../../lib/api/post';
 
 // context
 import { AuthContext } from '../../App';
 import CanNotUserEditToastButton from '../commons/CanNotUserEditToastButton';
-
-import Page404 from '../pages/NotFound404';
-
-// component
-// import SpaceRow from '../commons/SpaceRow';
-// import ListTable from '../commons/ListTable';
 
 // style
 import { makeStyles } from '@material-ui/core/styles';
@@ -25,8 +15,6 @@ import {
   CardHeader, Button, Box, Input, Avatar,
 } from '@material-ui/core';
 import EditIcon from "@material-ui/icons/Edit"
-
-
 
 
 const useStyles = makeStyles((theme) => ({
@@ -40,10 +28,7 @@ const useStyles = makeStyles((theme) => ({
   },
   header: {
     textAlign: 'center',
-    // backgroundColor: '#115293',
-    // backgroundColor: '#1976d2',
     backgroundColor: '#192e43',
-
     color: 'white',
   },
   card: {
@@ -118,11 +103,6 @@ export const Account = withRouter(() => {
           <CardContent>
 
             <Box textAlign='center' className={classes.box}>
-              {/* <Typography variant='body2'>
-                <Link to={`/users/${accountId}`} className={classes.link}>
-                  USER ID[ {query.id} ]
-                </Link>
-              </Typography> */}
 
               <Avatar className={classes.avatarSize}
                 src={imageUrl ? imageUrl : ""} alt=""

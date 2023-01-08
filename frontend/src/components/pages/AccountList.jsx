@@ -33,10 +33,7 @@ const useStyles = makeStyles({
 export const AccountList = withRouter(() => {
   const classes = useStyles();
   const [dataList, setDataList] = useState([]);
-
-  useEffect(() => {
-    handleGetList();
-  }, []);
+  const history = useHistory();
 
   const handleGetList = async () => {
     try {
@@ -48,18 +45,10 @@ export const AccountList = withRouter(() => {
     }
   };
 
-  const history = useHistory();
+  useEffect(() => {
+    handleGetList();
+  }, []);
 
-  // const handleDelete = async (item) => {
-  //   console.log('click', item.id);
-  //   try {
-  //     const res = await deletePost(item.id);
-  //     console.log(res.data);
-  //     handleGetList();
-  //   } catch (e) {
-  //     console.log(e);
-  //   }
-  // };
 
   return (
     <>

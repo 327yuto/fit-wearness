@@ -1,6 +1,7 @@
 import React, { useContext, useState, useEffect } from 'react';
 import { useHistory, Link, withRouter } from 'react-router-dom';
 import Cookies from 'js-cookie';
+
 // style
 import { createStyles, makeStyles } from '@material-ui/core/styles';
 import {
@@ -26,7 +27,9 @@ import { AuthContext } from '../../App';
 // component
 import HeaderDrawer from './HeaderDrawer';
 
+// logo
 import TitleLogo from '../../images/logo-fit-wearness-5.jpg';
+
 
 const useStyles = makeStyles((theme) =>
   createStyles({
@@ -62,15 +65,13 @@ export const Header = withRouter(() => {
   ];
 
 
-  // const Header = () => {
   const { loading, isSignedIn, setIsSignedIn, currentUser } =
     useContext(AuthContext);
   const classes = useStyles();
   const history = useHistory();
 
   useEffect(() => {
-    // handleGetCurrentUser();
-    // console.log(currentUser)
+
   }, [])
 
 
@@ -112,14 +113,6 @@ export const Header = withRouter(() => {
               <AddBoxIcon />
             </Button>
 
-            {/* <Button
-              color='inherit'
-              className={classes.linkBtn}
-              onClick={() => history.push('/posts')}
-            >
-              Posts List
-              <PublicIcon />
-            </Button> */}
             <Button
               color='inherit'
               className={classes.linkBtn}

@@ -12,7 +12,7 @@ import { PostShow } from "./components/pages/PostShow";
 import { CreatePost } from "./components/pages/CreatePost";
 import { SignIn } from "./components/pages/SignIn";
 import { SignUp } from "./components/pages/SignUp";
-import MainContainer from './components/layouts/MainContainer'; //export defaultしている
+import MainContainer from './components/layouts/MainContainer';
 import Header from './components/commons/Header';
 import Page404 from './components/pages/NotFound404';
 

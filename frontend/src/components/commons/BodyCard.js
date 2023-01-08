@@ -7,7 +7,6 @@ import {
   CardMedia, Avatar, IconButton, CardHeader, Typography,
   Button, CardContent, CardActions, Card, CardActionArea, Box,
 } from '@material-ui/core';
-// import StarBorderOutlinedIcon from '@material-ui/icons/StarBorderOutlined';
 
 const useStyles = makeStyles({
   bullet: {
@@ -26,8 +25,6 @@ const useStyles = makeStyles({
     width: 280,
     // width: '0 auto',
     height: 350,
-
-
     // paddingTop: '82.25%',
   },
 
@@ -51,16 +48,7 @@ function BodyCard(props) {
 
 
     <Card variant="outlined">
-      {/* <CardHeader
-        // avatar={<Avatar src={avatarUrl} />}
-        action={
-          <IconButton aria-label="settings">
 
-          </IconButton>
-        }
-      // title={title}
-      // subheader={subheader}
-      /> */}
       <CardActionArea className={classes.mediaArea}>
         <CardMedia className={classes.media}
           // style={{ height: "250px", width: "250px" }} 
@@ -68,14 +56,7 @@ function BodyCard(props) {
           onClick={() => history.push(`/posts/${postId}`)}
         />
       </CardActionArea>
-      {/* <CardContent>
-        <Typography variant="body2" component="p">
-          {text}
-        </Typography>
-      </CardContent> */}
-      {/* <CardActions>
-        <Button size="small">詳細をみる</Button>
-      </CardActions> */}
+
     </Card>
   );
 }

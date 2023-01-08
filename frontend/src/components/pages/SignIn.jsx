@@ -7,14 +7,11 @@ import { AuthContext } from "../../App";
 import SignForm from './SignForm';
 
 export const SignIn = () => {
-  const { setIsSignedIn, setCurrentUser } = useContext(AuthContext);
 
+  const { setIsSignedIn, setCurrentUser } = useContext(AuthContext);
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-
   const history = useHistory();
-
-
 
   const signInHandleSubmit = async (e) => {
     e.preventDefault();
@@ -32,15 +29,12 @@ export const SignIn = () => {
         setIsSignedIn(true);
         setCurrentUser(res.data.data);
 
-        // jsonを飛ばす用
         const sessions = await getCurrentUser();
-
 
         history.push("/");
       }
     } catch (e) {
       console.log(e);
-      console.log("catch");
     }
   };
 
@@ -64,35 +58,3 @@ export const SignIn = () => {
     />
   );
 };
-  // return (
-  //   <>
-  //     <p>サインインページです</p>
-  //     <form>
-  //       <div>
-  //         <label htmlFor="email">メールアドレス</label>
-  //         <input
-  //           type="email"
-  //           id="email"
-  //           name="email"
-  //           value={email}
-  //           onChange={(e) => setEmail(e.target.value)}
-  //         />
-  //       </div>
-  //       <div>
-  //         <label htmlFor="password">パスワード</label>
-  //         <input
-  //           type="password"
-  //           id="password"
-  //           name="password"
-  //           value={password}
-  //           onChange={(e) => setPassword(e.target.value)}
-  //         />
-  //       </div>
-  //       <button type="submit" onClick={(e) => handleSignInSubmit(e)}>
-  //         Submit
-  //       </button>
-  //     </form>
-  //     <Link to="/signup">サインアップへ</Link>
-  //   </>
-  // );
-// };

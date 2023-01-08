@@ -10,8 +10,6 @@ import { AuthContext } from '../../App';
 
 // commons
 import BodyCard from '../commons/BodyCard';
-// import Paginate from '../commons/Paginate';
-// import Pagination from '@material-ui/lab/Pagination';
 
 // style
 import { makeStyles } from '@material-ui/core/styles';

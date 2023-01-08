@@ -1,6 +1,6 @@
 import React, { useEffect, useState, useCallback, useContext } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
-import { useHistory, withRouter, useParams } from 'react-router-dom';
+import { Redirect, useHistory, withRouter, useParams } from 'react-router-dom';
 import { getPostsList, getPostShow, postDelete } from '../../api/posts';
 import { getId } from '../../api/users';
 import LikeButton from '../../components/commons/LikeButton';
@@ -117,22 +117,30 @@ export const PostShow = withRouter(() => {
 
 
   const handleGetData = async (query) => {
+    try {
+      if (!loading) {
+        if (isSignedIn) {
+          const res = await getPostShow(query.id);
 
-    const res = await getPostShow(query.id);
+          setValue({
+            picture: res.data.picture.url,
+            category: res.data.category,
+            content: res.data.content,
+            createdAt: res.data.createdAt,
+            userId: res.data.userId,
 
-    // setPost(res.data);
-    // setPictureUrl(res.data.picture.url)
-    // console.log(res.data);
+          });
 
-    // 使う値のみstateにセットする
-    setValue({
-      picture: res.data.picture.url,
-      category: res.data.category,
-      content: res.data.content,
-      createdAt: res.data.createdAt,
-      userId: res.data.userId,
+        } else {
+          console.log("error");
+          <Redirect to='/signin' />;
+        }
+      }
+    } catch (e) {
+      console.log("error");
+      history.push('/notfound404')
+    }
 
-    });
   };
 
   const handleGetLike = async () => {
@@ -160,8 +168,6 @@ export const PostShow = withRouter(() => {
   useEffect(() => {
     handleGetData(query);
     handleGetLike();
-    // console.log(currentUser);
-    // console.log()
   }, [query])
 
 

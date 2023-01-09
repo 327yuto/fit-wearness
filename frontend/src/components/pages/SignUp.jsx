@@ -15,7 +15,7 @@ export const SignUp = () => {
   const [password, setPassword] = useState("");
   const [passwordConfirmation, setPasswordConfirmation] = useState("");
   const [category, setCategory] = useState("");
-  const confirmSuccessUrl = `${process.env.REACT_APP_BACKEND_URL}`
+  const confirmSuccessUrl = process.env.REACT_APP_CONFIRM_SUCCESS_URL;
 
 
   const signUpHandleSubmit = async (e) => {
@@ -27,7 +27,7 @@ export const SignUp = () => {
     try {
       const res = await signUp(params);
       console.log(res);
-      alert("メールを送信しました");
+      alert("メールを送信しました。メールを開いて登録を完了させて下さい。");
     } catch (e) {
       console.log(e);
     }

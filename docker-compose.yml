@@ -56,20 +56,12 @@ services:
       - ./.env
     environment:
       REACT_APP_BACKEND_URL: "http://localhost:3000/api/v1"
+      REACT_APP_CONFIRM_SUCCESS_URL: "https://github.com/"
     command: sh -c "PORT=3002 yarn start"
     depends_on:
       - "db"
       - "backend"
     stdin_open: true
-
-  nginx:
-    build:
-      context: ./nginx
-      dockerfile: Dockerfile
-    ports:
-      - "80:80"
-    depends_on:
-      - "backend"
 
 volumes:
   mysql_vol:

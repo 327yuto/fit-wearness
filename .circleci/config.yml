@@ -35,6 +35,9 @@ jobs:
           path: ~/fit-wearness
       - ruby/install-deps
       - run:
+          name: Display the value set in context
+          command: echo $"{GMAIL_ADDRESS}"
+      - run:
           name: Database setup
           command: bundle exec rails db:migrate
       - run:

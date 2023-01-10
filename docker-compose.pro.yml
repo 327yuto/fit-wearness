@@ -50,6 +50,7 @@ services:
       - ./.env
     environment:
       REACT_APP_BACKEND_URL: "https://api.fit-wearness.com/api/v1"
+      REACT_APP_CONFIRM_SUCCESS_URL: "https://web.fit-wearness.com/"
     command: sh -c "PORT=3002 yarn start"
     depends_on:
       - "db"

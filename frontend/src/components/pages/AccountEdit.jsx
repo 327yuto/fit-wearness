@@ -3,10 +3,6 @@ import { useHistory, useParams, withRouter } from 'react-router-dom';
 
 // api
 import { getId, updateUserInfo, updateUserImage } from '../../api/users';
-import client from '../../api/client';
-import axios from "axios"
-import Cookies from "js-cookie";
-import { getCurrentUser } from '../../api/auth';
 
 // context
 import { AuthContext } from '../../App';
@@ -18,10 +14,7 @@ import {
   CardHeader, Button, Box, Avatar,
 } from '@material-ui/core';
 import UpdateIcon from "@material-ui/icons/Update"
-import IconImage from '../../man-839604_1280.jpg'
 import CancelPresentationIcon from '@material-ui/icons/CancelPresentation';
-
-
 
 
 const useStyles = makeStyles((theme) => ({
@@ -53,12 +46,11 @@ const useStyles = makeStyles((theme) => ({
     margin: '1em 0', /* まわりの余白 */
     padding: '.7em 1em', /* 文字まわりの余白 */
     lineHeight: '1.4', /* 行間 */
-    // background: '#3e8bff', /* 背景色 */
-    // color: '#FFF', /* 文字色 */
     fontSize: '0.95em', /* フォントサイズ */
     borderRadius: '2.5em', /* 角の丸み */
     transition: '0.2s', /* ホバーをなめらかに */
-
+    // background: '#3e8bff', /* 背景色 */
+    // color: '#FFF', /* 文字色 */
   },
   input: {
     display: 'none',
@@ -74,7 +66,6 @@ const useStyles = makeStyles((theme) => ({
 
 export const AccountEdit = withRouter(() => {
 
-  // apiで取得したデータを管理する為のstate
   const [value, setValue] = useState({
     email: '',
     name: '',
@@ -88,11 +79,9 @@ export const AccountEdit = withRouter(() => {
   // 更新したい画像を管理・プレビューするstate
   const [image, setImage] = useState(null);
 
-
   //react hocksのルールで追加
   const classes = useStyles();
   const { loading, isSignedIn, currentUser } = useContext(AuthContext);
-
 
   // 一覧からreact-router-domを使ってidを取得
   const query = useParams();
@@ -100,6 +89,7 @@ export const AccountEdit = withRouter(() => {
   // 画面が描画された時、queryが更新された時に関数を実行
   const history = useHistory();
 
+  // FileReader
   const reader = new FileReader();
 
 
@@ -108,15 +98,13 @@ export const AccountEdit = withRouter(() => {
     console.log(currentUser)
   }, [])
 
-  // idをapiクライアントに渡し、/api/v1/users/:idのエンドポイントからデータ取得
+
   const handleGetData = async (query) => {
     try {
       const res = await getId(query.id)
 
       if (query.id == currentUser.id) {
 
-
-        // 使う値のみstateにセットする
         setValue({
           email: res.data.email,
           name: res.data.name,
@@ -133,6 +121,7 @@ export const AccountEdit = withRouter(() => {
       console.log(e)
     }
   }
+
   // テキストフィールドの変更を検知し値を書き換えstateで管理
   const handleChange = (e) => {
     setValue({
@@ -144,10 +133,10 @@ export const AccountEdit = withRouter(() => {
   const handleSubmit = async (e) => {
     e.preventDefault()
     try {
-      const res = await updateUserInfo(query.id, (value))
 
-      // リクエストが成功したらリダイレクトさせる
+      const res = await updateUserInfo(query.id, (value))
       history.push(`/users/${query.id}`)
+
     } catch (e) {
       console.log(e)
     }
@@ -166,12 +155,6 @@ export const AccountEdit = withRouter(() => {
           console.log(response);
         })
     }
-  }
-
-
-
-  const Form = (props) => {
-    const { handleChange, handleSubmit, value, buttonType } = props
   }
 
   return (
@@ -242,7 +225,6 @@ export const AccountEdit = withRouter(() => {
               value={value.metadata}
             />
           </Box>
-          {/* <input type="submit" value={buttonType} onClick={(e) => handleSubmit(e)} /> */}
           <Button
             variant='outlined'
             color='primary'
@@ -250,7 +232,6 @@ export const AccountEdit = withRouter(() => {
             startIcon={<UpdateIcon />}
             style={{ marginTop: "2rem" }}
             onClick={(e) => handleSubmit(e)}
-          // onClick={(e) => sendFormData(e)}
           >
             更新
           </Button>
@@ -259,7 +240,6 @@ export const AccountEdit = withRouter(() => {
       <Button
         variant='contained'
         color='primary'
-        // onClick={() => history.push('/')}
         onClick={() => history.push(`/users/${currentUser.id}`)}
       >
         <CancelPresentationIcon />

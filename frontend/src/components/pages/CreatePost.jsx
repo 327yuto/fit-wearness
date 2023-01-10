@@ -17,8 +17,6 @@ import {
   CardHeader, Button, Box, Avatar, CardMedia,
 } from '@material-ui/core';
 import UpdateIcon from "@material-ui/icons/Update"
-
-import IconImage from '../../man-839604_1280.jpg';
 import addPicIcon from '../../images/add-picture-icon.jpeg';
 
 
@@ -56,12 +54,11 @@ const useStyles = makeStyles((theme) => ({
     margin: '0em 0', /* まわりの余白 */
     padding: '.7em 1em', /* 文字まわりの余白 */
     lineHeight: '1.4', /* 行間 */
-    // background: '#3e8bff', /* 背景色 */
-    // color: '#FFF', /* 文字色 */
     fontSize: '0.95em', /* フォントサイズ */
     borderRadius: '2.5em', /* 角の丸み */
     transition: '0.2s', /* ホバーをなめらかに */
-
+    // background: '#3e8bff', /* 背景色 */
+    // color: '#FFF', /* 文字色 */
   },
   input: {
     display: 'none',
@@ -70,8 +67,6 @@ const useStyles = makeStyles((theme) => ({
   picture: {
     width: 310,
     height: 'auto',
-    // maxheight: 'auto',
-    // background: '#3e8bff', /* 背景色 */
   },
 
   content: {
@@ -89,14 +84,12 @@ const useStyles = makeStyles((theme) => ({
 
 export const CreatePost = withRouter(() => {
 
-  // apiで取得したデータを管理する為のstate
   const [value, setValue] = useState({
     category: '',
     content: '',
     picture: '',
     user_id: '',
   });
-
 
   // apiから取得したimageカラムのデータを管理
   const [imageUrl, setImageUrl] = useState();
@@ -108,8 +101,6 @@ export const CreatePost = withRouter(() => {
   //react hocksのルールで追加
   const classes = useStyles();
   const { loading, isSignedIn, currentUser } = useContext(AuthContext);
-  // const guestToast = GuestToast();
-
 
   // 一覧からreact-router-domを使ってidを取得
   const query = useParams();
@@ -117,6 +108,7 @@ export const CreatePost = withRouter(() => {
   // 画面が描画された時、queryが更新された時に関数を実行
   const history = useHistory();
 
+  // FileReader
   const reader = new FileReader();
 
 
@@ -128,21 +120,6 @@ export const CreatePost = withRouter(() => {
     })
     console.log(value)
   }
-
-
-  // 更新ボタン押下後、idとparameterをapiクライアントに渡しリクエストを投げる
-  // const handleSubmit = async (e) => {
-  //   e.preventDefault()
-  //   try {
-  //     const res = await updateUserInfo(query.id, (value))
-
-  //     // リクエストが成功したら'/'にリダイレクトさせる
-  //     history.push(`/users/${query.id}`)
-  //   } catch (e) {
-  //     console.log(e)
-  //   }
-  // }
-
 
   const handleFileSend = async (e) => {
 
@@ -158,7 +135,6 @@ export const CreatePost = withRouter(() => {
 
       const res = await postCreat(file)
 
-
         .then(response => {
           console.log(response);
         })
@@ -167,14 +143,9 @@ export const CreatePost = withRouter(() => {
   }
 
   useEffect(() => {
-    // handleGetData(query)
-    // console.log(currentUser.id)
     setValue({ user_id: currentUser.id })
   }, [currentUser])
 
-  // const Form = (props) => {
-  //   const { handleChange, handleSubmit, value, buttonType } = props
-  // }
 
   return (
     <>
@@ -202,16 +173,11 @@ export const CreatePost = withRouter(() => {
               id="category"
               label="Category"
               name="category"
-              // fullWidth
-              // multiline
               minRows={1}
               defaultValue=""
-
               variant="outlined"
               onChange={(e) => handleChange(e)}
             />
-
-
             <TextField className={classes.content}
               id="content"
               label="Content"
@@ -220,7 +186,6 @@ export const CreatePost = withRouter(() => {
               multiline
               minRows={4}
               maxRows={4}
-              // defaultValue=""
               variant="outlined"
               onChange={(e) => handleChange(e)}
             />

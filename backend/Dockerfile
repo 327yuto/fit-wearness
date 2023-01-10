@@ -1,8 +1,4 @@
 FROM ruby:2.7.6
-#RUN apt-get update -qq && apt-get install -y nodejs postgresql-client
-
-#本番環境を環境変数で定義する
-#  ENV RAILS_ENV=production
 
 # yarnパッケージ管理ツールをインストール
 RUN apt-get update && apt-get install -y curl apt-transport-https wget && \
@@ -20,6 +16,7 @@ RUN curl -sL https://deb.nodesource.com/setup_${NODEJS_VERSION}.x | bash - && \
 #backendディレクトリを作成する
 RUN mkdir /backend
 WORKDIR /backend
+
 #Railsで使うGemをインストールする
 COPY Gemfile /Gemfile
 COPY Gemfile.lock /Gemfile.lock
@@ -33,9 +30,6 @@ COPY entrypoint.sh /usr/bin/
 RUN chmod +x /usr/bin/entrypoint.sh
 ENTRYPOINT ["entrypoint.sh"]
 EXPOSE 3000
-
-# Start the main process.
-# CMD ["rails", "server", "-b", "0.0.0.0"]
 
 COPY start.sh /start.sh
 RUN chmod 744 /start.sh

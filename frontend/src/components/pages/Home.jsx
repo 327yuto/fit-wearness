@@ -60,15 +60,10 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 
-
-
 export const Home = () => {
 
-  //react hocksのルールで追加
   const classes = useStyles();
-
   const { isSignedIn, setIsSignedIn, setCurrentUser } = useContext(AuthContext);
-
   const history = useHistory();
 
 
@@ -89,20 +84,15 @@ export const Home = () => {
         // jsonを飛ばす用
         const sessions = await getCurrentUser();
 
-
         history.push("/posts");
       }
     } catch (e) {
       console.log(e);
-      console.log("catch");
     }
   };
 
 
-  // データを取得
   useEffect(() => {
-
-    // handleGetData();
 
   }, []);
 

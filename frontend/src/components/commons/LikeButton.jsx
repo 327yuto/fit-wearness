@@ -29,12 +29,9 @@ const useStyles = makeStyles((theme) => ({
   button: {
     background: '#ffffff',
     display: 'inline-block',
-    // margin: 50px auto,
     fontSize: '50px',
   },
   liked: {
-    // color: '#f0f8ff',
-    // fontSize: 20,
     width: 32,
     height: 32,
     margin: '5px',
@@ -47,9 +44,6 @@ const useStyles = makeStyles((theme) => ({
   },
 
   like: {
-    // color: '#f0f8ff',
-    // backgroundColor: '#FF0000',
-    // fontSize: 20,
     width: 32,
     height: 32,
     margin: '5px',
@@ -77,9 +71,10 @@ function LikeButton(props) {
   // css
   const classes = useStyles();
 
-  // いいねのボタンの色の状態をstate管理。
+  // いいねボタンの色を管理
   const [liked, setLike] = useState(false);
 
+  // いいねの数を管理
   const [likeCount, setLikeCount] = useState(initialLikeCount);
 
   const [likeData, setLikeData] = useState({
@@ -98,12 +93,9 @@ function LikeButton(props) {
 
     const res = await likedCheck(postId);
     console.log(res.data.like)
-    // console.log(res.data.likeCount)
 
-    // if (res.data.likeCount > 0) {
     setLikeCount(res.data.likeCount);
     console.log(res.data.likeCount);
-    // };
 
     if (res.data.like) {
       console.log(res.data.like)
@@ -114,8 +106,6 @@ function LikeButton(props) {
 
   }
 
-  // const className = liked ? 'liked' : 'like';
-
 
   const clickToLike = async () => {
 
@@ -124,43 +114,26 @@ function LikeButton(props) {
     const change = true;
     setLike(change);
 
-
     const res = await creatLike(postId, likeData);
 
     setLikeCount(likeCount + 1);
-    // handleGetLike();
 
-    console.log(res)
     console.log(liked)
   }
 
   const clickToUnLike = async () => {
+
     // 現在のlikedの状態と逆のboolean型をchangeに代入
     // setLikeの更新。画面が更新される。changeを代入
     const change = false;
     setLike(change);
 
-    setLikeCount(likeCount - 1);
-
-    // if (likeCount == 1) {
-    //   // setLikeCount(0);
-    // }
-    // else {
-    //   // setLikeCount(likeCount - 1);
-    // };
-    console.log(likeData)
-    console.log(postId)
-
     const res = await deleteLike(postId);
 
-    // handleGetLike();
+    setLikeCount(likeCount - 1);
 
-    console.log(res)
     console.log(liked)
   }
-
-
-
 
 
   useEffect(() => {
@@ -192,13 +165,4 @@ function LikeButton(props) {
   );
 }
 
-//  class App extends Component {
-//   render(){
-//     return (
-//       <div>
-//         <LikeButton/>
-//       </div>
-//     );
-//   }
-//  }
 export default LikeButton

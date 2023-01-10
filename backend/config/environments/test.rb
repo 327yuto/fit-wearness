@@ -58,5 +58,9 @@ Rails.application.configure do
   # Annotate rendered view with file names.
   # config.action_view.annotate_rendered_view_with_filenames = true
 
-  config.action_mailer.default_url_options = { host: "localhost", port: 3020 }
+
+ # メール認証設定で追加
+ config.action_mailer.default_url_options = { host: 'localhost', port: 3000 }
+
+
 end

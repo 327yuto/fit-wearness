@@ -8,36 +8,29 @@ CarrierWave::SanitizedFile.sanitize_regexp = /[^[:word:]\.\-\+]/
 
 CarrierWave.configure do |config|
 
-  # if Rails.env.production?
+  if Rails.env.production?
   
     config.asset_host = 'https://s3-ap-northeast-1.amazonaws.com/fit-wearness-app' 
 
     config.storage :fog
     config.fog_provider = 'fog/aws'
-    config.fog_directory  = 'fit-wearness-app'               # 作成したバケット名
+    config.fog_directory  = 'fit-wearness-app'    # 作成したバケット名
     config.fog_public = true
+    config.cache_storage = :fog
 
-    # test環境のみ画像をローカルに保存している為、cacheもローカルへ保存させる
-    if Rails.env.development?
-      config.cache_storage = :fog
-    elsif Rails.env.test?
-      config.cache_storage = :file
-    else
-      config.cache_storage = :fog
-    end
     
     config.fog_credentials = {
       provider: 'AWS',
-      aws_access_key_id: ENV['AWS_ACCESS_KEY_ID'],           # 環境変数
-      aws_secret_access_key: ENV['AWS_SECRET_ACCESS_KEY'],   # 環境変数
-      region: 'ap-northeast-1',                              # アジアパシフィック(東京)
+      aws_access_key_id: ENV['AWS_ACCESS_KEY_ID'],           
+      aws_secret_access_key: ENV['AWS_SECRET_ACCESS_KEY'],   
+      region: 'ap-northeast-1',     # アジアパシフィック(東京)
       path_style: true
     }
 
-  # else
-  #   config.asset_host = 'http://localhost:3020'
-  #   config.storage = :file
-    # config.cache_storage = :file
-  # end
+  else
+    config.asset_host = 'http://localhost:3000'
+    config.storage = :file
+    config.cache_storage = :file
+  end
 
 end 

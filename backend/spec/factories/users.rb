@@ -11,10 +11,6 @@ FactoryBot.define do
     confirmed_at { DateTime.now } 
     category { 'test category' }
   
-    
-    # confirm_success_url { "https://google.com" } #使用できない
-    # uid { email }
-    # provider { 'email' }
   end
 
   trait :error_user do

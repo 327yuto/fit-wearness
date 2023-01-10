@@ -27,7 +27,6 @@ const useStyles = makeStyles((theme) =>
       display: 'flex',
       alignItems: 'center',
       padding: theme.spacing(0, 1),
-      // necessary for content to be below app bar
       ...theme.mixins.toolbar,
       justifyContent: 'flex-end',
     },
@@ -35,7 +34,6 @@ const useStyles = makeStyles((theme) =>
       '&:hover': {
         cursor: 'pointer',
         transform: 'scale(1.1, 1.1)',
-        // backgroundColor: '#E6A1C0',
         backgroundColor: '#2F4F4F',
         color: '#FFFFFF',
       },

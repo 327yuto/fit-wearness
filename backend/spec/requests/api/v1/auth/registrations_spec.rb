@@ -4,7 +4,6 @@ RSpec.describe 'api v1 auth registration', type: :request do
    let(:email) { 'test@mail.com' }
    let(:password) { 'password' }
    let(:password_confirmation) { 'password' }
-   # let(:name) { 'ユーザー' }
    let(:confirm_success_url) { "https://google.com" }
    let(:category) { 'test category' }
 

@@ -15,7 +15,7 @@ jobs:
       - ruby/install-deps
       - run:
           name: Display the value set in context
-          command: echo $EMAIL_ADDRESS
+          command: echo $GMAIL_ADDRESS
   test:
     docker:
       - image: cimg/ruby:2.7.6
@@ -34,6 +34,9 @@ jobs:
       - checkout:
           path: ~/fit-wearness
       - ruby/install-deps
+      - run:
+          name: Display the value set in context
+          command: echo $"{GMAIL_ADDRESS}"
       - run:
           name: Database setup
           command: bundle exec rails db:migrate

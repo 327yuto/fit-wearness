@@ -6,8 +6,7 @@ module AuthorizationSpecHelper
   end
 
   def get_auth_params_from_login_response_headers(response)
-
-    # 下記で作成したメソッドは同等のコード (対象のkeyのみを入手している)
+    # 対象のkeyのみを入手
     response.headers.slice('access-token', 'client', 'uid', 'expiry', 'token-type')
   end
 

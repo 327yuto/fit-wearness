@@ -1,5 +1,4 @@
 # ログイン状態確認用コントローラー
-# class Api::V1::Auth::SessionsController < ApplicationController
 class Api::V1::Auth::SessionsController < DeviseTokenAuth::SessionsController
   def index
     if current_api_v1_user

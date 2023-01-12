@@ -78,14 +78,14 @@ workflows:
               branches:
                   only:
                   - main
-      - aws-ecs/deploy-service-update:
-          requires:
-              - aws-ecr/build-and-push-image
-          family: 'fit_v2_task' # タスク名 #OK
-          cluster-name: 'v2-fit-backend' #OK
-          service-name: 'v2-fit-wearness' #OK
-          container-image-name-updates: 'container=fit-wearness_nginx,tag=${CIRCLE_SHA1}' #OK
-          filters:    # ここを追加
-              branches:
-                  only:
-                  - main
+      # - aws-ecs/deploy-service-update:
+      #     requires:
+      #         - aws-ecr/build-and-push-image
+      #     family: 'fit_v2_task' # タスク名 #OK
+      #     cluster-name: 'v2-fit-backend' #OK
+      #     service-name: 'v2-fit-wearness' #OK
+      #     container-image-name-updates: 'container=fit-wearness_nginx,tag=${CIRCLE_SHA1}' #OK
+      #     filters:    # ここを追加
+      #         branches:
+      #             only:
+      #             - main

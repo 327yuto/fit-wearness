@@ -45,7 +45,10 @@ jobs:
       - run:
           name: test
           command: bundle exec rspec
-  aws-ecr/build-and-push-image:
+  build-and-push-image:
+    executor:
+      name: aws-ecr/default
+    steps:
       - aws-ecr/build-and-push-image:
           region: AWS_REGION #OK
           account-url: AWS_ECR_ACCOUNT_URL #OK

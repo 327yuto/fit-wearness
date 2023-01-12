@@ -76,6 +76,7 @@ workflows:
           cluster-name: 'v2-fit-backend' #OK
           service-name: 'v2-fit-wearness' #OK
           container-image-name-updates: 'container=fit-wearness_nginx,tag=${CIRCLE_SHA1}' #OK
+          container-image-name-updates: 'container=fit-wearness_backend,tag=${CIRCLE_SHA1}'
           filters:    # ここを追加
               branches:
                   only:

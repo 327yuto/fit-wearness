@@ -49,7 +49,7 @@ jobs:
               
 workflows:
   build_and_push_image:
-    jobs:
+      jobs:
       - build:
           context: env_value
       - test:

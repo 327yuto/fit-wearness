@@ -45,6 +45,15 @@ jobs:
       - run:
           name: test
           command: bundle exec rspec
+  build-and-push-image:
+    executor:
+      name: aws-ecr/default
+    steps:
+      - aws-ecr/build-and-push-image:
+          region: AWS_REGION #OK
+          account-url: AWS_ECR_ACCOUNT_URL #OK
+          repo: 'fit-wearness_backend' #OK
+          tag: "${CIRCLE_SHA1}"
 
               
 workflows:
@@ -57,14 +66,14 @@ workflows:
             - build
           context: env_value  
       # - test  # 追加、デプロイ操作前にテストを実行
-      - aws-ecr/build-and-push-image:
+      - build-and-push-image:
           requires:
             - test # 追加、テストに成功したときだけデプロイ操作に移るようにする
-          # context: env_value
-          region: AWS_REGION #OK
-          account-url: AWS_ECR_ACCOUNT_URL #OK
-          repo: 'fit-wearness_backend' #OK
-          tag: "${CIRCLE_SHA1}"
+          # # context: env_value
+          # region: AWS_REGION #OK
+          # account-url: AWS_ECR_ACCOUNT_URL #OK
+          # repo: 'fit-wearness_backend' #OK
+          # tag: "${CIRCLE_SHA1}"
           filters:    # ここを追加
               branches:
                   only:

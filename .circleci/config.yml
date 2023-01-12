@@ -66,7 +66,7 @@ workflows:
             - build
           context: env_value  
       # - test  # 追加、デプロイ操作前にテストを実行
-      - aws-ecr/build-and-push-image:
+      - build-and-push-image:
           requires:
             - test # 追加、テストに成功したときだけデプロイ操作に移るようにする
           # # context: env_value

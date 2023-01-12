@@ -60,7 +60,7 @@ workflows:
       - aws-ecr/build-and-push-image:
           requires:
             - test # 追加、テストに成功したときだけデプロイ操作に移るようにする
-          context: env_value
+          # context: env_value
           region: AWS_REGION #OK
           account-url: AWS_ECR_ACCOUNT_URL #OK
           repo: 'fit-wearness_backend' #OK
@@ -76,7 +76,6 @@ workflows:
           cluster-name: 'v2-fit-backend' #OK
           service-name: 'v2-fit-wearness' #OK
           container-image-name-updates: 'container=fit-wearness_nginx,tag=${CIRCLE_SHA1}' #OK
-          container-image-name-updates: 'container=fit-wearness_backend,tag=${CIRCLE_SHA1}'
           filters:    # ここを追加
               branches:
                   only:

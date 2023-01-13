@@ -59,8 +59,8 @@ workflows:
           requires:
             - test
           context: env_value
-          region: ${AWS_REGION}
-          account-url: ${AWS_ECR_ACCOUNT_URL}
+          region: "${AWS_REGION}""
+          account-url: "${AWS_ECR_ACCOUNT_URL}"
           repo: 'fit-wearness_backend' 
           tag: "${CIRCLE_SHA1}"
           path: ./backend

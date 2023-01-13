@@ -45,17 +45,6 @@ jobs:
       - run:
           name: test
           command: bundle exec rspec
-  # build-and-push-image:
-  #   working_directory: ~/fit-wearness/backend
-  #   steps:
-  #     - checkout
-  #     - aws-ecr/build-and-push-image:
-  #         region: AWS_REGION #OK
-  #         account-url: AWS_ECR_ACCOUNT_URL #OK
-  #         repo: 'fit-wearness_backend' #OK
-  #         tag: "${CIRCLE_SHA1}"
-  #         path: ./backend/
-
               
 workflows:
   build_and_push_image:
@@ -70,23 +59,23 @@ workflows:
           requires:
             - test
           context: env_value
-          region: AWS_REGION #OK
-          account-url: AWS_ECR_ACCOUNT_URL #OK
-          repo: 'fit-wearness_backend' #OK
+          region: AWS_REGION
+          account-url: AWS_ECR_ACCOUNT_URL
+          repo: 'fit-wearness_backend' 
           tag: "${CIRCLE_SHA1}"
-          path: ./backend
+          path: ./backend/
           filters:
             branches:
               only:
                 - main
-      # - aws-ecs/deploy-service-update:
-      #     requires:
-      #         - aws-ecr/build-and-push-image
-      #     family: 'fit_v2_task' # タスク名 #OK
-      #     cluster-name: 'v2-fit-backend' #OK
-      #     service-name: 'v2-fit-wearness' #OK
-      #     container-image-name-updates: 'container=fit-wearness_nginx,tag=${CIRCLE_SHA1}' #OK
-      #     filters:    # ここを追加
-      #         branches:
-      #             only:
-      #             - main
+      - aws-ecs/deploy-service-update:
+          requires:
+              - aws-ecr/build-and-push-image
+          family: 'fit_v2_task'
+          cluster-name: 'v2-fit-backend' 
+          service-name: 'v2-fit-wearness' 
+          container-image-name-updates: 'container=fit-wearness_nginx,tag=${CIRCLE_SHA1}'
+          filters:    
+              branches:
+                  only:
+                  - main

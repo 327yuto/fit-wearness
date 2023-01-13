@@ -74,7 +74,7 @@ workflows:
           account-url: AWS_ECR_ACCOUNT_URL #OK
           repo: 'fit-wearness_backend' #OK
           tag: "${CIRCLE_SHA1}"
-          path: './backend'
+          path: ./backend
           filters:
             branches:
               only:

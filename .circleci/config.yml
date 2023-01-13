@@ -66,20 +66,19 @@ workflows:
           requires:
             - build
           context: env_value  
-      # - test  # 追加、デプロイ操作前にテストを実行
       - aws-ecr/build-and-push-image:
           requires:
-            - test # 追加、テストに成功したときだけデプロイ操作に移るようにする
+            - test
           context: env_value
           region: AWS_REGION #OK
           account-url: AWS_ECR_ACCOUNT_URL #OK
           repo: 'fit-wearness_backend' #OK
           tag: "${CIRCLE_SHA1}"
-          path: ./backend/
-          filters:    # ここを追加
-              branches:
-                  only:
-                  - main
+          path: './backend'
+          filters:
+            branches:
+              only:
+                - main
       # - aws-ecs/deploy-service-update:
       #     requires:
       #         - aws-ecr/build-and-push-image

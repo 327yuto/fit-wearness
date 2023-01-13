@@ -68,6 +68,12 @@ workflows:
           context: env_value  
       # - test  # 追加、デプロイ操作前にテストを実行
       - aws-ecr/build-and-push-image:
+          docker:
+            - image: cimg/ruby:2.7.6
+          steps:
+            - checkout
+            - setup_remote_docker:
+                version: 19.03.13
           requires:
             - test # 追加、テストに成功したときだけデプロイ操作に移るようにする
           context: env_value

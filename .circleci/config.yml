@@ -46,8 +46,7 @@ jobs:
           name: test
           command: bundle exec rspec
   build-and-push-image:
-    executor:
-      name: aws-ecr/default
+    working_directory: ~/fit-wearness/backend
     steps:
       - checkout
       - aws-ecr/build-and-push-image:

@@ -66,7 +66,6 @@ workflows:
           requires:
             - build
           context: env_value  
-      # - test  # 追加、デプロイ操作前にテストを実行
       - build-and-push-image:
           context: env_value
           region: AWS_REGION #OK
@@ -77,9 +76,9 @@ workflows:
           requires:
             - test # 追加、テストに成功したときだけデプロイ操作に移るようにする
           filters:    # ここを追加
-              branches:
-                  only:
-                  - main
+            branches:
+              only:
+                - main
       # - aws-ecs/deploy-service-update:
       #     requires:
       #         - aws-ecr/build-and-push-image

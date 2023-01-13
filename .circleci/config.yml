@@ -13,7 +13,7 @@ jobs:
     working_directory: ~/fit-wearness/backend
     steps:
       - checkout:
-          path: ~/fit-wearness/backend
+          path: ~/fit-wearness
       - ruby/install-deps
       - run:
           name: Display the value set in context
@@ -34,7 +34,7 @@ jobs:
     working_directory: ~/fit-wearness/backend
     steps:
       - checkout:
-          path: ~/fit-wearness/backend
+          path: ~/fit-wearness
       - ruby/install-deps
       - run:
           name: Display the value set in context

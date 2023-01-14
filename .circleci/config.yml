@@ -1,9 +1,9 @@
 version: 2.1
 orbs:
   ruby: circleci/ruby@1.1.2
-  # heroku: circleci/heroku@1.2.3
-  aws-ecr: circleci/aws-ecr@6.1.0
-  aws-ecs: circleci/aws-ecs@0.0.8
+  heroku: circleci/heroku@1.2.3
+  aws-ecr: circleci/aws-ecr@6.7.0
+
 
 
 jobs:
@@ -45,37 +45,70 @@ jobs:
       - run:
           name: test
           command: bundle exec rspec
-              
+  # deploy:
+  #   docker:
+  #     - image: cimg/ruby:2.7.6
+  #   steps:
+  #     - checkout
+  #     - setup_remote_docker:
+  #         version: 19.03.13
+  #     - heroku/install
+  #     - run:
+  #         name: heroku login
+  #         command: heroku container:login
+  #     - run:
+  #         working_directory: backend
+  #         name: cd dir and push docker image
+  #         command: |
+  #           pwd
+  #           ls
+  #           heroku container:push web -a $HEROKU_APP_NAME
+  #     - run:
+  #         name: release docker image
+  #         command: heroku container:release web -a $HEROKU_APP_NAME
+  #     - run:
+  #         name: database setup
+  #         command: >-
+  #               heroku run bundle exec rake db:migrate
+  #               RAILS_ENV=production -a $HEROKU_APP_NAME
+  aws-dep:
+    docker:
+      - image: cimg/ruby:2.7.6
+    steps:
+      # - checkout
+      - setup_remote_docker:
+          version: 19.03.13
+      - aws-ecr/build-and-push-image:
+          account-url: AWS_ECR_ACCOUNT_URL
+          aws-access-key-id: AWS_ACCESS_KEY_ID
+          aws-secret-access-key: AWS_SECRET_ACCESS_KEY
+          create-repo: true
+          dockerfile: Dockerfile
+          path: .
+          region: AWS_REGION
+          repo: 'fit-wearness_backend'
+          tag: "$CIRCLE_SHA1"                
+
 workflows:
-  build_and_push_image:
-      jobs:
+  version: 2
+  build_test_and_deploy:
+    jobs:
       - build:
           context: env_value
       - test:
           requires:
             - build
-          context: env_value  
-      - aws-ecr/build-and-push-image:
+          context: env_value
+      # heroku → AWS 切り替え 
+      # - deploy:
+      #     requires:
+      #       - test
+      #     filters:
+      #       branches:
+      #         only: main
+      - aws-dep:
           requires:
             - test
-          # context: env_value
-          region: AWS_REGION
-          account-url: AWS_ECR_ACCOUNT_URL
-          repo: 'fit-wearness_backend' 
-          tag: "${CIRCLE_SHA1}"
-          path: ./backend
           filters:
             branches:
-              only:
-                - main
-      - aws-ecs/deploy-service-update:
-          requires:
-              - aws-ecr/build-and-push-image
-          family: 'fit_v2_task'
-          cluster-name: 'v2-fit-backend' 
-          service-name: 'v2-fit-wearness' 
-          container-image-name-updates: 'container=fit-wearness_nginx,tag=${CIRCLE_SHA1}'
-          filters:    
-              branches:
-                  only:
-                  - main
+              only: main

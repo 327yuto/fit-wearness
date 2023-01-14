@@ -79,7 +79,6 @@ jobs:
       - checkout
       - setup_remote_docker:
           version: 19.03.13
-      - working_directory: backend
       - aws-cli/install
       - aws-ecr/build-and-push-image:
           account-url: AWS_ECR_ACCOUNT_URL

@@ -73,7 +73,6 @@ export const PostList = withRouter(() => {
 
       // スプレッドで配列をばらした後もう一度まとめる。
       setPosts([...res.data].reverse());
-      console.log(res.data.reverse());
 
     } catch (e) {
       console.log(e)

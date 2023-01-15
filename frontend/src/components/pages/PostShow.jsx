@@ -128,17 +128,17 @@ export const PostShow = withRouter(() => {
   const handleGetLike = async () => {
 
     const res = await likedCheck(query.id);
-    console.log(res)
     setLikeCount(res.data.likeCount);
 
   }
 
   const handleDelete = async (post) => {
-    console.log('click', post.id);
+
     try {
+
       const res = await postDelete(post.id);
-      console.log(res.data);
       history.push(`/posts`)
+
     } catch (e) {
       console.log(e.response);
     }

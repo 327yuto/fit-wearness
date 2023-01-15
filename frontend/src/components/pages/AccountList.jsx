@@ -36,10 +36,11 @@ export const AccountList = withRouter(() => {
   const history = useHistory();
 
   const handleGetList = async () => {
+
     try {
       const res = await getList();
-      console.log(res.data);
       setDataList(res.data);
+
     } catch (e) {
       console.log(e);
     }

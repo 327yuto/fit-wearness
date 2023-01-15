@@ -71,7 +71,6 @@ export const Home = () => {
 
     try {
       const res = await getGuestUserSignIn();
-      console.log(res)
 
       if (res.status === 200) {
         Cookies.set("_access_token", res.headers["access-token"]);

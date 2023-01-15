@@ -92,17 +92,12 @@ function LikeButton(props) {
     });
 
     const res = await likedCheck(postId);
-    console.log(res.data.like)
 
     setLikeCount(res.data.likeCount);
-    console.log(res.data.likeCount);
 
     if (res.data.like) {
-      console.log(res.data.like)
       setLike(true);
     }
-
-    console.log(liked)
 
   }
 
@@ -118,7 +113,6 @@ function LikeButton(props) {
 
     setLikeCount(likeCount + 1);
 
-    console.log(liked)
   }
 
   const clickToUnLike = async () => {
@@ -132,7 +126,6 @@ function LikeButton(props) {
 
     setLikeCount(likeCount - 1);
 
-    console.log(liked)
   }
 
 

@@ -95,7 +95,6 @@ export const AccountEdit = withRouter(() => {
 
   useEffect(() => {
     handleGetData(query)
-    console.log(currentUser)
   }, [])
 
 

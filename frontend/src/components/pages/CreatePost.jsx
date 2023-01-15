@@ -118,7 +118,6 @@ export const CreatePost = withRouter(() => {
       ...value,
       [e.target.name]: e.target.value
     })
-    console.log(value)
   }
 
   const handleFileSend = async (e) => {

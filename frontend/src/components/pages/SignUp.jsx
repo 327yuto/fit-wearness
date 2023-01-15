@@ -25,9 +25,10 @@ export const SignUp = () => {
     console.log(e);
 
     try {
+
       const res = await signUp(params);
-      console.log(res);
       alert("メールを送信しました。メールを開いて登録を完了させて下さい。");
+
     } catch (e) {
       console.log(e);
     }

@@ -1,4 +1,5 @@
 # Fit-wearness（フィットウェアネス）
+---
 **FitnessとFashionを楽しみたい方に向けた、コーディネート投稿SNSです。**
 <br>
 <br>

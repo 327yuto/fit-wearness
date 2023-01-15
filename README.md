@@ -87,7 +87,7 @@ Fitness(健康の維持・増進を目指して行う運動) / Wear(着ている
 # 使用技術詳細
 ## Back End
 - ``Ruby 2.7.6``
-- ``Ruby on Rails　6.1.4``
+- ``Ruby on Rails 6.1.4``
 - ``Nginx``
 ### 主要gem
 - ``devise / devise_token_auth`` : トークン認証, メールでの本認証

@@ -1,6 +1,7 @@
 # Fit-wearness（フィットウェアネス）
 **FitnessとFashionを楽しみたい方に向けた、コーディネート投稿SNSです。**
-
+<br>
+<br>
 **URL: https://web.fit-wearness.com  (TOPページから、ゲストログインできます)**
 
 <p align="center">
@@ -10,7 +11,11 @@
 
 # サービスの概要と背景
 ## どのようなサービスか
-「Fitness」と「Fashion」を楽しみたい方に向けた、コーデ投稿SNSです。
+「Fitness」と「Fashion」を楽しみたい方に向けた、コーデ投稿SNSです。 
+
+## 名前の由来
+Fitness(健康の維持・増進を目指して行う運動) / Wear(着ている)<br>
+フィットネスの中に、ウェアを取り入れる意味<br>
 
 ## このサービスのターゲット
 * フィットネスとファッションが好きな方
@@ -18,8 +23,8 @@
 
 ## このサービスで解決できるユーザーが抱える課題
 下記2つの課題に注目しました。（自身の体験から）<br>
-①: フィットネスを始めたいが,"オシャレじゃない"と思われるファッションはしたくない。<br>
-②: 他の人のフィットネスコーディネートを見たい、オシャレを共有したい。<br>
+①:（初心者）フィットネスのオシャレなコーディネートがわからない。<br>
+②:他の人のフィットネスコーディネートを見たい、オシャレを共有したい。<br>
 
 # 使用技術概略(詳細後述) 
 ## 構成<br>
@@ -27,7 +32,8 @@
 ## 技術<br>
 **Back End:** ``Ruby on Rails ( APIモード ), MySQL, Nginx, AWS( S3 )``<br>
 **Front End:**``React ( JavaScript )``<br>
-**Infra:**    ``Docker / Docker-Compose, AWS ( ECS Fargate / ECR / ALB / RDS / S3 / CloudFront / Route53 / VPC / ACM )``<br>
+**Infra:**    ``Docker / Docker-Compose,`` <br>
+&emsp; &emsp; &nbsp;``AWS ( ECS Fargate / ECR / ALB / RDS / S3 / CloudFront / Route53 / VPC / ACM )``<br>
 **Other:**    ``CircleCI(※HEROKUデプロイ時のみ使用)``<br>
 
 
@@ -114,6 +120,7 @@
 - ``VPC``: 個人のネットワーク領域
 - ``ACM``: SSL証明書を発行
 
+## Other
 ### ``CircleCI``
 CI/CDパイプライン構築
 ビルド、テスト、デプロイを全自動化
@@ -122,7 +129,7 @@ CI/CDパイプライン構築
 - デプロイ（バック）
   - ※herokuへpushのみ
 
-## 今後使いたい技術
+## 学習予定の技術
 - ``GitHub Actions``
 
 ---

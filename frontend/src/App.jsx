@@ -101,9 +101,9 @@ function App() {
                         <Route exact path="/users/:id">
                           <Account />
                         </Route>
-                        <Route exact path="/users">
+                        {/* <Route exact path="/users">
                           <AccountList />
-                        </Route>
+                        </Route> */}
                         <Route exact path="/edit/:id">
                           <AccountEdit />
                         </Route>

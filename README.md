@@ -3,6 +3,7 @@
 <br>
 <br>
 **URL: https://web.fit-wearness.com  (TOPページから、ゲストログインできます)**
+※2023.05~停止中
 
 <p align="center">
   <img src="https://user-images.githubusercontent.com/78023458/212503515-66b0f47b-29d4-46db-9258-a3759bdc808e.png" />
